@@ -1,0 +1,12 @@
+C:\Users\agust\Desktop\UNLP\2DO\1ER SEMESTRE\.NET\proyecto\SGE\SGE.Dominio\bin\Debug\net10.0\SGE.Dominio.deps.json
+C:\Users\agust\Desktop\UNLP\2DO\1ER SEMESTRE\.NET\proyecto\SGE\SGE.Dominio\bin\Debug\net10.0\SGE.Dominio.dll
+C:\Users\agust\Desktop\UNLP\2DO\1ER SEMESTRE\.NET\proyecto\SGE\SGE.Dominio\bin\Debug\net10.0\SGE.Dominio.pdb
+C:\Users\agust\Desktop\UNLP\2DO\1ER SEMESTRE\.NET\proyecto\SGE\SGE.Dominio\obj\Debug\net10.0\SGE.Dominio.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\agust\Desktop\UNLP\2DO\1ER SEMESTRE\.NET\proyecto\SGE\SGE.Dominio\obj\Debug\net10.0\SGE.Dominio.AssemblyInfoInputs.cache
+C:\Users\agust\Desktop\UNLP\2DO\1ER SEMESTRE\.NET\proyecto\SGE\SGE.Dominio\obj\Debug\net10.0\SGE.Dominio.AssemblyInfo.cs
+C:\Users\agust\Desktop\UNLP\2DO\1ER SEMESTRE\.NET\proyecto\SGE\SGE.Dominio\obj\Debug\net10.0\SGE.Dominio.csproj.CoreCompileInputs.cache
+C:\Users\agust\Desktop\UNLP\2DO\1ER SEMESTRE\.NET\proyecto\SGE\SGE.Dominio\obj\Debug\net10.0\SGE.Dominio.sourcelink.json
+C:\Users\agust\Desktop\UNLP\2DO\1ER SEMESTRE\.NET\proyecto\SGE\SGE.Dominio\obj\Debug\net10.0\SGE.Dominio.dll
+C:\Users\agust\Desktop\UNLP\2DO\1ER SEMESTRE\.NET\proyecto\SGE\SGE.Dominio\obj\Debug\net10.0\refint\SGE.Dominio.dll
+C:\Users\agust\Desktop\UNLP\2DO\1ER SEMESTRE\.NET\proyecto\SGE\SGE.Dominio\obj\Debug\net10.0\SGE.Dominio.pdb
+C:\Users\agust\Desktop\UNLP\2DO\1ER SEMESTRE\.NET\proyecto\SGE\SGE.Dominio\obj\Debug\net10.0\ref\SGE.Dominio.dll
