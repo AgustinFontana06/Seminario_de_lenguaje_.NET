@@ -26,6 +26,74 @@ public class Expediente
         Estado = EstadoExpediente.RecienIniciado;
     }
 
+    public void RegistrarCambio(Guid idUsuario)
+    {
+        UsuarioUltimoCambio = idUsuario;
+        FechaUltimaModificacion = DateTime.Now;
+    }
+
+    public void ModificarCaratula(Caratula nuevaCaratula, Guid idUsuario)
+    {
+        if(idUsuario == Guid.Empty)
+        {
+            throw new DominioException("El id no puede estar vacio");
+        }
+
+        Caratula = nuevaCaratula;
+        RegistrarCambio(idUsuario);
+    }
+
+    public bool ActualizarEstado(EtiquetaTramite? ultimaEtiqueta, Guid idUsuario)
+    {
+        if(idUsuario == Guid.Empty)
+        {
+            throw new DominioException("El id no puede estar vacio");
+        }
+
+        EstadoExpediente estadoAnterior = Estado;
+        EstadoExpediente nuevoEstado;
+
+        if(ultimaEtiqueta == null)
+        {
+            nuevoEstado = EstadoExpediente.RecienIniciado;
+        } else
+        {
+            switch (ultimaEtiqueta) {
+                case EtiquetaTramite.Resolucion:
+                    nuevoEstado = EstadoExpediente.ConResolucion;
+                    break;
+                case EtiquetaTramite.PaseAEstudio:
+                    nuevoEstado = EstadoExpediente.ParaResolver;
+                    break;
+                case EtiquetaTramite.PaseAlArchivo:
+                    nuevoEstado = EstadoExpediente.Finalizado;
+                    break;
+                default:
+                    nuevoEstado = Estado;
+                    break;
+            }
+        }
+
+        if(nuevoEstado != estadoAnterior)
+        {
+            Estado = nuevoEstado;
+            RegistrarCambio(idUsuario);
+            return true;
+        }
+        return false;
+    }
+
+    public void CambiarEstado(EstadoExpediente nuevoEstado, Guid idUsuario)
+    {
+        if(idUsuario == Guid.Empty)
+        {
+            throw new DominioException("El id no puede estar vacio");
+        }
+
+        Estado = nuevoEstado;
+        RegistrarCambio(idUsuario);
+    }
+
     public override string ToString()
     {
         return $"Expediente: {Id}, {Caratula.Texto}, {FechaCreacion}";
