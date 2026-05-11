@@ -11,10 +11,12 @@ class RepositorioExpedienteTXT : IExpedienteRepository
         using var sw = new StreamWriter(_nombreArchivo, true);
 
         sw.WriteLine($"id del expediente: {expedienteNuevo.Id} ");
-        sw.WriteLine("motivo: ", expedienteNuevo.Caratula.Texto);
-        sw.WriteLine("");
+        sw.WriteLine($"Caratula: {expedienteNuevo.Caratula.Texto}");
+        sw.WriteLine($"Fecha de creacion: {expedienteNuevo.FechaCreacion}");
+        sw.WriteLine($"Estado: {expedienteNuevo.Estado}");
         sw.WriteLine();
-        sw.WriteLine();
+
+        //no agregamos fecha de ultima modificacion ni usuario de ultimo cambio por redundancia
     }
 
 }
