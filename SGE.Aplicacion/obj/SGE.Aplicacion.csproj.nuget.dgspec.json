@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\agust\\Desktop\\UNLP\\2DO\\1ER SEMESTRE\\.NET\\proyecto\\SGE\\SGE.Aplicacion\\SGE.Aplicacion.csproj": {}
+    "/Users/sans6114/Documents/desarrollo/proyectosDotnet/Seminario_de_lenguaje_.NET/SGE.Aplicacion/SGE.Aplicacion.csproj": {}
   },
   "projects": {
-    "C:\\Users\\agust\\Desktop\\UNLP\\2DO\\1ER SEMESTRE\\.NET\\proyecto\\SGE\\SGE.Aplicacion\\SGE.Aplicacion.csproj": {
+    "/Users/sans6114/Documents/desarrollo/proyectosDotnet/Seminario_de_lenguaje_.NET/SGE.Aplicacion/SGE.Aplicacion.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\agust\\Desktop\\UNLP\\2DO\\1ER SEMESTRE\\.NET\\proyecto\\SGE\\SGE.Aplicacion\\SGE.Aplicacion.csproj",
+        "projectUniqueName": "/Users/sans6114/Documents/desarrollo/proyectosDotnet/Seminario_de_lenguaje_.NET/SGE.Aplicacion/SGE.Aplicacion.csproj",
         "projectName": "SGE.Aplicacion",
-        "projectPath": "C:\\Users\\agust\\Desktop\\UNLP\\2DO\\1ER SEMESTRE\\.NET\\proyecto\\SGE\\SGE.Aplicacion\\SGE.Aplicacion.csproj",
-        "packagesPath": "C:\\Users\\agust\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\agust\\Desktop\\UNLP\\2DO\\1ER SEMESTRE\\.NET\\proyecto\\SGE\\SGE.Aplicacion\\obj\\",
+        "projectPath": "/Users/sans6114/Documents/desarrollo/proyectosDotnet/Seminario_de_lenguaje_.NET/SGE.Aplicacion/SGE.Aplicacion.csproj",
+        "packagesPath": "/Users/sans6114/.nuget/packages/",
+        "outputPath": "/Users/sans6114/Documents/desarrollo/proyectosDotnet/Seminario_de_lenguaje_.NET/SGE.Aplicacion/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\agust\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/Users/sans6114/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net10.0"
@@ -26,8 +26,8 @@
           "net10.0": {
             "targetAlias": "net10.0",
             "projectReferences": {
-              "C:\\Users\\agust\\Desktop\\UNLP\\2DO\\1ER SEMESTRE\\.NET\\proyecto\\SGE\\SGE.Dominio\\SGE.Dominio.csproj": {
-                "projectPath": "C:\\Users\\agust\\Desktop\\UNLP\\2DO\\1ER SEMESTRE\\.NET\\proyecto\\SGE\\SGE.Dominio\\SGE.Dominio.csproj"
+              "/Users/sans6114/Documents/desarrollo/proyectosDotnet/Seminario_de_lenguaje_.NET/SGE.Dominio/SGE.Dominio.csproj": {
+                "projectPath": "/Users/sans6114/Documents/desarrollo/proyectosDotnet/Seminario_de_lenguaje_.NET/SGE.Dominio/SGE.Dominio.csproj"
               }
             }
           }
@@ -63,7 +63,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.201/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.203/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",
@@ -341,17 +341,17 @@
         }
       }
     },
-    "C:\\Users\\agust\\Desktop\\UNLP\\2DO\\1ER SEMESTRE\\.NET\\proyecto\\SGE\\SGE.Dominio\\SGE.Dominio.csproj": {
+    "/Users/sans6114/Documents/desarrollo/proyectosDotnet/Seminario_de_lenguaje_.NET/SGE.Dominio/SGE.Dominio.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\agust\\Desktop\\UNLP\\2DO\\1ER SEMESTRE\\.NET\\proyecto\\SGE\\SGE.Dominio\\SGE.Dominio.csproj",
+        "projectUniqueName": "/Users/sans6114/Documents/desarrollo/proyectosDotnet/Seminario_de_lenguaje_.NET/SGE.Dominio/SGE.Dominio.csproj",
         "projectName": "SGE.Dominio",
-        "projectPath": "C:\\Users\\agust\\Desktop\\UNLP\\2DO\\1ER SEMESTRE\\.NET\\proyecto\\SGE\\SGE.Dominio\\SGE.Dominio.csproj",
-        "packagesPath": "C:\\Users\\agust\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\agust\\Desktop\\UNLP\\2DO\\1ER SEMESTRE\\.NET\\proyecto\\SGE\\SGE.Dominio\\obj\\",
+        "projectPath": "/Users/sans6114/Documents/desarrollo/proyectosDotnet/Seminario_de_lenguaje_.NET/SGE.Dominio/SGE.Dominio.csproj",
+        "packagesPath": "/Users/sans6114/.nuget/packages/",
+        "outputPath": "/Users/sans6114/Documents/desarrollo/proyectosDotnet/Seminario_de_lenguaje_.NET/SGE.Dominio/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\agust\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/Users/sans6114/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net10.0"
@@ -396,7 +396,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.201/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/10.0.203/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",

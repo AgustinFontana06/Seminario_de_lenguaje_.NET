@@ -9,3 +9,4 @@ public enum EtiquetaTramite
     Notificacion,
     PaseAlArchivo
 }
+
