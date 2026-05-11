@@ -2,6 +2,8 @@ using SGE.Dominio;
 namespace SGE.Aplicacion;
 
 public interface IExpedienteRepository{
-    //hola prueba
-    void agregar();
+    void Agregar();
+    void ObtenerPorId();
+    void Modificar();
+    void Eliminar();
 }
