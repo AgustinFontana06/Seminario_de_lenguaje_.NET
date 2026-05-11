@@ -1,5 +1,5 @@
 using System.Runtime.CompilerServices;
-namespace SGE;
+namespace SGE.Dominio;
 
 public class DominioException : Exception
 {
