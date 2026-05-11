@@ -3,6 +3,7 @@ namespace SGE.Dominio;
 
 public class DominioException : Exception
 {
+    //hola
     public DominioException(){}
 
     public DominioException(string? message) : base(message){}
