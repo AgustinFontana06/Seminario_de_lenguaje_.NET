@@ -10,6 +10,7 @@ public class AgregarExpedienteUseCase(IExpedienteRepository repositorio)
 
         var expediente = new Expediente(caratula, request.idUsuario);
         //TODO: conectar con repositorio
+
         return new AgregarExpedienteResponse(expediente.Id);
     }
 
