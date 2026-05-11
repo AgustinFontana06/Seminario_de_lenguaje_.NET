@@ -1,4 +1,4 @@
-namespace SGE;
+namespace SGE.Dominio;
 
 public class Tramite
 {

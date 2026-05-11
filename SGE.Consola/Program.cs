@@ -1,4 +1,4 @@
-﻿using SGE;
+﻿using SGE.Dominio;
 
 //prueba de funcionamiento
 var caratula = new Caratula("hola");
