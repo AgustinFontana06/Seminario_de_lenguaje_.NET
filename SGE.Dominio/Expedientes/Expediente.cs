@@ -1,3 +1,5 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace SGE.Dominio;
 
 public class Expediente
@@ -25,6 +27,18 @@ public class Expediente
         FechaUltimaModificacion = FechaCreacion;
         Estado = EstadoExpediente.RecienIniciado;
     }
+
+    public static Expediente Reconstruir (Guid id, Caratula caratula, DateTime fechaDeCreacion, DateTime fechaDeUltimaModificacion, Guid usuarioUltimoCambio, EstadoExpediente estado)
+    {
+        // ESTO REVISAR ESTA RARO;
+        if (fechaDeUltimaModificacion < fechaDeCreacion)
+        {
+            throw new DomainException ("la fecha de modificacion no puede ser menor a la fecha de creacion");
+        }
+        Expediente nuevoExpediente = new Expediente (id,caratula,fechaDeCreacion,fechaDeUltimaModificacion,estado);
+        return nuevoExpediente;
+    }
+    
 
     public void RegistrarCambio(Guid idUsuario)
     {
