@@ -11,7 +11,7 @@ public class Tramite
     public DateTime FechaUltimaModificacion {get; private set;}
     public Guid UsuarioUltimoCambio {get; private set;}
 
-    public Tramite(Guid idExpediente, EtiquetaTramite etiqueta, ContenidoTramite contenido)
+    public Tramite(Guid idExpediente, EtiquetaTramite etiqueta, ContenidoTramite contenido, Guid usuarioUltimoCambio)
     {
         if(idExpediente == Guid.Empty)
         {
@@ -24,7 +24,7 @@ public class Tramite
         Contenido = contenido;
         FechaCreacion = DateTime.Now;
         FechaUltimaModificacion = FechaCreacion;
-        UsuarioUltimoCambio = Id;
+        UsuarioUltimoCambio = usuarioUltimoCambio;
     }
     public static Tramite Reconstruir (Guid id, Guid expedienteId,EtiquetaTramite etiqueta,ContenidoTramite contenido , DateTime fechaDeCreacion, DateTime fechaDeUltimaModificacion, Guid usuarioUltimoCambio)
     {

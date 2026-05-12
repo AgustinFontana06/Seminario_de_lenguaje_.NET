@@ -47,9 +47,6 @@ public class Expediente
         UsuarioUltimoCambio = usuarioUltimoCambio;
         Estado = estado;
     }
-    public EstadoExpediente Estado {get; private set;}
-    
-    
 
     public void RegistrarCambio(Guid idUsuario)
     {

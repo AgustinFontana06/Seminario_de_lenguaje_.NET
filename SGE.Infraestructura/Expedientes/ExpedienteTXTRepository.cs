@@ -29,7 +29,7 @@ class RepositorioExpedienteTXT : IExpedienteRepository
         ActualizarArchivo(expAModificar);
     }
     
-    public void cambiarEstado(EstadoExpediente estado,Guid expedienteId, Guid usuarioId)
+    public void CambiarEstado(EstadoExpediente estado,Guid expedienteId, Guid usuarioId)
     {
         if (!File.Exists(_nombreArchivo))
             throw new Exception("no existe el archivo de expedientes");
@@ -37,7 +37,7 @@ class RepositorioExpedienteTXT : IExpedienteRepository
         Expediente? expAModificar = ObtenerPorId(expedienteId);
         if (expAModificar == null)
             throw new Exception($"expediente con id: {expedienteId} no fue encontrado.");
-        expAModificar.cambiarEstado(estado, usuarioId);
+        expAModificar.CambiarEstado(estado, usuarioId);
         ActualizarArchivo(expAModificar);
     }
     public Expediente? ObtenerPorId(Guid expedienteId)
@@ -46,7 +46,7 @@ class RepositorioExpedienteTXT : IExpedienteRepository
             Expediente? expedienteIdEncontrado = null;
             foreach(Expediente exp in ListaExpedientes)
             {
-                if (Exp.Id == expedienteId)
+                if (exp.Id == expedienteId)
                 {
                     expedienteEncontrado =  exp;
                     break;
