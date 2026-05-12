@@ -1,9 +1,12 @@
-using SGE.Dominio;
-namespace SGE.Aplicacion;
+namespace SGE.Aplicacion.Expedientes;
+using SGE.Dominio.Expedientes;
 
 public interface IExpedienteRepository{
     void Agregar(Expediente expedienteNuevo);
-    void ObtenerPorId();
-    void Modificar();
-    void Eliminar();
+    Expediente? ObtenerPorId(Guid expedienteId);
+    void Modificar(string texto, Guid expedienteId, Guid usuarioId);
+    void CambiarEstado(EstadoExpediente estadoNuevo ,Guid usuarioId);
+    void Eliminar(Guid expedienteId);
+    IEnumerable<Expediente> ObtenerTodos();
+    
 }

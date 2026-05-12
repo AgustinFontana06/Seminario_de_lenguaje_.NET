@@ -1,4 +1,6 @@
-﻿using SGE.Dominio;
+﻿using SGE.Dominio.Comun;
+using SGE.Dominio.Expedientes;
+using SGE.Dominio.Tramites;
 
 //prueba de funcionamiento
 var caratula = new Caratula("hola");

@@ -1,4 +1,5 @@
-namespace SGE.Dominio;
+namespace SGE.Dominio.Expedientes;
+using SGE.Dominio.Comun;
 
 public record class Caratula
 {

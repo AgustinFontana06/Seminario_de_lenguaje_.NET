@@ -1,4 +1,4 @@
-namespace SGE.Aplicacion;
-using SGE.Dominio;
+namespace SGE.Aplicacion.Expedientes;
+using SGE.Dominio.Expedientes;
 
 public record ExpedienteDTOs(Caratula caratula, Guid idUsuario){}

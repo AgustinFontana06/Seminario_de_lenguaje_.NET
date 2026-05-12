@@ -1,4 +1,4 @@
-namespace SGE.Dominio;
+namespace SGE.Dominio.Tramites;
 
 public enum EtiquetaTramite
 {

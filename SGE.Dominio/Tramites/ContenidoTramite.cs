@@ -1,4 +1,5 @@
-namespace SGE.Dominio;
+namespace SGE.Dominio.Tramites;
+using SGE.Dominio.Comun;
 
 public record class ContenidoTramite
 {

@@ -1,5 +1,6 @@
-namespace SGE.Aplicacion;
-using SGE.Dominio;
+namespace SGE.Aplicacion.Expedientes.Agregar;
+using SGE.Dominio.Expedientes;
+using SGE.Aplicacion.Expedientes;
 
 public class AgregarExpedienteUseCase(IExpedienteRepository repositorio)
 {

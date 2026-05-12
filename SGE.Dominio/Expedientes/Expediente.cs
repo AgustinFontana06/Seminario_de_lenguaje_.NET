@@ -1,5 +1,7 @@
+namespace SGE.Dominio.Expedientes;
 using System.Diagnostics.CodeAnalysis;
-namespace SGE.Dominio;
+using SGE.Dominio.Comun;
+using SGE.Dominio.Tramites;
 
 public class Expediente
 {
@@ -35,9 +37,7 @@ public class Expediente
 
 
         return new Expediente(id, caratula, fechaCreacion, fechaUltimaModificacion, usuarioUltimoCambio, estado);
-        
     }
-
     private Expediente(Guid id, Caratula caratula, DateTime fechaCreacion, DateTime fechaUltimaModificacion, Guid usuarioUltimoCambio, EstadoExpediente estado)
     {
         Id = id;
@@ -47,6 +47,8 @@ public class Expediente
         UsuarioUltimoCambio = usuarioUltimoCambio;
         Estado = estado;
     }
+    public EstadoExpediente Estado {get; private set;}
+    
     
 
     public void RegistrarCambio(Guid idUsuario)
