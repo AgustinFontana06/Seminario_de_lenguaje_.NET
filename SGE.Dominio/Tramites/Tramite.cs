@@ -25,15 +25,26 @@ public class Tramite
         FechaUltimaModificacion = FechaCreacion;
         UsuarioUltimoCambio = Id;
     }
-    public static Expediente Reconstruir (Guid id, Guid expedienteId,EtiquetaTramite etiqueta,ContenidoTramite contenido , DateTime fechaDeCreacion, DateTime fechaDeUltimaModificacion, Guid usuarioUltimoCambio)
+    public static Tramite Reconstruir (Guid id, Guid expedienteId,EtiquetaTramite etiqueta,ContenidoTramite contenido , DateTime fechaDeCreacion, DateTime fechaDeUltimaModificacion, Guid usuarioUltimoCambio)
     {
         // ESTO REVISAR ESTA RARO;
         if (fechaDeUltimaModificacion < fechaDeCreacion)
         {
-            throw new DomainException ("la fecha de modificacion no puede ser menor a la fecha de creacion");
+            throw new DominioException ("la fecha de modificacion no puede ser menor a la fecha de creacion");
         }
-        Tramite nuevoTramite  = new Tramite (id,expedienteId,etiqueta,contenido,fechaDeCreacion,fechaDeUltimaModificacion);
+        Tramite nuevoTramite  = new Tramite (id,expedienteId,etiqueta,contenido,fechaDeCreacion,fechaDeUltimaModificacion, usuarioUltimoCambio);
         return nuevoTramite;
+    }
+
+    private Tramite(Guid id, Guid expedienteId, EtiquetaTramite etiqueta, ContenidoTramite contenido, DateTime fechaCreacion, DateTime fechaUltimaModificacion, Guid usuarioUltimoCambio)
+    {
+        Id = id;
+        ExpedienteId = expedienteId;
+        Etiqueta = etiqueta;
+        Contenido = contenido;
+        FechaCreacion = fechaCreacion;
+        FechaUltimaModificacion = fechaUltimaModificacion;
+        UsuarioUltimoCambio = usuarioUltimoCambio;
     }
 
 }

@@ -1,5 +1,4 @@
 using System.Diagnostics.CodeAnalysis;
-
 namespace SGE.Dominio;
 
 public class Expediente
@@ -18,8 +17,6 @@ public class Expediente
             throw new DominioException("El id no puede estar vacio");
         }
 
-
-
         Id = Guid.NewGuid();
         UsuarioUltimoCambio = idUsuario;
         Caratula = caratula;
@@ -28,15 +25,27 @@ public class Expediente
         Estado = EstadoExpediente.RecienIniciado;
     }
 
-    public static Expediente Reconstruir (Guid id, Caratula caratula, DateTime fechaDeCreacion, DateTime fechaDeUltimaModificacion, Guid usuarioUltimoCambio, EstadoExpediente estado)
+    public static Expediente Reconstruir (Guid id, Caratula caratula, DateTime fechaCreacion, DateTime fechaUltimaModificacion, Guid usuarioUltimoCambio, EstadoExpediente estado)
     {
         // ESTO REVISAR ESTA RARO;
-        if (fechaDeUltimaModificacion < fechaDeCreacion)
+        if (fechaUltimaModificacion < fechaCreacion)
         {
-            throw new DomainException ("la fecha de modificacion no puede ser menor a la fecha de creacion");
+            throw new DominioException("la fecha de modificacion no puede ser menor a la fecha de creacion");
         }
-        Expediente nuevoExpediente = new Expediente (id,caratula,fechaDeCreacion,fechaDeUltimaModificacion,estado);
-        return nuevoExpediente;
+
+
+        return new Expediente(id, caratula, fechaCreacion, fechaUltimaModificacion, usuarioUltimoCambio, estado);
+        
+    }
+
+    private Expediente(Guid id, Caratula caratula, DateTime fechaCreacion, DateTime fechaUltimaModificacion, Guid usuarioUltimoCambio, EstadoExpediente estado)
+    {
+        Id = id;
+        Caratula = caratula;
+        FechaCreacion = fechaCreacion;
+        FechaUltimaModificacion = fechaUltimaModificacion;
+        UsuarioUltimoCambio = usuarioUltimoCambio;
+        Estado = estado;
     }
     
 
