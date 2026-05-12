@@ -1,4 +1,4 @@
-namespace SGE.Aplicacion.Expedientes.Modificar;
-using SGE.Dominio.Expedientes;
+namespace SGE.Aplicacion.Expediente.Modifcar;
+using SGE.Dominio;
 
 public record class ModificarCaratulaExpedienteRequest(string text, Guid id){}

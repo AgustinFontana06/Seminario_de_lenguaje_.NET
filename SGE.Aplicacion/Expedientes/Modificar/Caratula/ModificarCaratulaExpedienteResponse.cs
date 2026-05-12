@@ -1,3 +1,3 @@
-namespace SGE.Aplicacion.Expedientes.Modificar;
+namespace SGE.Aplicacion.Expediente.Modifcar;
 
 public record class ModificarCaratulaExpedienteResponse(Guid id){}
