@@ -4,6 +4,7 @@ using SGE.Aplicacion.Expedientes;
 using SGE.Aplicacion.Autorizaciones;
 using SGE.Aplicacion.Comun;
 
+// Constructor primario de C# 12 que inyecta automáticamente las dependencias como campos readonly
 public class ModificarCaratulExpedienteUseCase(IExpedienteRepository repositorio, IAutorizacionService autorizacion)
 {
     public ModificarCaratulaExpedienteResponse Ejecutar(ModificarCaratulaExpedienteRequest request)
