@@ -4,8 +4,7 @@ using SGE.Dominio.Expedientes;
 public interface IExpedienteRepository{
     void Agregar(Expediente expedienteNuevo);
     Expediente? ObtenerPorId(Guid expedienteId);
-    void Modificar(Expediente expediente);
-    void CambiarEstado(EstadoExpediente estadoNuevo, Guid usuarioId);
+    void Modificar(Expediente expedienteModificado);
     void Eliminar(Guid expedienteId);
     IEnumerable<Expediente> ObtenerTodos();
     
