@@ -1,4 +1,5 @@
-namespace SGE.Aplicacion.Expediente.Eliminar;
-using SGE.Dominio;
+namespace SGE.Aplicacion.Expedientes.Eliminar;
+using SGE.Dominio.Expedientes;
+using SGE.Aplicacion.Expedientes;
 
-public record class EliminarExpedienteRequest(Guid idUsuario){}
+public record class EliminarExpedienteRequest(Guid idExpediente, Guid idUsuario){}

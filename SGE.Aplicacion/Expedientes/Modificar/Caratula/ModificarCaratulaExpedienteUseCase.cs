@@ -11,7 +11,7 @@ public class ModificarCaratulExpedienteUseCase(IExpedienteRepository repositorio
         //verifico autorizacion
         if(!autorizacion.PoseeElPermiso(request.idUsuario, Permiso.ExpedienteModificacion))
         {
-            throw new AutorizacionExcepcion("No tienes permiso para modificar la caratula");
+            throw new AutorizacionException("No tienes permiso para modificar la caratula");
         }
 
         //obtengo su id
