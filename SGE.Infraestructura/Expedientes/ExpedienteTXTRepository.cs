@@ -8,166 +8,105 @@ class RepositorioExpedienteTXT : IExpedienteRepository
     private readonly string _nombreArchivo = "expedientes.txt";
 
     public void Agregar(Expediente expedienteNuevo)
-    {
-        string separador = Environment.NewLine + Environment.NewLine;
-        string bloque = CrearBloque(expedienteNuevo);
+{
+    // Armamos la línea SOLO con los datos puros, separados por comas
+    string lineaNueva = $"{expedienteNuevo.Id},{expedienteNuevo.Caratula.Texto},{expedienteNuevo.FechaCreacion},{expedienteNuevo.FechaUltimaModificacion},{expedienteNuevo.Estado}";
 
-        File.AppendAllText(_nombreArchivo, bloque + separador);
-    }
+    // Environment.NewLine es el "Enter" oficial del sistema operativo. 
+    // Lo agregamos al final para que el próximo expediente vaya en el renglón de abajo.
+    File.AppendAllText("expedientes.txt", lineaNueva + Environment.NewLine);
+}
     
     public void Modificar(string textoNuevo, Guid expedienteId, Guid usuarioId)
     {
         if (!File.Exists(_nombreArchivo))
             throw new Exception("no existe el archivo de expedientes");
 
-        Expediente? expAModificar = ObtenerPorId(expedienteId);
-        if (expAModificar == null)
-            throw new Exception($"expediente con id: {expedienteId} no fue encontrado.");
+         var expedientesLista = ObtenerTodos().ToList();
 
-        var nuevaCaratula = new Caratula(textoNuevo);
-        expAModificar.ModificarCaratula(nuevaCaratula, usuarioId);
-        ActualizarArchivo(expAModificar);
-    }
-    
-    public void cambiarEstado(EstadoExpediente estado,Guid expedienteId, Guid usuarioId)
-    {
-        if (!File.Exists(_nombreArchivo))
-            throw new Exception("no existe el archivo de expedientes");
+        // Buscamos en qué posición (índice) de la lista está el expediente viejo
+        int index = expedientesLista.FindIndex(e => e.Id == expedienteModificado.Id);// RARO PODRIA MODFICARSE
 
-        Expediente? expAModificar = ObtenerPorId(expedienteId);
-        if (expAModificar == null)
-            throw new Exception($"expediente con id: {expedienteId} no fue encontrado.");
-        expAModificar.cambiarEstado(estado, usuarioId);
-        ActualizarArchivo(expAModificar);
-    }
-    public Expediente? ObtenerPorId(Guid expedienteId)
+        // REGLA DEL TP: Si no existe, lanzamos excepción
+        if (index == -1)
         {
-            ListaExpedientes = ObtenerTodos();
-            Expediente? expedienteIdEncontrado = null;
-            foreach(Expediente exp in ListaExpedientes)
-            {
-                if (Exp.Id == expedienteId)
-                {
-                    expedienteEncontrado =  exp;
-                    break;
-                }
-            }
-            return expedienteIdEncontrado;
+            throw new RepositorioException($"No se encontró un expediente con ID {expedienteModificado.Id} para modificar.");
         }
 
+        // Reemplazamos el expediente viejo por el modificado en esa posición
+        expedientesLista[index] = expedienteModificado;
+
+        // Sobrescribimos el archivo TXT completo con la lista actualizada
+        ActualizarArchivo(expedientesLista);
+    }
+    public void cambiarEstado(EstadoExpediente estado,Guid expedienteId, Guid usuarioId)
+    {
+      //DEBO ESTO
+    }
     public void Eliminar(Guid expedienteId)
     {
         if (!File.Exists(_nombreArchivo))
             throw new Exception("no existe el archivo de expedientes");
 
-        string separador = Environment.NewLine + Environment.NewLine;
-        string idLinea = "id del expediente: " + expedienteId;
-        bool encontrado = false;
-        List<string> bloquesRestantes = new();
+        // 1. Traemos TODOS los expedientes a la memoria y los convertimos en una Lista
+        // Usamos .ToList() porque IEnumerable es de solo lectura y no nos dejaría usar .Remove()
+        var expedientesLista = ObtenerTodos().ToList();
 
-        foreach (string bloque in LeerBloques())
+        // 2. Buscamos el expediente específico en la lista
+        var expedienteAEliminar = expedientesList.FirstOrDefault(e => e.Id == id);
+
+        // 3. REGLA DEL TP: Si no existe, lanzamos excepción
+        if (expedienteAEliminar == null)
         {
-            if (bloque.Contains(idLinea))
-            {
-                encontrado = true;
-                continue; // salta este bloque, no lo agrega
-            }
-            bloquesRestantes.Add(bloque);
+            throw new RepositorioException($"No se encontró un expediente con ID {id} para eliminar.");
         }
 
-        if (!encontrado)
-            throw new Exception($"expediente con id: {expedienteId} no fue encontrado.");
+        // 4. Lo borramos de nuestra lista temporal en memoria
+        expedientesList.Remove(expedienteAEliminar);
 
-        File.WriteAllText(_nombreArchivo, string.Join(separador, bloquesRestantes) + separador);
+        // 5. Sobrescribimos el archivo TXT completo (ahora sin ese expediente)
+        ActualizarArchivo(expedientesLista);
     }
 
     private void ActualizarArchivo(Expediente expModificado)
     {
-        string separador = Environment.NewLine + Environment.NewLine;
-        string idLinea = "id del expediente: " + expModificado.Id;
-        bool reemplazado = false;
+        // 1. Borramos el archivo viejo y lo preparamos para escribir de cero
+        // File.WriteAllText lo sobrescribe automáticamente si ya existe.
+    
+        // 2. Usamos una lista de strings para armar las líneas
+        var texto = new List<string>();
 
-        IEnumerable<string> bloquesActualizados = LeerBloques().Select(bloque =>
+        foreach (var e in expedientesActualizados)
         {
-            if (!reemplazado && bloque.Contains(idLinea))
-            {
-                reemplazado = true;
-                return CrearBloque(expModificado);
-            }
-            return bloque;
-        });
+            // Armamos la línea con el mismo formato que en el Agregar
+            string linea = $"{e.Id},{e.Caratula.Texto},{e.FechaCreacion},{e.FechaUltimaModificacion},{e.Estado}";
+            texto.Add(linea);
+        }
 
-        if (!reemplazado)
-            throw new Exception("expediente no encontrado en archivo");
-
-        File.WriteAllText(_nombreArchivo, string.Join(separador, bloquesActualizados) + separador);
+        // 3. Escribimos todas las líneas de golpe en el TXT
+        File.WriteAllLines("expedientes.txt", lineas);
     }
 
-    private static string CrearBloque(Expediente e)
+
+
+    private IEnumerable<string> LeerLineas()
     {
-            string bloque =
-            "id del expediente: " + e.Id + Environment.NewLine +
-            "Caratula: " + e.Caratula.Texto + Environment.NewLine +
-            "Fecha de creacion: " + e.FechaCreacion + Environment.NewLine;
-
-            if (e.FechaUltimaModificacion != e.FechaCreacion)
-            {
-                bloque += "Fecha de ultima modificacion: " + e.FechaUltimaModificacion + Environment.NewLine;
-            }
-
-            bloque += "Estado: " + e.Estado;
-
-        return bloque;
-    }
-
-    private IEnumerable<string> LeerBloques()
-    {
-        string separador = Environment.NewLine + Environment.NewLine;
+        string separador = Environment.NewLine;
         string texto = File.ReadAllText(_nombreArchivo);
 
-        return texto.Split(separador, StringSplitOptions.RemoveEmptyEntries);
+        return texto.Split(separador);
     }
 
-    private Expediente ParsearBloque(string bloque)
-    {
-        var lineas = bloque.Split(Environment.NewLine);
-        // indice 0 -> id, 1 -> textoCaratula, 2-> fecha creacion, 3 -> fecha modificacion, 4 -> estado
-        Guid id = Guid.Parse(lineas[0].Replace("id del expediente: ", "").Trim());
-        string textoCaratula = lineas[1].Replace("Caratula: ", "").Trim();
-        DateTime fechaCreacion = DateTime.Parse(lineas[2].Replace("Fecha de creacion: ", "").Trim());
-
-        DateTime fechaUltimaModificacion = fechaCreacion;
-        EstadoExpediente estado;
-        //asumo que el bloque recibido es de un expediente que nunca se modifico.
-        if (lineas[3].StartsWith("Fecha de ultima modificacion: "))
-        {
-            fechaUltimaModificacion = DateTime.Parse(
-            lineas[3].Replace("Fecha de ultima modificacion: ", "").Trim()
-            );
-
-            estado = Enum.Parse<EstadoExpediente>(
-            lineas[4].Replace("Estado: ", "").Trim()
-            );
-        }
-        else
-        {
-            estado = Enum.Parse<EstadoExpediente>(
-            lineas[3].Replace("Estado: ", "").Trim()
-        );
-        }
-
-        var caratula = new Caratula(textoCaratula);
-    
-        return Expediente.Reconstruir(id, caratula, fechaCreacion, fechaUltimaModificacion, Guid.Empty, estado);
-    }
 
     public IEnumerable<Expediente> ObtenerTodos()
     {
         List<Expediente> expedientes = new();
 
-        foreach (string bloque in LeerBloques())
+        foreach (string linea in LeerLineas())
         {
-            expedientes.Add(ParsearBloque(bloque));
+            var datos = linea.Split(",");
+            Expediente exp = Expediente.Reconstruir(datos[0],datos[1],datos[2],datos[3],datos[4],datos[5]);
+            expedientes.Add(exp);
         }
 
         return expedientes;

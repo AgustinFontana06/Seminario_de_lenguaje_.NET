@@ -28,11 +28,8 @@ public class Tramite
     }
     public static Tramite Reconstruir (Guid id, Guid expedienteId,EtiquetaTramite etiqueta,ContenidoTramite contenido , DateTime fechaDeCreacion, DateTime fechaDeUltimaModificacion, Guid usuarioUltimoCambio)
     {
-        // ESTO REVISAR ESTA RARO;
-        if (fechaDeUltimaModificacion < fechaDeCreacion)
-        {
-            throw new DominioException ("la fecha de modificacion no puede ser menor a la fecha de creacion");
-        }
+        // no debe cheque nada debido  que solo reconstruye el expediente que antes ya creado
+
         Tramite nuevoTramite  = new Tramite (id,expedienteId,etiqueta,contenido,fechaDeCreacion,fechaDeUltimaModificacion, usuarioUltimoCambio);
         return nuevoTramite;
     }
