@@ -11,7 +11,7 @@ public class Tramite
     public DateTime FechaUltimaModificacion {get; private set;}
     public Guid UsuarioUltimoCambio {get; private set;}
 
-    public Tramite(Guid idExpediente, EtiquetaTramite etiqueta, ContenidoTramite contenido, Guid usuarioUltimoCambio)
+    public Tramite(Guid idExpediente, ContenidoTramite contenido, Guid usuarioUltimoCambio)
     {
         if(idExpediente == Guid.Empty)
         {
@@ -20,7 +20,7 @@ public class Tramite
 
         Id = Guid.NewGuid();
         ExpedienteId = idExpediente;
-        Etiqueta = etiqueta;
+        Etiqueta = EtiquetaTramite.EscritoPresentado; // TODO: escritoPresentado es el estado inicial?
         Contenido = contenido;
         FechaCreacion = DateTime.Now;
         FechaUltimaModificacion = FechaCreacion;
@@ -45,4 +45,25 @@ public class Tramite
         UsuarioUltimoCambio = usuarioUltimoCambio;
     }
 
+    public void ModificarContenido(ContenidoTramite nuevoContenido, Guid idUsuario)
+    {
+        if(idUsuario == Guid.Empty)
+        {
+            throw new DominioException("El id no puede estar vacio");
+        }
+        Contenido = nuevoContenido;
+        RegistrarCambio(idUsuario);
+    }
+
+    
+    public override string ToString()
+    {
+        return $"Tramite: {Id}, expediente asociado: {ExpedienteId}, fecha de creación:  {FechaCreacion}, contenido: {Contenido}";
+    }
+
+    private void RegistrarCambio(Guid idUsuario)
+    {
+        UsuarioUltimoCambio = idUsuario;
+        FechaUltimaModificacion = DateTime.Now;
+    }
 }

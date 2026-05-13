@@ -99,6 +99,7 @@ class ExpedienteTXTRepository : IExpedienteRepository
     }
 
 
+
     public IEnumerable<Expediente> ObtenerTodos()
     {
         List<Expediente> expedientes = new();
@@ -112,4 +113,5 @@ class ExpedienteTXTRepository : IExpedienteRepository
 
         return expedientes;
     }
+
     }

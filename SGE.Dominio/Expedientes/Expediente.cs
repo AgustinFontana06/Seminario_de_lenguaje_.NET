@@ -43,7 +43,7 @@ public class Expediente
     }   
     
 
-    public void RegistrarCambio(Guid idUsuario)
+    private void RegistrarCambio(Guid idUsuario)
     {
         UsuarioUltimoCambio = idUsuario;
         FechaUltimaModificacion = DateTime.Now;
@@ -90,14 +90,17 @@ public class Expediente
                     break;
             }
         }
-
+        Boolean cambio;
         if(nuevoEstado != estadoAnterior)
         {
             Estado = nuevoEstado;
             RegistrarCambio(idUsuario);
-            return true;
+            cambio = true;
+        } else
+        {
+            cambio = false;
         }
-        return false;
+        return cambio;
     }
 
     public void CambiarEstado(EstadoExpediente nuevoEstado, Guid idUsuario)
