@@ -1,8 +1,9 @@
 namespace SGE.Infraestructura.Expedientes;
 using SGE.Dominio.Expedientes;
 using SGE.Aplicacion.Expedientes;
+using SGE.Aplicacion.Comun;
 
-class RepositorioExpedienteTXT : IExpedienteRepository
+class ExpedienteTXTRepository : IExpedienteRepository
 {
 
     private readonly string _nombreArchivo = "expedientes.txt";
@@ -17,12 +18,12 @@ class RepositorioExpedienteTXT : IExpedienteRepository
     File.AppendAllText("expedientes.txt", lineaNueva + Environment.NewLine);
 }
     
-    public void Modificar(string textoNuevo, Guid expedienteId, Guid usuarioId)
+    public void Modificar(Expediente expedienteModificado)
     {
         if (!File.Exists(_nombreArchivo))
             throw new Exception("no existe el archivo de expedientes");
-
-         var expedientesLista = ObtenerTodos().ToList();
+        
+        var expedientesLista = ObtenerTodos().ToList();
 
         // Buscamos en qué posición (índice) de la lista está el expediente viejo
         int index = expedientesLista.FindIndex(e => e.Id == expedienteModificado.Id);// RARO PODRIA MODFICARSE
@@ -35,7 +36,7 @@ class RepositorioExpedienteTXT : IExpedienteRepository
 
         // Reemplazamos el expediente viejo por el modificado en esa posición
         expedientesLista[index] = expedienteModificado;
-
+        
         // Sobrescribimos el archivo TXT completo con la lista actualizada
         ActualizarArchivo(expedientesLista);
     }

@@ -1,6 +1,7 @@
 namespace SGE.Aplicacion.Expedientes.Eliminar;
 using SGE.Dominio.Expedientes;
-using SGE.Aplicacion.Expedientes.Eliminar;
+using SGE.Dominio.Tramites;
+using SGE.Aplicacion.Expedientes;
 using SGE.Aplicacion.Autorizaciones;
 using SGE.Aplicacion.Tramites;
 using SGE.Aplicacion.Comun;

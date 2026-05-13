@@ -1,5 +1,6 @@
 namespace SGE.Aplicacion.Expedientes.ObtenerTodos;
 using SGE.Dominio.Expedientes;
+using SGE.Aplicacion.Expedientes;
 using SGE.Aplicacion.Expedientes.ObtenerPorId;
 
 public class ObtenerTodosExpedientesUseCase(IExpedienteRepository repositorio)
