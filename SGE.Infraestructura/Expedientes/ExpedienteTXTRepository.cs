@@ -10,7 +10,7 @@ class ExpedienteTXTRepository : IExpedienteRepository
 
     public Expediente? ObtenerPorId(Guid expedienteId)
     {
-     Expediente expedienteBuscado = null;
+     Expediente? expedienteBuscado = null;
      var datos = ObtenerTodos();
      foreach (Expediente e in datos)
          {
@@ -22,14 +22,14 @@ class ExpedienteTXTRepository : IExpedienteRepository
     return expedienteBuscado; 
     }
     public void Agregar(Expediente expedienteNuevo)
-{
+    {
     // Armamos la línea SOLO con los datos puros, separados por comas
-    string lineaNueva = $"{expedienteNuevo.Id},{expedienteNuevo.Caratula.Texto},{expedienteNuevo.FechaCreacion},{expedienteNuevo.FechaUltimaModificacion},{expedienteNuevo.Estado}";
+        string lineaNueva = $"{expedienteNuevo.Id},{expedienteNuevo.Caratula.Texto},{expedienteNuevo.FechaCreacion},{expedienteNuevo.FechaUltimaModificacion},{expedienteNuevo.Estado}";
 
     // Environment.NewLine es el "Enter" oficial del sistema operativo. 
     // Lo agregamos al final para que el próximo expediente vaya en el renglón de abajo.
-    File.AppendAllText("expedientes.txt", lineaNueva + Environment.NewLine);
-}
+        File.AppendAllText("expedientes.txt", lineaNueva + Environment.NewLine);
+    }   
     public void Modificar(Expediente expedienteModificado)
     {
         if (!File.Exists(_nombreArchivo))
