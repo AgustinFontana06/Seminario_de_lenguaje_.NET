@@ -7,9 +7,10 @@ public class AgregarExpedienteUseCase(IExpedienteRepository repositorio, IAutori
 {
     public AgregarExpedienteResponse Ejecutar(AgregarExpedienteRequest request)
     {
+
         if(!autorizacion.PoseeElPermiso(request.idUsuario, Permiso.ExpendienteAlta))
         {
-            throw new AutorizacionException("No tienes permiso para modificar la caratula");
+            throw new AutorizacionException("No tienes permiso para dar de alta el expediente.");
         }
 
         var caratula = new Caratula(request.caratulaText);
@@ -20,5 +21,4 @@ public class AgregarExpedienteUseCase(IExpedienteRepository repositorio, IAutori
         repositorio.Agregar(expediente);
         return new AgregarExpedienteResponse(expediente.Id);
     }
-
 }

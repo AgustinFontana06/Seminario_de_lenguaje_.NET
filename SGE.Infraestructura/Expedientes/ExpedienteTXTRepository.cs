@@ -1,12 +1,26 @@
 namespace SGE.Infraestructura.Expedientes;
 using SGE.Dominio.Expedientes;
+using SGE.Infraestructura.RepositorioException;
 using SGE.Aplicacion.Expedientes;
 
-class RepositorioExpedienteTXT : IExpedienteRepository
+class ExpedienteTXTRepository : IExpedienteRepository
 {
 
     private readonly string _nombreArchivo = "expedientes.txt";
 
+    public Expediente? ObtenerPorId(Guid expedienteId)
+    {
+     Expediente expedienteBuscado = null;
+     var datos = ObtenerTodos();
+     foreach (Expediente e in datos)
+         {
+            if (expedienteId == e.Id)
+            {
+                expedienteBuscado = e;
+            }
+        }  
+    return expedienteBuscado; 
+    }
     public void Agregar(Expediente expedienteNuevo)
 {
     // Armamos la línea SOLO con los datos puros, separados por comas
@@ -16,7 +30,6 @@ class RepositorioExpedienteTXT : IExpedienteRepository
     // Lo agregamos al final para que el próximo expediente vaya en el renglón de abajo.
     File.AppendAllText("expedientes.txt", lineaNueva + Environment.NewLine);
 }
-    
     public void Modificar(Expediente expedienteModificado)
     {
         if (!File.Exists(_nombreArchivo))
@@ -39,10 +52,6 @@ class RepositorioExpedienteTXT : IExpedienteRepository
         // Sobrescribimos el archivo TXT completo con la lista actualizada
         ActualizarArchivo(expedientesLista);
     }
-    public void cambiarEstado(EstadoExpediente estado,Guid expedienteId, Guid usuarioId)
-    {
-      //DEBO ESTO
-    }
     public void Eliminar(Guid expedienteId)
     {
         if (!File.Exists(_nombreArchivo))
@@ -53,22 +62,22 @@ class RepositorioExpedienteTXT : IExpedienteRepository
         var expedientesLista = ObtenerTodos().ToList();
 
         // 2. Buscamos el expediente específico en la lista
-        var expedienteAEliminar = expedientesList.FirstOrDefault(e => e.Id == id);
+        var expedienteAEliminar = expedientesLista.FirstOrDefault(e => e.Id == expedienteId);
 
         // 3. REGLA DEL TP: Si no existe, lanzamos excepción
         if (expedienteAEliminar == null)
         {
-            throw new RepositorioException($"No se encontró un expediente con ID {id} para eliminar.");
+            throw new RepositorioException($"No se encontró un expediente con ID {expedienteId} para eliminar.");
         }
 
         // 4. Lo borramos de nuestra lista temporal en memoria
-        expedientesList.Remove(expedienteAEliminar);
+        expedientesLista.Remove(expedienteAEliminar);
 
         // 5. Sobrescribimos el archivo TXT completo (ahora sin ese expediente)
         ActualizarArchivo(expedientesLista);
     }
 
-    private void ActualizarArchivo(Expediente expModificado)
+    private void ActualizarArchivo( IEnumerable<Expediente> expedientesActualizados)
     {
         // 1. Borramos el archivo viejo y lo preparamos para escribir de cero
         // File.WriteAllText lo sobrescribe automáticamente si ya existe.
@@ -84,7 +93,7 @@ class RepositorioExpedienteTXT : IExpedienteRepository
         }
 
         // 3. Escribimos todas las líneas de golpe en el TXT
-        File.WriteAllLines("expedientes.txt", lineas);
+        File.WriteAllLines("expedientes.txt", texto);
     }
 
 
@@ -96,8 +105,6 @@ class RepositorioExpedienteTXT : IExpedienteRepository
 
         return texto.Split(separador);
     }
-
-
     public IEnumerable<Expediente> ObtenerTodos()
     {
         List<Expediente> expedientes = new();
@@ -105,10 +112,19 @@ class RepositorioExpedienteTXT : IExpedienteRepository
         foreach (string linea in LeerLineas())
         {
             var datos = linea.Split(",");
-            Expediente exp = Expediente.Reconstruir(datos[0],datos[1],datos[2],datos[3],datos[4],datos[5]);
+            // debo parsea la informacion en string a datos nesesarios para la reconstrucion, podria hacerlo dentro del mismo metodo con dato pero por prolijidad decalre variables
+            Guid id = Guid.Parse(datos[0]);
+            Caratula caratula = new Caratula (datos[1]);
+            DateTime fechaCreacion = DateTime.Parse(datos[2]);
+            DateTime fechaUltimaModificacion = DateTime.Parse(datos[3]);
+            Guid idUltimo = Guid.Parse(datos[4]);
+            EstadoExpediente estado = Enum.Parse<EstadoExpediente>(datos[5]);
+
+            Expediente exp = Expediente.Reconstruir(id, caratula, fechaCreacion, fechaUltimaModificacion,idUltimo, estado);
             expedientes.Add(exp);
         }
 
         return expedientes;
     }
+
     }
