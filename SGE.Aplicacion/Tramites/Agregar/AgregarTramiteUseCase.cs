@@ -12,6 +12,7 @@ public class AgregarTramiteUseCase(ITramiteRepository repositorio, IActualizacio
         {
             throw new AutorizacionException("No tienes permiso para dar de alta el tramite.");
         }
+        
         var contenido = new ContenidoTramite(request.contenidoText);
         var tramite = new Tramite(request.expedienteId, contenido,request.idUsuario);
         //llamamos al servicio por si hay que cambiar automaticamente el state del expediente.
