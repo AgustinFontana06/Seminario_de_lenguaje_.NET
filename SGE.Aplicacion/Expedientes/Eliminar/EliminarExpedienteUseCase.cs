@@ -1,9 +1,9 @@
 namespace SGE.Aplicacion.Expedientes.Eliminar;
 using SGE.Dominio.Expedientes;
-using SGE.Aplicacion.Expedientes.Eliminar;
 using SGE.Aplicacion.Autorizaciones;
 using SGE.Aplicacion.Tramites;
 using SGE.Aplicacion.Comun;
+using SGE.Dominio.Tramites;
 
 
 public class EliminarExpedienteUseCase(IExpedienteRepository repositorioExpediente, ITramiteRepository repositorioTramite,
@@ -16,7 +16,7 @@ public class EliminarExpedienteUseCase(IExpedienteRepository repositorioExpedien
         }
 
         Expediente? exp = repositorioExpediente.ObtenerPorId(request.idExpediente);
-        if (exp is null)
+        if (exp == null)
             throw new EntidadNoEncontradaException($"No se encontró un expediente con id {request.idExpediente}");
     
         IEnumerable<Tramite> tramites = repositorioTramite.ObtenerPorExpedienteId(request.idExpediente);
@@ -29,6 +29,8 @@ public class EliminarExpedienteUseCase(IExpedienteRepository repositorioExpedien
         repositorioExpediente.Eliminar(request.idExpediente);
 
         return new EliminarExpedienteResponse(exp.Id);
+
+        //nota: se debe actualizar el ultimo cambio por usuario?
     }
 
 }

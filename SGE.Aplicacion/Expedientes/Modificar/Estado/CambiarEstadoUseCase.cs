@@ -25,6 +25,9 @@ public class CambiarEstadoUseCase(IExpedienteRepository repositorio, IAutorizaci
 
         exp.CambiarEstado(request.estado, request.idUsuario);
 
+        //nota: creo que no es necesario un propio metodo de repositorio de cambiar estado, con el modificar ya basta
+        repositorio.Modificar(exp);
+
 
         return new CambiarEstadoResponse(exp.Id, exp.Estado);
     }

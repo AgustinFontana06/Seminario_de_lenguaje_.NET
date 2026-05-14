@@ -1,3 +1,3 @@
 namespace SGE.Aplicacion.Expedientes.Eliminar;
 
-public record class AgregarExpedienteResponse(Guid id){}
+public record class EliminarExpedienteResponse(Guid id){}

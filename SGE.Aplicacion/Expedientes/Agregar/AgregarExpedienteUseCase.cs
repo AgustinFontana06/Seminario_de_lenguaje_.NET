@@ -20,14 +20,5 @@ public class AgregarExpedienteUseCase(IExpedienteRepository repositorio, IAutori
         repositorio.Agregar(expediente);
         return new AgregarExpedienteResponse(expediente.Id);
     }
-    
-
-    //TODO:obtenerporId
-
-    //TODO: Eliminar
-
-    //TODO: modificar
-
-    //TODO: obtenertodos
 
 }

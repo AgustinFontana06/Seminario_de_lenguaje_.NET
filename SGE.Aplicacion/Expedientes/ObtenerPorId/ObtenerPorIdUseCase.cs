@@ -9,7 +9,7 @@ public class ObtenerPorIdUseCase(IExpedienteRepository repositorio)
 
         Expediente? expediente = repositorio.ObtenerPorId(request.ExpedienteId);
 
-        if (expediente is null)
+        if (expediente == null)
             throw new EntidadNoEncontradaException($"No se encontro un expediente con id {request.ExpedienteId}");
 
 

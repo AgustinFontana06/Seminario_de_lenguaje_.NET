@@ -30,8 +30,7 @@ public class Tramite
     {
         // no debe cheque nada debido  que solo reconstruye el expediente que antes ya creado
 
-        Tramite nuevoTramite  = new Tramite (id,expedienteId,etiqueta,contenido,fechaDeCreacion,fechaDeUltimaModificacion, usuarioUltimoCambio);
-        return nuevoTramite;
+        return new Tramite(id,expedienteId,etiqueta,contenido,fechaDeCreacion,fechaDeUltimaModificacion, usuarioUltimoCambio);
     }
 
     private Tramite(Guid id, Guid expedienteId, EtiquetaTramite etiqueta, ContenidoTramite contenido, DateTime fechaCreacion, DateTime fechaUltimaModificacion, Guid usuarioUltimoCambio)

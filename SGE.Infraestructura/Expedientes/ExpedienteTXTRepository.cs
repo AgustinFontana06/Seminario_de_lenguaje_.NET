@@ -17,7 +17,7 @@ class RepositorioExpedienteTXT : IExpedienteRepository
     File.AppendAllText("expedientes.txt", lineaNueva + Environment.NewLine);
 }
     
-    public void Modificar(string textoNuevo, Guid expedienteId, Guid usuarioId)
+    public void Modificar(Expediente expedienteModificado)
     {
         if (!File.Exists(_nombreArchivo))
             throw new Exception("no existe el archivo de expedientes");
