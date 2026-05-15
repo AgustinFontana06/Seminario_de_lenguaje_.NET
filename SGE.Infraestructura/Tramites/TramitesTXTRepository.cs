@@ -22,7 +22,7 @@ public class TramitesTXTRepository : ITramiteRepository
         public IEnumerable<Tramite> ObtenerTodos()
         {
             if (!File.Exists(_nombreArchivo))
-                throw new RepositorioException("no existe el TXT de tramites.");
+                return new List<Tramite>();
 
             var tramites = new List<Tramite>();
             foreach (string linea in File.ReadAllLines(_nombreArchivo))

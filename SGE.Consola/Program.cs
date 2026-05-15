@@ -66,11 +66,11 @@ try
 {
     var request1 = new AgregarExpedienteRequest("nuevo", idUsuario);
     var response1 = agregarExpedienteUseCase.Ejecutar(request1);
-    Console.WriteLine($"[Éxito] Producto agregado. El ID generado es: {response1.id}\n");
+    Console.WriteLine($"[Éxito] expediente agregado. El ID generado es: {response1.id}\n");
 
-    var request2 = new AgregarTramiteRequest("holaaa", response1.id , idUsuario);
+    var request2 = new AgregarTramiteRequest("holaaa", idUsuario, response1.id);
     var response2 = agregarTramiteUseCase.Ejecutar(request2);
-    Console.WriteLine($"[Éxito] Producto agregado. El ID generado es: {response2.idTramite}\n");
+    Console.WriteLine($"[Éxito] tramite agregado. El ID generado es: {response2.idTramite}\n");
 }
 catch (Exception ex)
 {
@@ -88,11 +88,11 @@ try
 {
     var request1 = new AgregarExpedienteRequest("Caratula1", idUsuario);
     var response1 = agregarExpedienteUseCase.Ejecutar(request1);
-    Console.WriteLine($"[Éxito] Producto agregado. El ID generado es: {response1.id}\n");
+    Console.WriteLine($"[Éxito] expediente agregado. El ID generado es: {response1.id}\n");
 
    var request = new EliminarExpedienteRequest(response1.id, idUsuario);
    var response = eliminarExpedienteUseCase.Ejecutar(request);
-   Console.WriteLine($"[Éxito] Producto Eliminado, Id del producto {response.id}\n"); 
+   Console.WriteLine($"[Éxito] expediente Eliminado, Id del producto {response.id}\n"); 
 }
 catch (Exception ex)
 {

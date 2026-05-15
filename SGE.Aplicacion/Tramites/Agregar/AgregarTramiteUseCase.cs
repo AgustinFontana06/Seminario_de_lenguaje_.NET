@@ -16,8 +16,8 @@ public class AgregarTramiteUseCase(ITramiteRepository repositorio, IActualizacio
         var contenido = new ContenidoTramite(request.contenidoText);
         var tramite = new Tramite(request.expedienteId, contenido,request.idUsuario);
         //llamamos al servicio por si hay que cambiar automaticamente el state del expediente.
-        actualizacion.ActualizacionEstado(request.expedienteId, request.idUsuario);
         repositorio.Agregar(tramite);
+        actualizacion.ActualizacionEstado(request.expedienteId, request.idUsuario);
         return new AgregarTramiteResponse(tramite.Id, request.idUsuario);
     }
 }

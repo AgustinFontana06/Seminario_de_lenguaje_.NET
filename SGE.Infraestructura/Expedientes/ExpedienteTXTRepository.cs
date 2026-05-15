@@ -24,7 +24,7 @@ public class ExpedienteTXTRepository : IExpedienteRepository
     public void Agregar(Expediente expedienteNuevo)
     {
     // Armamos la línea SOLO con los datos puros, separados por comas
-        string lineaNueva = $"{expedienteNuevo.Id},{expedienteNuevo.Caratula.Texto},{expedienteNuevo.FechaCreacion},{expedienteNuevo.FechaUltimaModificacion},{expedienteNuevo.Estado}";
+        string lineaNueva = $"{expedienteNuevo.Id},{expedienteNuevo.Caratula.Texto},{expedienteNuevo.FechaCreacion},{expedienteNuevo.FechaUltimaModificacion}, {expedienteNuevo.UsuarioUltimoCambio} ,{expedienteNuevo.Estado}";
 
     // Environment.NewLine es el "Enter" oficial del sistema operativo. 
     // Lo agregamos al final para que el próximo expediente vaya en el renglón de abajo.
@@ -88,7 +88,7 @@ public class ExpedienteTXTRepository : IExpedienteRepository
         foreach (var e in expedientesActualizados)
         {
             // Armamos la línea con el mismo formato que en el Agregar
-            string linea = $"{e.Id},{e.Caratula.Texto},{e.FechaCreacion},{e.FechaUltimaModificacion},{e.Estado}";
+            string linea = $"{e.Id},{e.Caratula.Texto},{e.FechaCreacion},{e.FechaUltimaModificacion}, {e.UsuarioUltimoCambio},{e.Estado}";
             texto.Add(linea);
         }
 
@@ -107,10 +107,13 @@ public class ExpedienteTXTRepository : IExpedienteRepository
     }
     public IEnumerable<Expediente> ObtenerTodos()
     {
+        if (!File.Exists(_nombreArchivo)) return new List<Expediente>();
+
         List<Expediente> expedientes = new();
 
         foreach (string linea in LeerLineas())
         {
+            if (string.IsNullOrWhiteSpace(linea)) continue;
             var datos = linea.Split(",");
             // debo parsea la informacion en string a datos nesesarios para la reconstrucion, podria hacerlo dentro del mismo metodo con dato pero por prolijidad decalre variables
             Guid id = Guid.Parse(datos[0]);
