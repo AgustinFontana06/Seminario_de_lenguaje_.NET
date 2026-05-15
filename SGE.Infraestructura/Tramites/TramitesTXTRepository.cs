@@ -4,7 +4,7 @@ using SGE.Aplicacion.Tramites;
 using SGE.Aplicacion.Comun;
 using SGE.Infraestructura.RepositorioException;
 
-class TramitesTXTRepository : ITramiteRepository
+public class TramitesTXTRepository : ITramiteRepository
 {
     private readonly string _nombreArchivo = "tramites.txt";
 

@@ -3,7 +3,7 @@ using SGE.Dominio.Expedientes;
 using SGE.Infraestructura.RepositorioException;
 using SGE.Aplicacion.Expedientes;
 
-class ExpedienteTXTRepository : IExpedienteRepository
+public class ExpedienteTXTRepository : IExpedienteRepository
 {
 
     private readonly string _nombreArchivo = "expedientes.txt";
