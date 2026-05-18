@@ -1,10 +1,12 @@
-72583da5-2912-4f2e-9045-fd7c3f1aa7fa|Informe de Solicitud de Licencia de Funcionamiento|18/5/2026 3:55:12 p. m.|18/5/2026 3:55:12 p. m.|165f0943-688e-46e4-9dc0-70aa492b3f98|RecienIniciado
-bed5be86-a0b0-4d81-8aa6-0b666c136929|Acta de Inicio: Investigación Administrativa|18/5/2026 3:55:12 p. m.|18/5/2026 3:55:12 p. m.|165f0943-688e-46e4-9dc0-70aa492b3f98|RecienIniciado
-896f6f9e-e3b0-4c70-8256-aec51cc2f2e0|Expediente: Evaluación Técnica - Proyecto Urbano|18/5/2026 3:55:12 p. m.|18/5/2026 3:55:12 p. m.|165f0943-688e-46e4-9dc0-70aa492b3f98|RecienIniciado
-cd24e0eb-2eeb-4980-ad46-0f45bd736e8b|Permiso de obra menor - Ampliación Edificio|18/5/2026 3:55:12 p. m.|18/5/2026 3:55:12 p. m.|165f0943-688e-46e4-9dc0-70aa492b3f98|RecienIniciado
-6167ef94-0bf0-4108-9042-2e59f849439c|Carátula actualizada: Inspección completada - Conforme|18/5/2026 3:55:12 p. m.|18/5/2026 3:55:12 p. m.|165f0943-688e-46e4-9dc0-70aa492b3f98|RecienIniciado
-dd0668a9-93be-4722-b868-513566bf0a85|Expediente: Prueba error - carátula|18/5/2026 3:55:12 p. m.|18/5/2026 3:55:12 p. m.|165f0943-688e-46e4-9dc0-70aa492b3f98|RecienIniciado
-8f6e5129-62b2-44c8-90b1-6e83d9f097af|Expediente: Solicitud de Permiso Administrativo|18/5/2026 3:55:12 p. m.|18/5/2026 3:55:12 p. m.|165f0943-688e-46e4-9dc0-70aa492b3f98|RecienIniciado
-e78059be-497e-411f-8d31-e0e4d35f59fc|Expediente: Prueba error - trámite autorización|18/5/2026 3:55:12 p. m.|18/5/2026 3:55:12 p. m.|165f0943-688e-46e4-9dc0-70aa492b3f98|RecienIniciado
-ada99680-3031-4633-9189-f5792ebab38d|Expediente: Prueba error - trámite validación|18/5/2026 3:55:12 p. m.|18/5/2026 3:55:12 p. m.|165f0943-688e-46e4-9dc0-70aa492b3f98|RecienIniciado
-294c5803-1ca2-4adb-b0d0-1703ef846fa9|Expediente para listar trámites|18/5/2026 3:55:12 p. m.|18/5/2026 3:55:12 p. m.|165f0943-688e-46e4-9dc0-70aa492b3f98|RecienIniciado
+77d8dfc7-b871-49f7-992c-7fc2abed1ac0|Informe de Solicitud de Licencia de Funcionamiento|5/18/2026 4:34:31 PM|5/18/2026 4:34:31 PM|148c395e-0ecd-4f70-9317-7d672ce82d23|RecienIniciado
+201cb537-bbdb-41b8-985c-3f61ca7aed14|Acta de Inicio: Investigación Administrativa|5/18/2026 4:34:31 PM|5/18/2026 4:34:31 PM|148c395e-0ecd-4f70-9317-7d672ce82d23|RecienIniciado
+7a875fdc-297a-4861-8f5d-c3eb72d053c7|Expediente: Evaluación Técnica - Proyecto Urbano|5/18/2026 4:34:31 PM|5/18/2026 4:34:31 PM|148c395e-0ecd-4f70-9317-7d672ce82d23|RecienIniciado
+fb6777a9-021a-47ed-95ed-cf7e26074905|Permiso de obra menor - Ampliación Edificio|5/18/2026 4:34:32 PM|5/18/2026 4:34:32 PM|148c395e-0ecd-4f70-9317-7d672ce82d23|RecienIniciado
+c1682877-9df0-427c-8f7a-2842a58a79a2|Carátula actualizada: Inspección completada - Conforme|5/18/2026 4:34:32 PM|5/18/2026 4:34:32 PM|148c395e-0ecd-4f70-9317-7d672ce82d23|RecienIniciado
+c7571e39-9531-4a10-885d-c3b62e676681|Expediente: Prueba error - carátula|5/18/2026 4:34:32 PM|5/18/2026 4:34:32 PM|148c395e-0ecd-4f70-9317-7d672ce82d23|RecienIniciado
+e660f113-a00b-4166-9d68-1f058a3cb6d5|Expediente: Cambio de estado manual|5/18/2026 4:34:32 PM|5/18/2026 4:34:32 PM|148c395e-0ecd-4f70-9317-7d672ce82d23|EnNotificacion
+af43273b-fbec-4ca5-bfbd-c46b99964f8f|Expediente: error de cambio de estado|5/18/2026 4:34:32 PM|5/18/2026 4:34:32 PM|148c395e-0ecd-4f70-9317-7d672ce82d23|RecienIniciado
+6889fa04-1bf1-4e01-b457-e7b827f3a6c1|Expediente: Solicitud de Permiso Administrativo|5/18/2026 4:34:32 PM|5/18/2026 4:34:32 PM|148c395e-0ecd-4f70-9317-7d672ce82d23|RecienIniciado
+69a7a9eb-4db6-4c7e-b442-5006e11f6825|Expediente: Prueba error - trámite autorización|5/18/2026 4:34:32 PM|5/18/2026 4:34:32 PM|148c395e-0ecd-4f70-9317-7d672ce82d23|RecienIniciado
+9351be5f-3fe5-42d7-9fc5-86375b60b106|Expediente: Prueba error - trámite validación|5/18/2026 4:34:32 PM|5/18/2026 4:34:32 PM|148c395e-0ecd-4f70-9317-7d672ce82d23|RecienIniciado
+75106a45-18b6-4457-8759-85c4da628446|Expediente para listar trámites|5/18/2026 4:34:32 PM|5/18/2026 4:34:32 PM|148c395e-0ecd-4f70-9317-7d672ce82d23|RecienIniciado

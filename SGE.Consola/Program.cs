@@ -44,6 +44,7 @@ Guid idUsuario = Guid.NewGuid();
 File.WriteAllText("expedientes.txt", string.Empty);
 File.WriteAllText("tramites.txt", string.Empty);
 
+//altas
 Console.WriteLine("1-- Prueba: alta de expedientes (escenario institucional)");
 try
 {
@@ -55,21 +56,33 @@ try
     var resp2 = agregarExpedienteUseCase.Ejecutar(req2);
     Console.WriteLine($"[Éxito] expediente registrado. ID: {resp2.id}\n");
 }
-catch (Exception ex)
+catch (AutorizacionException ex)
+{
+    Console.WriteLine($"[Error de Autorizacion]: {ex.Message}");
+}
+catch (DominioException ex)
 {
     Console.WriteLine($"[Error de Negocio]: {ex.Message}\n");
 }
+catch (Exception ex)
+{
+    Console.WriteLine($"[Error inesperado]: {ex.Message}");
+}
 
-// Camino de error: carátula vacía
+Console.WriteLine("Camino de error, caratula vacia");
 try
 {
     var reqInvalid = new AgregarExpedienteRequest("", idUsuario);
     agregarExpedienteUseCase.Ejecutar(reqInvalid);
     Console.WriteLine("[Error de prueba] Esperaba excepción por carátula vacía (falla la prueba)");
 }
+catch (DominioException ex)
+{
+    Console.WriteLine($"[Camino de error - Validación]: {ex.Message}");
+}
 catch (Exception ex)
 {
-    Console.WriteLine($"[Camino de error - Validación]: {ex.Message}\n");
+    Console.WriteLine($"[Error inesperado]: {ex.Message}");
 }
 
 Console.WriteLine("2-- Prueba: alta de trámite asociado a expediente");
@@ -83,11 +96,24 @@ try
     var respTram = agregarTramiteUseCase.Ejecutar(reqTram);
     Console.WriteLine($"[Éxito] trámite registrado. ID: {respTram.idTramite}\n");
 }
-catch (Exception ex)
+catch (AutorizacionException ex)
+{
+    Console.WriteLine($"[Error de Autorizacion]: {ex.Message}");
+}
+catch (DominioException ex)
 {
     Console.WriteLine($"[Error de Negocio]: {ex.Message}\n");
 }
+catch (EntidadNoEncontradaException ex)
+{
+    Console.WriteLine($"[Error de busqueda]: {ex.Message}\n");
+}
+catch (Exception ex)
+{
+    Console.WriteLine($"[Error inesperado]: {ex.Message}");
+}
 
+//bajas
 Console.WriteLine("3-- Prueba: baja de expediente");
 try
 {
@@ -99,9 +125,21 @@ try
     var respEliminar = eliminarExpedienteUseCase.Ejecutar(reqEliminar);
     Console.WriteLine($"[Éxito] expediente eliminado. ID: {respEliminar.id}\n");
 }
-catch (Exception ex)
+catch (AutorizacionException ex)
+{
+    Console.WriteLine($"[Error de Autorizacion]: {ex.Message}");
+}
+catch (DominioException ex)
 {
     Console.WriteLine($"[Error de Negocio]: {ex.Message}\n");
+}
+catch (EntidadNoEncontradaException ex)
+{
+    Console.WriteLine($"[Error de busqueda]: {ex.Message}\n");
+}
+catch (Exception ex)
+{
+    Console.WriteLine($"[Error inesperado]: {ex.Message}");
 }
 
 Console.WriteLine("4-- Prueba: baja de trámite");
@@ -109,19 +147,34 @@ try
 {
     var reqExp = new AgregarExpedienteRequest("Permiso de obra menor - Ampliación Edificio", idUsuario);
     var respExp = agregarExpedienteUseCase.Ejecutar(reqExp);
+    Console.WriteLine($"[Éxito] expediente registrado. ID: {respExp.id}");
 
     var reqTr = new AgregarTramiteRequest("Se remite al área de estudio para evaluación técnica", idUsuario, respExp.id);
     var respTr = agregarTramiteUseCase.Ejecutar(reqTr);
+    Console.WriteLine($"[Éxito] trámite registrado. ID: {respTr.idTramite}");
 
     var reqEliminarTr = new EliminarTramiteRequest(respTr.idTramite, idUsuario);
     var respEliminarTr = eliminarTramiteUseCase.Ejecutar(reqEliminarTr);
     Console.WriteLine($"[Éxito] trámite eliminado. ID: {respEliminarTr.idTramite}\n");
 }
-catch (Exception ex)
+catch (AutorizacionException ex)
+{
+    Console.WriteLine($"[Error de Autorizacion]: {ex.Message}");
+}
+catch (DominioException ex)
 {
     Console.WriteLine($"[Error de Negocio]: {ex.Message}\n");
 }
+catch (EntidadNoEncontradaException ex)
+{
+    Console.WriteLine($"[Error de busqueda]: {ex.Message}\n");
+}
+catch (Exception ex)
+{
+    Console.WriteLine($"[Error inesperado]: {ex.Message}");
+}
 
+//modificaciones
 Console.WriteLine("5-- Prueba: modificación de carátula de expediente");
 try
 {
@@ -129,7 +182,7 @@ try
     var resp = agregarExpedienteUseCase.Ejecutar(req);
     var reqModificar = new ModificarCaratulaExpedienteRequest(resp.id, "Carátula actualizada: Inspección completada - Conforme", idUsuario);
     var respModificar = modificarCaratulaExpedienteUseCase.Ejecutar(reqModificar);
-    Console.WriteLine($"[Éxito] carátula modificada. ID: {respModificar.id}, nueva carátula: {respModificar.texto}\n");
+    Console.WriteLine($"[Éxito] carátula modificada. ID: {respModificar.id} | nueva carátula: {respModificar.texto}\n");
 }
 catch (AutorizacionException ex)
 {
@@ -148,7 +201,7 @@ catch (Exception ex)
     Console.WriteLine($"[Error inesperado]: {ex.Message}\n");
 }
 
-// Camino de error: modificar carátula sin permiso
+Console.WriteLine("camino de error, modificar caratula sin permisos");
 try
 {
     var req = new AgregarExpedienteRequest("Expediente: Prueba error - carátula", idUsuario);
@@ -161,7 +214,57 @@ try
 }
 catch (AutorizacionException ex)
 {
-    Console.WriteLine($"[Camino de error - Autorización]: denegado correctamente: {ex.Message}");
+    Console.WriteLine($"[Error de Autorizacion]: {ex.Message}");
+}
+catch (Exception ex)
+{
+    Console.WriteLine($"[Error inesperado]: {ex.Message}");
+}
+
+Console.WriteLine("5b-- Prueba: cambiar estado de expediente manualmente");
+try
+{
+    var req = new AgregarExpedienteRequest("Expediente: Cambio de estado manual", idUsuario);
+    var resp = agregarExpedienteUseCase.Ejecutar(req);
+
+    var reqCambiar = new CambiarEstadoRequest(resp.id, EstadoExpediente.EnNotificacion, idUsuario);
+    var respCambiar = modificarEstadoExpediente.Ejecutar(reqCambiar);
+    Console.WriteLine($"[Éxito] estado cambiado. ID: {respCambiar.id}, nuevo estado: {respCambiar.nuevoEstado}\n");
+}
+catch (AutorizacionException ex)
+{
+    Console.WriteLine($"[Error de Autorizacion]: {ex.Message}");
+}
+catch (DominioException ex)
+{
+    Console.WriteLine($"[Error de Negocio]: {ex.Message}\n");
+}
+catch (EntidadNoEncontradaException ex)
+{
+    Console.WriteLine($"[Error de busqueda]: {ex.Message}\n");
+}
+catch (Exception ex)
+{
+    Console.WriteLine($"[Error inesperado]: {ex.Message}");
+}
+
+Console.WriteLine("camino de error, cambiar estado sin permiso:");
+try
+{
+    var req = new AgregarExpedienteRequest("Expediente: error de cambio de estado", idUsuario);
+    var resp = agregarExpedienteUseCase.Ejecutar(req);
+
+    var reqError = new CambiarEstadoRequest(resp.id, EstadoExpediente.Finalizado, idUsuario);
+    cambiarEstadoUseCaseRechaza.Ejecutar(reqError);
+    Console.WriteLine("[Error de prueba] Esperaba AutorizacionException (falla la prueba)");
+}
+catch (AutorizacionException ex)
+{
+    Console.WriteLine($"[Error de Autorizacion]: {ex.Message}");
+}
+catch (Exception ex)
+{
+    Console.WriteLine($"[Error inesperado]: {ex.Message}");
 }
 
 Console.WriteLine("6-- Prueba: modificación de trámite");
@@ -169,13 +272,15 @@ try
 {
     var reqExp2 = new AgregarExpedienteRequest("Expediente: Solicitud de Permiso Administrativo", idUsuario);
     var respExp2 = agregarExpedienteUseCase.Ejecutar(reqExp2);
+    Console.WriteLine($"[Éxito] expediente registrado. ID: {respExp2.id}");
 
     var reqTr2 = new AgregarTramiteRequest("Presentación inicial de planos y memoria técnica", idUsuario, respExp2.id);
     var respTr2 = agregarTramiteUseCase.Ejecutar(reqTr2);
+    Console.WriteLine($"[Éxito] trámite registrado. ID: {respTr2.idTramite}");
 
     var reqModificarTr = new ModificarTramiteRequest(respTr2.idTramite, "Versión actualizada: planos revisados y observaciones incorporadas", idUsuario);
     var respModificarTr = modificarTramiteUseCase.Ejecutar(reqModificarTr);
-    Console.WriteLine($"[Éxito] trámite modificado. ID: {respModificarTr.id}, contenido nuevo: {respModificarTr.texto}\n");
+    Console.WriteLine($"[Éxito] trámite modificado. ID: {respModificarTr.id}| contenido nuevo: {respModificarTr.texto}\n");
 }
 catch (AutorizacionException ex)
 {
@@ -194,7 +299,7 @@ catch (Exception ex)
     Console.WriteLine($"[Error inesperado]: {ex.Message}\n");
 }
 
-// Camino de error: modificar trámite sin permiso y validaciones
+Console.WriteLine("camino de error: modificar tramite sin permiso");
 try
 {
     var reqExp = new AgregarExpedienteRequest("Expediente: Prueba error - trámite autorización", idUsuario);
@@ -209,13 +314,14 @@ try
 }
 catch (AutorizacionException ex)
 {
-    Console.WriteLine($"[Camino de error - Autorización trámite]: denegado correctamente: {ex.Message}");
+    Console.WriteLine($"[Camino de error - Autorización trámite]: denegado correctamente: {ex.Message}");  Console.WriteLine($"[Error de Negocio]: {ex.Message}\n");
 }
-catch (EntidadNoEncontradaException ex)
+catch (Exception ex)
 {
-    Console.WriteLine($"[Camino de error - Entidad no encontrada]: {ex.Message}");
+    Console.WriteLine($"[Error inesperado]: {ex.Message}");
 }
 
+Console.WriteLine("camino de error: modificar trámite con contenido vacío");
 try
 {
     var reqExp = new AgregarExpedienteRequest("Expediente: Prueba error - trámite validación", idUsuario);
@@ -231,6 +337,10 @@ try
 catch (DominioException ex)
 {
     Console.WriteLine($"[Camino de error - Validación dominio trámite]: {ex.Message}");
+}
+catch (Exception ex)
+{
+    Console.WriteLine($"[Error inesperado]: {ex.Message}");
 }
 
 // Últimas pruebas: listados

@@ -22,7 +22,7 @@ public class EliminarTramiteUseCase(ITramiteRepository repositorioTramite, IActu
         repositorioTramite.Eliminar(request.idTramite);
 
         //actualizo estado del expediente
-        actualizacion.ActualizacionEstado(request.idTramite, request.idUsuario);
+        actualizacion.ActualizacionEstado(tramite.ExpedienteId, request.idUsuario);
     
         return new EliminarTramiteResponse(request.idTramite);
     }
