@@ -21,15 +21,15 @@ var agregarTramiteUseCase = new AgregarTramiteUseCase(repositorioTramite, reposi
 
 Guid idUsuario = Guid.NewGuid();
 
+File.WriteAllText("expedientes.txt", string.Empty);
+File.WriteAllText("tramites.txt", string.Empty);
 
-Console.WriteLine("1-- probando agregar un expediente");
+Console.WriteLine("1-- probando alta de expediente");
 try
 {
-    /*
     var request1 = new AgregarExpedienteRequest("Caratula1", idUsuario);
     var response1 = agregarExpedienteUseCase.Ejecutar(request1);
     Console.WriteLine($"[Éxito] Producto agregado. El ID generado es: {response1.id}\n");
-    */
 
     var request2 = new AgregarExpedienteRequest("Caratula2", idUsuario);
     var response2 = agregarExpedienteUseCase.Ejecutar(request2);
