@@ -11,7 +11,7 @@ public class TramitesTXTRepository : ITramiteRepository
         public void Agregar(Tramite tramiteNuevo)
         {
             
-            string lineaNueva = $"{tramiteNuevo.Id},{tramiteNuevo.ExpedienteId},{tramiteNuevo.Etiqueta},{tramiteNuevo.Contenido.Texto},{tramiteNuevo.FechaCreacion},{tramiteNuevo.FechaUltimaModificacion},{tramiteNuevo.UsuarioUltimoCambio}";
+            string lineaNueva = $"{tramiteNuevo.Id}|{tramiteNuevo.ExpedienteId}|{tramiteNuevo.Etiqueta}|{tramiteNuevo.Contenido.Texto}|{tramiteNuevo.FechaCreacion}|{tramiteNuevo.FechaUltimaModificacion}|{tramiteNuevo.UsuarioUltimoCambio}";
 
             // Environment.NewLine es el "Enter" oficial del sistema operativo. 
             // Lo agregamos al final para que el próximo expediente vaya en el renglón de abajo.
@@ -28,7 +28,7 @@ public class TramitesTXTRepository : ITramiteRepository
             foreach (string linea in File.ReadAllLines(_nombreArchivo))
             {
                 if (string.IsNullOrWhiteSpace(linea)) continue;
-                var d = linea.Split(",");
+                var d = linea.Split("|");
                 var tramite = Tramite.Reconstruir(
                     Guid.Parse(d[0]),
                     Guid.Parse(d[1]),
@@ -86,7 +86,7 @@ public class TramitesTXTRepository : ITramiteRepository
         private void ActualizarArchivo(List<Tramite> tramites)
         {
             var lineas = tramites.Select(t =>
-                $"{t.Id},{t.ExpedienteId},{t.Etiqueta},{t.Contenido.Texto},{t.FechaCreacion},{t.FechaUltimaModificacion},{t.UsuarioUltimoCambio}");
+                $"{t.Id}|{t.ExpedienteId}|{t.Etiqueta}|{t.Contenido.Texto}|{t.FechaCreacion}|{t.FechaUltimaModificacion}|{t.UsuarioUltimoCambio}");
             File.WriteAllLines(_nombreArchivo, lineas);
         }
 

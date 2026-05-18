@@ -19,7 +19,7 @@ public class ModificarCaratulExpedienteUseCase(IExpedienteRepository repositorio
 
         if(exp == null)
         {
-            //crear nueva excepcion, algo como ExcepcionIdentidadNoEncontrada
+            //creamos nueva exception(personalizada).
             throw new EntidadNoEncontradaException($"No se encontro el expediente con el id {request.idExpediente}");
         }
 
