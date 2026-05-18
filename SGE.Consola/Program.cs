@@ -45,7 +45,7 @@ File.WriteAllText("expedientes.txt", string.Empty);
 File.WriteAllText("tramites.txt", string.Empty);
 
 //altas
-Console.WriteLine("1-- Prueba: alta de expedientes (escenario institucional)");
+Console.WriteLine("1-- PRUEBA: ALTA DE EXPEDIENTES (ESCENARIO INSTITUCIONAL)");
 try
 {
     var req1 = new AgregarExpedienteRequest("Informe de Solicitud de Licencia de Funcionamiento", idUsuario);
@@ -69,7 +69,7 @@ catch (Exception ex)
     Console.WriteLine($"[Error inesperado]: {ex.Message}");
 }
 
-Console.WriteLine("Camino de error, caratula vacia");
+Console.WriteLine("1.1-- CAMINO ERROR, CARATULA VACIA");
 try
 {
     var reqInvalid = new AgregarExpedienteRequest("", idUsuario);
@@ -85,7 +85,7 @@ catch (Exception ex)
     Console.WriteLine($"[Error inesperado]: {ex.Message}");
 }
 
-Console.WriteLine("2-- Prueba: alta de trámite asociado a expediente");
+Console.WriteLine("2-- PRUEBA: ALTA DE TRAMITE ASOCIADO A EXPEDIENTE");
 try
 {
     var reqExp = new AgregarExpedienteRequest("Expediente: Evaluación Técnica - Proyecto Urbano", idUsuario);
@@ -114,7 +114,7 @@ catch (Exception ex)
 }
 
 //bajas
-Console.WriteLine("3-- Prueba: baja de expediente");
+Console.WriteLine("3-- PRUEBA: BAJA DE EXPEDIENTE");
 try
 {
     var req = new AgregarExpedienteRequest("Expediente: Solicitud de Baja de Registro", idUsuario);
@@ -142,7 +142,7 @@ catch (Exception ex)
     Console.WriteLine($"[Error inesperado]: {ex.Message}");
 }
 
-Console.WriteLine("4-- Prueba: baja de trámite");
+Console.WriteLine("4-- PRUEBA: BAJA DE TRAMITE");
 try
 {
     var reqExp = new AgregarExpedienteRequest("Permiso de obra menor - Ampliación Edificio", idUsuario);
@@ -175,7 +175,7 @@ catch (Exception ex)
 }
 
 //modificaciones
-Console.WriteLine("5-- Prueba: modificación de carátula de expediente");
+Console.WriteLine("5-- PRUEBA: MODIFICACION DE CARATULA DE EXPEDIENTE");
 try
 {
     var req = new AgregarExpedienteRequest("Expediente: Solicitud de Revisión Administrativa", idUsuario);
@@ -201,7 +201,7 @@ catch (Exception ex)
     Console.WriteLine($"[Error inesperado]: {ex.Message}\n");
 }
 
-Console.WriteLine("camino de error, modificar caratula sin permisos");
+Console.WriteLine("5.1 CAMINO ERROR, MODIFICAR CARATULA SIN PERMISO");
 try
 {
     var req = new AgregarExpedienteRequest("Expediente: Prueba error - carátula", idUsuario);
@@ -221,7 +221,7 @@ catch (Exception ex)
     Console.WriteLine($"[Error inesperado]: {ex.Message}");
 }
 
-Console.WriteLine("5b-- Prueba: cambiar estado de expediente manualmente");
+Console.WriteLine("5B-- PRUEBA: CAMBIAR ESTADO DE EXPEDIENTE MANUALMENTE");
 try
 {
     var req = new AgregarExpedienteRequest("Expediente: Cambio de estado manual", idUsuario);
@@ -248,7 +248,7 @@ catch (Exception ex)
     Console.WriteLine($"[Error inesperado]: {ex.Message}");
 }
 
-Console.WriteLine("camino de error, cambiar estado sin permiso:");
+Console.WriteLine("5B.1 CAMINO ERROR, CAMBIAR ESTADO SIN PERMISO");
 try
 {
     var req = new AgregarExpedienteRequest("Expediente: error de cambio de estado", idUsuario);
@@ -267,7 +267,7 @@ catch (Exception ex)
     Console.WriteLine($"[Error inesperado]: {ex.Message}");
 }
 
-Console.WriteLine("6-- Prueba: modificación de trámite");
+Console.WriteLine("6-- PRUEBA: MODIFICACION DE TRAMITE");
 try
 {
     var reqExp2 = new AgregarExpedienteRequest("Expediente: Solicitud de Permiso Administrativo", idUsuario);
@@ -299,7 +299,7 @@ catch (Exception ex)
     Console.WriteLine($"[Error inesperado]: {ex.Message}\n");
 }
 
-Console.WriteLine("camino de error: modificar tramite sin permiso");
+Console.WriteLine("6.1 CAMINO DE ERROR, MODIFICAR TRAMITE SIN PERMISO");
 try
 {
     var reqExp = new AgregarExpedienteRequest("Expediente: Prueba error - trámite autorización", idUsuario);
@@ -321,7 +321,7 @@ catch (Exception ex)
     Console.WriteLine($"[Error inesperado]: {ex.Message}");
 }
 
-Console.WriteLine("camino de error: modificar trámite con contenido vacío");
+Console.WriteLine("6.2 CAMINO DE ERROR: MODIFICAR TRAMITE CON CONTENIDO VACIO");
 try
 {
     var reqExp = new AgregarExpedienteRequest("Expediente: Prueba error - trámite validación", idUsuario);
@@ -344,7 +344,7 @@ catch (Exception ex)
 }
 
 // Últimas pruebas: listados
-Console.WriteLine("7-- Prueba: ObtenerTodos de expedientes");
+Console.WriteLine("7-- PRUEBA: OBTENER TODOS LOS EXPEDIENTES");
 try
 {
     var response = obtenerTodosUseCase.Ejecutar();
@@ -363,7 +363,7 @@ catch (Exception ex)
     Console.WriteLine($"[Error inesperado]: {ex.Message}");
 }
 
-Console.WriteLine("8-- Prueba: ObtenerPorExpedienteId de trámites");
+Console.WriteLine("8-- PRUEBA: OBTENER TRAMITES POR ID DE EXPEDIENTE");
 try
 {
     var request1 = new AgregarExpedienteRequest("Expediente para listar trámites", idUsuario);

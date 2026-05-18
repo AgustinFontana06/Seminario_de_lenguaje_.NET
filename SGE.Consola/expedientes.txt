@@ -1,12 +1,12 @@
-77d8dfc7-b871-49f7-992c-7fc2abed1ac0|Informe de Solicitud de Licencia de Funcionamiento|5/18/2026 4:34:31 PM|5/18/2026 4:34:31 PM|148c395e-0ecd-4f70-9317-7d672ce82d23|RecienIniciado
-201cb537-bbdb-41b8-985c-3f61ca7aed14|Acta de Inicio: Investigación Administrativa|5/18/2026 4:34:31 PM|5/18/2026 4:34:31 PM|148c395e-0ecd-4f70-9317-7d672ce82d23|RecienIniciado
-7a875fdc-297a-4861-8f5d-c3eb72d053c7|Expediente: Evaluación Técnica - Proyecto Urbano|5/18/2026 4:34:31 PM|5/18/2026 4:34:31 PM|148c395e-0ecd-4f70-9317-7d672ce82d23|RecienIniciado
-fb6777a9-021a-47ed-95ed-cf7e26074905|Permiso de obra menor - Ampliación Edificio|5/18/2026 4:34:32 PM|5/18/2026 4:34:32 PM|148c395e-0ecd-4f70-9317-7d672ce82d23|RecienIniciado
-c1682877-9df0-427c-8f7a-2842a58a79a2|Carátula actualizada: Inspección completada - Conforme|5/18/2026 4:34:32 PM|5/18/2026 4:34:32 PM|148c395e-0ecd-4f70-9317-7d672ce82d23|RecienIniciado
-c7571e39-9531-4a10-885d-c3b62e676681|Expediente: Prueba error - carátula|5/18/2026 4:34:32 PM|5/18/2026 4:34:32 PM|148c395e-0ecd-4f70-9317-7d672ce82d23|RecienIniciado
-e660f113-a00b-4166-9d68-1f058a3cb6d5|Expediente: Cambio de estado manual|5/18/2026 4:34:32 PM|5/18/2026 4:34:32 PM|148c395e-0ecd-4f70-9317-7d672ce82d23|EnNotificacion
-af43273b-fbec-4ca5-bfbd-c46b99964f8f|Expediente: error de cambio de estado|5/18/2026 4:34:32 PM|5/18/2026 4:34:32 PM|148c395e-0ecd-4f70-9317-7d672ce82d23|RecienIniciado
-6889fa04-1bf1-4e01-b457-e7b827f3a6c1|Expediente: Solicitud de Permiso Administrativo|5/18/2026 4:34:32 PM|5/18/2026 4:34:32 PM|148c395e-0ecd-4f70-9317-7d672ce82d23|RecienIniciado
-69a7a9eb-4db6-4c7e-b442-5006e11f6825|Expediente: Prueba error - trámite autorización|5/18/2026 4:34:32 PM|5/18/2026 4:34:32 PM|148c395e-0ecd-4f70-9317-7d672ce82d23|RecienIniciado
-9351be5f-3fe5-42d7-9fc5-86375b60b106|Expediente: Prueba error - trámite validación|5/18/2026 4:34:32 PM|5/18/2026 4:34:32 PM|148c395e-0ecd-4f70-9317-7d672ce82d23|RecienIniciado
-75106a45-18b6-4457-8759-85c4da628446|Expediente para listar trámites|5/18/2026 4:34:32 PM|5/18/2026 4:34:32 PM|148c395e-0ecd-4f70-9317-7d672ce82d23|RecienIniciado
+e9df9606-cfb7-457e-a7e9-ae100a11c584|Informe de Solicitud de Licencia de Funcionamiento|5/18/2026 4:53:23 PM|5/18/2026 4:53:23 PM|e3cc5d9f-826e-4667-bbfb-d8b5b70e864c|RecienIniciado
+6a598d6c-c0ae-44a6-bb5b-b5e16814334e|Acta de Inicio: Investigación Administrativa|5/18/2026 4:53:23 PM|5/18/2026 4:53:23 PM|e3cc5d9f-826e-4667-bbfb-d8b5b70e864c|RecienIniciado
+c1597419-72f0-4f4c-8f9f-39bf014cd221|Expediente: Evaluación Técnica - Proyecto Urbano|5/18/2026 4:53:23 PM|5/18/2026 4:53:23 PM|e3cc5d9f-826e-4667-bbfb-d8b5b70e864c|RecienIniciado
+1294ac0a-14e1-42ea-bf18-089b5cf4aaaf|Permiso de obra menor - Ampliación Edificio|5/18/2026 4:53:23 PM|5/18/2026 4:53:23 PM|e3cc5d9f-826e-4667-bbfb-d8b5b70e864c|RecienIniciado
+b21d7ec4-4f52-41da-a6c6-b084d2e05f0b|Carátula actualizada: Inspección completada - Conforme|5/18/2026 4:53:23 PM|5/18/2026 4:53:23 PM|e3cc5d9f-826e-4667-bbfb-d8b5b70e864c|RecienIniciado
+4ae3d95d-864b-400b-b511-6859277662c0|Expediente: Prueba error - carátula|5/18/2026 4:53:23 PM|5/18/2026 4:53:23 PM|e3cc5d9f-826e-4667-bbfb-d8b5b70e864c|RecienIniciado
+3c706277-6475-4d87-a55f-bf9507ef03e2|Expediente: Cambio de estado manual|5/18/2026 4:53:23 PM|5/18/2026 4:53:23 PM|e3cc5d9f-826e-4667-bbfb-d8b5b70e864c|EnNotificacion
+4647028a-9b81-4f5f-a43f-c58a03e999de|Expediente: error de cambio de estado|5/18/2026 4:53:23 PM|5/18/2026 4:53:23 PM|e3cc5d9f-826e-4667-bbfb-d8b5b70e864c|RecienIniciado
+2503bbff-31c0-4644-9e2b-af07cc23024a|Expediente: Solicitud de Permiso Administrativo|5/18/2026 4:53:23 PM|5/18/2026 4:53:23 PM|e3cc5d9f-826e-4667-bbfb-d8b5b70e864c|RecienIniciado
+c54eeeeb-a217-4110-bfef-aaeb20cc0ac8|Expediente: Prueba error - trámite autorización|5/18/2026 4:53:23 PM|5/18/2026 4:53:23 PM|e3cc5d9f-826e-4667-bbfb-d8b5b70e864c|RecienIniciado
+387c35b8-763a-45a1-ab06-6dcfae869bd8|Expediente: Prueba error - trámite validación|5/18/2026 4:53:23 PM|5/18/2026 4:53:23 PM|e3cc5d9f-826e-4667-bbfb-d8b5b70e864c|RecienIniciado
+70501c11-d786-4355-97c6-437acdc3b101|Expediente para listar trámites|5/18/2026 4:53:23 PM|5/18/2026 4:53:23 PM|e3cc5d9f-826e-4667-bbfb-d8b5b70e864c|RecienIniciado
