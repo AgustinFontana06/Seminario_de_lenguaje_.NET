@@ -1,82 +1,118 @@
 # SGE - Instrucciones para probar Program.cs
 
-Este documento explica cómo ejecutar y probar la funcionalidad que se desarrolla desde `SGE.Consola/Program.cs` en este espacio de trabajo.
+Este documento detalla cómo ejecutar y probar la funcionalidad desarrollada desde `SGE.Consola/Program.cs` en este espacio de trabajo.
 
-Requisitos
+## Requisitos
 
-- .NET SDK (versión compatible con los proyectos del repositorio, por ejemplo .NET 10 o la versión indicada en los csproj).
-- Terminal o un IDE (VS / VS Code).
+- .NET SDK (compatible con la versión indicada en los proyectos, por ejemplo, .NET 10).
+- Terminal (zsh) o IDE (Visual Studio / VS Code).
 
-Pasos rápidos (desde la raíz del repositorio)
+## Ejecución del proyecto
 
-1. Abrir una terminal y situarse en la carpeta del repo:
+Desde la raíz del repositorio, ejecute el siguiente comando en la terminal:
 
-```bash
-cd /Users/sans6114/Documents/desarrollo/proyectosDotnet/Seminario_de_lenguaje_.NET
-```
-
-2. Ejecutar el proyecto de consola:
-
-````bash
 ```bash
 dotnet run --project SGE.Consola/SGE.Consola.csproj
-````
+```
 
-Alternativa: entrar en la carpeta del proyecto y ejecutar:
+Alternativamente, puede situarse en la carpeta del proyecto y ejecutar la aplicación:
 
 ```bash
 cd SGE.Consola
 dotnet run
 ```
 
-Qué hace `Program.cs`
+## Pruebas de Funcionalidad
 
-- Inicializa repositorios en disco (`ExpedienteTXTRepository`, `TramitesTXTRepository`) y un servicio de autorizaciones.
-- Ejecuta una serie de pruebas:
-  1. Alta de varios expedientes (y un caso con carátula vacía para probar el manejo de errores de dominio).
-  2. Alta de un trámite asociado a un expediente recién creado.
-  3. Baja (eliminación) de un expediente.
-- Muestra mensajes por consola indicando éxito o errores.
+El archivo `Program.cs` inicializa los repositorios de texto (`expedientes.txt` y `tramites.txt`), los limpia para partir de un estado inicial "vacío", y luego ejecuta de forma secuencial una batería de pruebas de los casos de uso para expedientes y trámites (caminos felices y caminos de error).
 
-Ejemplo de código (extracto de `Program.cs` relevante)
+### Código de ejemplo
+
+A continuación, un extracto de `Program.cs` que ejecuta el alta de expedientes y captura correctamente las excepciones de dominio (validación) y autorización:
 
 ```csharp
-// se limpian los ficheros
-File.WriteAllText("expedientes.txt", string.Empty);
-File.WriteAllText("tramites.txt", string.Empty);
+// 1-- PRUEBA: ALTA DE EXPEDIENTES (ESCENARIO INSTITUCIONAL)
+try
+{
+    var req1 = new AgregarExpedienteRequest("Informe de Solicitud de Licencia de Funcionamiento", idUsuario);
+    var resp1 = agregarExpedienteUseCase.Ejecutar(req1);
+    Console.WriteLine($"[Éxito] expediente registrado. ID: {resp1.id}\n");
 
-Console.WriteLine("1-- probando alta de expediente");
-// ejemplo de alta
-var request1 = new AgregarExpedienteRequest("Caratula1", idUsuario);
-var response1 = agregarExpedienteUseCase.Ejecutar(request1);
-Console.WriteLine($"[Éxito] Producto agregado. El ID generado es: {response1.id}\n");
-
-// ejemplo de alta de tramite
-var request2 = new AgregarTramiteRequest("holaaa", idUsuario, response1.id);
-var response2 = agregarTramiteUseCase.Ejecutar(request2);
-Console.WriteLine($"[Éxito] tramite agregado. El ID generado es: {response2.idTramite}\n");
-
-// ejemplo de eliminación
-var requestEliminar = new EliminarExpedienteRequest(response1.id, idUsuario);
-var responseEliminar = eliminarExpedienteUseCase.Ejecutar(requestEliminar);
-Console.WriteLine($"[Éxito] expediente Eliminado, Id del producto {responseEliminar.id}\n");
+    var req2 = new AgregarExpedienteRequest("Acta de Inicio: Investigación Administrativa", idUsuario);
+    var resp2 = agregarExpedienteUseCase.Ejecutar(req2);
+    Console.WriteLine($"[Éxito] expediente registrado. ID: {resp2.id}\n");
+}
+catch (AutorizacionException ex)
+{
+    Console.WriteLine($"[Error de Autorizacion]: {ex.Message}");
+}
+catch (DominioException ex)
+{
+    Console.WriteLine($"[Error de Negocio]: {ex.Message}\n");
+}
+catch (Exception ex)
+{
+    Console.WriteLine($"[Error inesperado]: {ex.Message}");
+}
 ```
 
-Ejemplo de salida por consola (salida de ejemplo; los GUIDs y timestamps variarán en cada ejecución)
+### Salida por consola producida
 
+Al ejecutar el proyecto usando `dotnet run`, se generan salidas estructuradas validando tanto las operaciones correctas como los rechazos controlados. La salida producida es similar a la siguiente (los IDs variarán debido a que los GUIDs son generados dinámicamente cada vez):
+
+```text
+1-- PRUEBA: ALTA DE EXPEDIENTES (ESCENARIO INSTITUCIONAL)
+[Éxito] expediente registrado. ID: 3f1a2b4e-6c3d-4b2a-9f6c-1a2b3c4d5e6f
+
+[Éxito] expediente registrado. ID: 7a8b9c0d-1e2f-3a4b-5c6d-7e8f9a0b1c2d
+
+1.1-- CAMINO ERROR, CARATULA VACIA
+[Camino de error - Validación]: La carátula no puede estar vacía
+
+2-- PRUEBA: ALTA DE TRAMITE ASOCIADO A EXPEDIENTE
+[Éxito] expediente registrado. ID: 11112222-3333-4444-5555-666677778888
+
+[Éxito] trámite registrado. ID: 9999aaaa-bbbb-cccc-dddd-eeeeffff0000
+
+3-- PRUEBA: BAJA DE EXPEDIENTE
+[Éxito] expediente registrado. ID: 22223333-4444-5555-6666-777788889999
+
+[Éxito] expediente eliminado. ID: 22223333-4444-5555-6666-777788889999
 ```
-1-- probando alta de expediente
-[Éxito] Producto agregado. El ID generado es: 3f1a2b4e-6c3d-4b2a-9f6c-1a2b3c4d5e6f
-[Éxito] Producto agregado. El ID generado es: 7a8b9c0d-1e2f-3a4b-5c6d-7e8f9a0b1c2d
-[Éxito] Producto agregado. El ID generado es: a1b2c3d4-e5f6-7a8b-9c0d-e1f2a3b4c5d6
-[Éxito] Producto agregado. El ID generado es: f0e1d2c3-b4a5-6978-8c7d-6b5a4e3d2c1b
-[Error de Negocio]: La carátula no puede estar vacía
 
-2-- probando alta de tramite
-[Éxito] expediente agregado. El ID generado es: 11112222-3333-4444-5555-666677778888
-[Éxito] tramite agregado. El ID generado es: 9999aaaa-bbbb-cccc-dddd-eeeeffff0000
+## Detalle de Funcionalidades Probadas en `Program.cs`
 
-3-- probando baja de expediente
-[Éxito] expediente agregado. El ID generado es: 22223333-4444-5555-6666-777788889999
-[Éxito] expediente Eliminado, Id del producto 22223333-4444-5555-6666-777788889999
-```
+A continuación, se detalla cada bloque de prueba implementado en el archivo y el comportamiento esperado por consola:
+
+### 1. Alta de Expedientes (Caminos exitosos y de error)
+
+- **Funcionalidad:** Crea nuevos expedientes.
+- **Camino de Error:** Intenta crear un expediente pasando un `string` vacío como carátula.
+- **Salida esperada:** Mensajes de éxito indicando que los expedientes se registraron con sus respectivos IDs generados. Para el caso de error, se captura una `DominioException` y se muestra un mensaje advirtiendo que la carátula no puede estar vacía.
+
+### 2. Alta de Trámite Asociado
+
+- **Funcionalidad:** Registra un expediente y, usando el ID resultante, le asocia un nuevo trámite.
+- **Salida esperada:** Mensajes de confirmación sucesivos: primero el alta del expediente y luego el alta del trámite con sus correspondientes IDs.
+
+### 3 y 4. Bajas (Eliminación de Expedientes y Trámites)
+
+- **Funcionalidad:** Recrea entidades (expediente en el caso 3; expediente y trámite en el caso 4) para proceder inmediatamente a su eliminación a través del caso de uso correspondiente.
+- **Salida esperada:** Se notificarán las creaciones y, a continuación, un mensaje de éxito afirmando que la entidad vinculada a dicho ID ha sido eliminada correctamente del repositorio.
+
+### 5. Modificaciones en Expedientes (Carátula y Estado)
+
+- **Funcionalidad:** Altera atributos de un expediente existente. Primero, su carátula, y más adelante, su estado mediante el `CambiarEstadoUseCase`.
+- **Caminos de Error:** Se inyecta temporalmente un servicio (`RechazaAutorizacionService`) que deniega cualquier operación para simular el fallo en la validación de permisos.
+- **Salida esperada:** Se mostrarán los mensajes de actualización de la carátula y el estado. En los bloques de error correspondientes, se atraparán excepciones del tipo `AutorizacionException`, notificando en pantalla de forma controlada que los accesos fueron denegados.
+
+### 6. Modificación de Trámites
+
+- **Funcionalidad:** Actualiza el texto descriptivo del contenido de un trámite previamente creado.
+- **Caminos de Error:** Evalúa dos vertientes. La primera es el rechazo por falta de permisos (Autorización). La segunda intenta actualizar el trámite enviando texto vacío (Dominio).
+- **Salida esperada:** La versión válida mostrará el trámite actualizado. Los caminos alternativos arrojarán explícitamente y por separado mensajes capturados de error por "Autorización" y por "Validación", demostrando la robustez de las validaciones.
+
+### 7 y 8. Consultas y Listados
+
+- **Funcionalidad:** Consumen los métodos de solo lectura. `ObtenerTodosUseCase` itera imprimiendo el estado íntegro de la lista de expedientes. `ObtenerPorExpedienteIdUseCase` filtra exclusivamente los trámites de un expediente dado.
+- **Salida esperada:** Imprimirá en consola la cantidad total de entidades halladas seguido por una lista detalla (con sub-viñetas) que incluye atributos fundamentales como ID, carátula/etiqueta y estado/contenido tanto de expedientes como de trámites listados de los archivos.
