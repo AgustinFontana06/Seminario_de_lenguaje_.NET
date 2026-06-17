@@ -34,4 +34,3 @@ public class DireccionEmail
         return $"{Cuenta}@{Dominio}";
     }
 }
-}
