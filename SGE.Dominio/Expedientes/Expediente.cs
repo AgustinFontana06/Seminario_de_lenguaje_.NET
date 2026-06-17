@@ -1,11 +1,11 @@
 namespace SGE.Dominio.Expedientes;
 using System.Diagnostics.CodeAnalysis;
-using SGE.Dominio.Comun;
+using SGE.Dominio.Excepciones;
 using SGE.Dominio.Tramites;
+using SGE.Dominio.Abstracciones;
 
-public class Expediente
+public class Expediente : Entidad
 {
-    public Guid Id {get; private set;}
     public Caratula Caratula {get; private set;}
     public DateTime FechaCreacion {get; private set;}
     public DateTime FechaUltimaModificacion {get; private set;}
@@ -19,7 +19,6 @@ public class Expediente
             throw new DominioException("El id no puede estar vacio");
         }
 
-        Id = Guid.NewGuid();
         UsuarioUltimoCambio = idUsuario;
         Caratula = caratula;
         FechaCreacion = DateTime.Now;

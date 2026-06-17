@@ -1,6 +1,7 @@
 namespace SGE.Aplicacion.Expedientes;
 
-using SGE.Aplicacion.Comun;
+using SGE.Aplicacion.Excepciones;
+using SGE.Aplicacion.Abstracciones;
 using SGE.Aplicacion.Tramites;
 using SGE.Dominio.Expedientes;
 using SGE.Dominio.Tramites;

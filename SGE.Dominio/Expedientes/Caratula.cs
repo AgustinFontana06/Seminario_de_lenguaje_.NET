@@ -1,5 +1,5 @@
 namespace SGE.Dominio.Expedientes;
-using SGE.Dominio.Comun;
+using SGE.Dominio.Excepciones;
 
 public record class Caratula
 {

@@ -1,4 +1,4 @@
-namespace SGE.Aplicacion.Autorizaciones;
+namespace SGE.Dominio.Permisos;
 public enum Permiso
 {
     ExpendienteAlta,

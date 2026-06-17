@@ -1,9 +1,10 @@
 namespace SGE.Aplicacion.Expedientes.Eliminar;
 using SGE.Dominio.Expedientes;
-using SGE.Aplicacion.Autorizaciones;
+using SGE.Aplicacion.Excepciones;
+using SGE.Aplicacion.Abstracciones;
 using SGE.Aplicacion.Tramites;
-using SGE.Aplicacion.Comun;
 using SGE.Dominio.Tramites;
+using SGE.Dominio.Permisos;
 
 
 public class EliminarExpedienteUseCase(IExpedienteRepository repositorioExpediente, ITramiteRepository repositorioTramite,

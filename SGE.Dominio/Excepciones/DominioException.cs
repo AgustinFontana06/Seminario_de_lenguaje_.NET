@@ -1,5 +1,5 @@
+namespace SGE.Dominio.Excepciones;
 using System.Runtime.CompilerServices;
-namespace SGE.Dominio.Comun;
 
 public class DominioException : Exception
 {

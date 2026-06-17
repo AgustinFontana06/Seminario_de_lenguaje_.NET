@@ -1,9 +1,10 @@
 namespace SGE.Dominio.Tramites;
-using SGE.Dominio.Comun;
+using SGE.Dominio.Excepciones;
+using SGE.Dominio.Abstracciones;
 
-public class Tramite
+public class Tramite : Entidad
 {
-    public Guid Id {get; private set;}
+
     public Guid ExpedienteId {get; private set;}
     public EtiquetaTramite Etiqueta {get; private set;}
     public ContenidoTramite Contenido {get; private set;}
@@ -18,9 +19,8 @@ public class Tramite
             throw new DominioException("El id no puede estar vacio");
         }
 
-        Id = Guid.NewGuid();
         ExpedienteId = idExpediente;
-        Etiqueta = EtiquetaTramite.EscritoPresentado; // TODO: escritoPresentado es el estado inicial?
+        Etiqueta = EtiquetaTramite.EscritoPresentado;
         Contenido = contenido;
         FechaCreacion = DateTime.Now;
         FechaUltimaModificacion = FechaCreacion;

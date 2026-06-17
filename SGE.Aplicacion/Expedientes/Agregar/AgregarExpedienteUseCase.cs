@@ -1,7 +1,9 @@
 namespace SGE.Aplicacion.Expedientes.Agregar;
 using SGE.Dominio.Expedientes;
 using SGE.Aplicacion.Expedientes;
-using SGE.Aplicacion.Autorizaciones;
+using SGE.Aplicacion.Excepciones;
+using SGE.Aplicacion.Abstracciones;
+using SGE.Dominio.Permisos;
 
 public class AgregarExpedienteUseCase(IExpedienteRepository repositorio, IAutorizacionService autorizacion)
 {

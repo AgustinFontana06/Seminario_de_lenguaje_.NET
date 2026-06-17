@@ -8,14 +8,14 @@ using SGE.Aplicacion.Tramites;
 using SGE.Aplicacion.Tramites.Agregar;
 using SGE.Aplicacion.Tramites.Modificar;
 using SGE.Aplicacion.Tramites.Eliminar;
-using SGE.Aplicacion.Excepciones;
 using SGE.Infraestructura.Expedientes;
 using SGE.Infraestructura.Tramites;
 using SGE.Infraestructura.Autorizaciones;
-using SGE.Aplicacion.Abstracciones;
+using SGE.Aplicacion.Excepciones;
 using SGE.Dominio.Expedientes;
 using SGE.Aplicacion.Expedientes.ObtenerTodos;
-using SGE.Aplicacion.Tramites.ObtenerExpedientePorId;
+using SGE.Aplicacion.Tramites.ObtenerExpedientePorId;   
+
 
 IExpedienteRepository repositorioExpediente = new ExpedienteTXTRepository();
 ITramiteRepository repositorioTramite = new TramitesTXTRepository();

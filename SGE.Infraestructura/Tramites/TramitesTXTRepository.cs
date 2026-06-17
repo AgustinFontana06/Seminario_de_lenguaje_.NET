@@ -1,7 +1,7 @@
 namespace SGE.Infraestructura.Tramites;
 using SGE.Dominio.Tramites;
 using SGE.Aplicacion.Tramites;
-using SGE.Aplicacion.Comun;
+using SGE.Aplicacion.Excepciones;
 using SGE.Infraestructura.RepositorioException;
 
 public class TramitesTXTRepository : ITramiteRepository

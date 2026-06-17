@@ -1,7 +1,8 @@
 namespace SGE.Aplicacion.Tramites.Eliminar;
-using SGE.Aplicacion.Autorizaciones;
-using SGE.Aplicacion.Comun;
+using SGE.Aplicacion.Excepciones;
+using SGE.Aplicacion.Abstracciones;
 using SGE.Dominio.Tramites;
+using SGE.Dominio.Permisos;
 
 public class EliminarTramiteUseCase(ITramiteRepository repositorioTramite, IActualizacionEstadoExpedienteService actualizacion, IAutorizacionService autorizacion)
 {

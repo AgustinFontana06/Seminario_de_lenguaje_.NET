@@ -1,8 +1,9 @@
 namespace SGE.Aplicacion.Expedientes.Modificar;
 using SGE.Dominio.Expedientes;
 using SGE.Aplicacion.Expedientes;
-using SGE.Aplicacion.Autorizaciones;
-using SGE.Aplicacion.Comun;
+using SGE.Aplicacion.Excepciones;
+using SGE.Aplicacion.Abstracciones;
+using SGE.Dominio.Permisos;
 
 
 public class CambiarEstadoUseCase(IExpedienteRepository repositorio, IAutorizacionService autorizacion)

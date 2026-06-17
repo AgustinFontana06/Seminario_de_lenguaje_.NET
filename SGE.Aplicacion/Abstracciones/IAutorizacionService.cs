@@ -1,4 +1,5 @@
-namespace SGE.Aplicacion.Autorizaciones;
+namespace SGE.Aplicacion.Abstracciones;
+using SGE.Dominio.Permisos;
 
 public interface IAutorizacionService
 {

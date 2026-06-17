@@ -1,5 +1,5 @@
-namespace SGE.Aplicacion.Autorizaciones;
-using SGE.Dominio.Comun;
+namespace SGE.Aplicacion.Excepciones;
+using SGE.Dominio.Excepciones;
 public class AutorizacionException : DominioException{
     public AutorizacionException(){}
 

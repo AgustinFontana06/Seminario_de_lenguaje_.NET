@@ -1,9 +1,10 @@
 namespace SGE.Aplicacion.Tramites.ObtenerExpedientePorId;
+using SGE.Aplicacion.Excepciones;
+using SGE.Aplicacion.Abstracciones;
 using SGE.Dominio.Tramites;
 using SGE.Dominio.Expedientes;
-using SGE.Aplicacion.Expedientes;
-using SGE.Aplicacion.Comun;
 using System.Linq;
+using SGE.Aplicacion.Tramites.Dtos;
 
 public class ObtenerPorExpedienteIdUseCase(IExpedienteRepository repositorioExpediente, ITramiteRepository repositorioTramite)
 {

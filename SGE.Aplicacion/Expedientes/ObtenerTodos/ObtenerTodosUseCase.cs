@@ -2,6 +2,7 @@ namespace SGE.Aplicacion.Expedientes.ObtenerTodos;
 using SGE.Dominio.Expedientes;
 using SGE.Aplicacion.Expedientes;
 using SGE.Aplicacion.Expedientes.ObtenerPorId;
+using SGE.Aplicacion.Abstracciones;
 
 public class ObtenerTodosUseCase(IExpedienteRepository repositorio)
 {

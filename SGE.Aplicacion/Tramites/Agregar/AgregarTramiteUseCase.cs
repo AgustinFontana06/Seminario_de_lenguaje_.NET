@@ -1,8 +1,10 @@
 namespace SGE.Aplicacion.Tramites.Agregar;
 
-using SGE.Aplicacion.Autorizaciones;
+using SGE.Aplicacion.Excepciones;
+using SGE.Aplicacion.Abstracciones;
 using SGE.Aplicacion.Tramites;
 using SGE.Dominio.Tramites;
+using SGE.Dominio.Permisos;
 
 public class AgregarTramiteUseCase(ITramiteRepository repositorio, IActualizacionEstadoExpedienteService actualizacion, IAutorizacionService autorizacion)
 {

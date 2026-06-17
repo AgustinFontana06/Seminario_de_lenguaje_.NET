@@ -1,8 +1,9 @@
 namespace SGE.Aplicacion.Tramites.Modificar;
 using SGE.Aplicacion.Expedientes;
-using SGE.Aplicacion.Autorizaciones;
+using SGE.Aplicacion.Excepciones;
 using SGE.Dominio.Tramites;
-using SGE.Aplicacion.Comun;
+using SGE.Aplicacion.Abstracciones;
+using SGE.Dominio.Permisos;
 
 public class ModificarTramiteUseCase(ITramiteRepository repositorioTramite,IActualizacionEstadoExpedienteService actualizacion, IAutorizacionService autorizacion)
 {
