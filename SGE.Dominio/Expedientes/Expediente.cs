@@ -34,6 +34,10 @@ public class Expediente
     }
     private Expediente(Guid id, Caratula caratula, DateTime fechaCreacion, DateTime fechaUltimaModificacion, Guid usuarioUltimoCambio, EstadoExpediente estado)
     {
+        if(fechaUltimaModificacion < fechaCreacion)
+        {
+            throw new DominioException("La fecha de ultima modificacion no puede ser menor que la fecha de creacion");
+        }
         Id = id;
         Caratula = caratula;
         FechaCreacion = fechaCreacion;

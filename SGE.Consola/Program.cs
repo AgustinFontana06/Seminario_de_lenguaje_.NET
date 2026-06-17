@@ -377,8 +377,8 @@ try
 
     var request4 = new ObtenerPorExpedienteIdRequest(response1.id);
     var response4 = obtenerPorExpedienteIdUseCase.Ejecutar(request4);
-    Console.WriteLine($"[Éxito] Se encontraron {response4.tramites.Count()} trámites:");
-    foreach (var tramite in response4.tramites)
+    Console.WriteLine($"[Éxito] Se encontraron {response4.Tramites.Count()} trámites:");
+    foreach (var tramite in response4.Tramites)
     {
         Console.WriteLine($"  - ID: {tramite.Id} | Etiqueta: {tramite.Etiqueta} | Contenido: {tramite.Contenido}");
     }

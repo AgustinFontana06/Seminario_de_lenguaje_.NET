@@ -3,6 +3,7 @@ using SGE.Dominio.Tramites;
 using SGE.Dominio.Expedientes;
 using SGE.Aplicacion.Expedientes;
 using SGE.Aplicacion.Comun;
+using System.Linq;
 
 public class ObtenerPorExpedienteIdUseCase(IExpedienteRepository repositorioExpediente, ITramiteRepository repositorioTramite)
 {
@@ -17,6 +18,8 @@ public class ObtenerPorExpedienteIdUseCase(IExpedienteRepository repositorioExpe
 
         IEnumerable<Tramite> tramites = repositorioTramite.ObtenerPorExpedienteId(request.idExpediente);
 
-        return new ObtenerPorExpedienteIdResponse(tramites);
+        IEnumerable<TramiteDto> tramitesDto = tramites.Select(t => new TramiteDto(t.Id, t.Etiqueta, t.Contenido, t.FechaCreacion, t.FechaUltimaModificacion, t.UsuarioUltimoCambio));
+
+        return new ObtenerPorExpedienteIdResponse(tramitesDto);
     }
 }

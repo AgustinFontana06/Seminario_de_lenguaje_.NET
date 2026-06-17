@@ -35,6 +35,10 @@ public class Tramite
 
     private Tramite(Guid id, Guid expedienteId, EtiquetaTramite etiqueta, ContenidoTramite contenido, DateTime fechaCreacion, DateTime fechaUltimaModificacion, Guid usuarioUltimoCambio)
     {
+        if(fechaUltimaModificacion < fechaCreacion)
+        {
+            throw new DominioException("La fecha de ultima modificacion no puede ser menor que la fecha de creacion");
+        }
         Id = id;
         ExpedienteId = expedienteId;
         Etiqueta = etiqueta;

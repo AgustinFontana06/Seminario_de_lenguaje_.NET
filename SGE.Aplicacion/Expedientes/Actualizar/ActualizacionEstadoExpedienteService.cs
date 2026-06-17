@@ -4,12 +4,13 @@ using SGE.Aplicacion.Comun;
 using SGE.Aplicacion.Tramites;
 using SGE.Dominio.Expedientes;
 using SGE.Dominio.Tramites;
+using System.Linq;
 
-public class ActualizacionEstadoExpediente(IExpedienteRepository repositorioExpediente, ITramiteRepository repositorioTramite)
+public class ActualizacionEstadoExpedienteService(IExpedienteRepository repositorioExpediente, ITramiteRepository repositorioTramite) : IActualizacionEstadoExpedienteService
 {
-    public void Ejecutar(Guid ExpedienteId, Guid idUsuario)
+    public void ActualizacionEstado(Guid ExpedienteId, Guid idUsuario)
     {
-        Expediente? exp = repositorioExpediente.ObtenerPorId(ExpedienteId);
+        Expediente? exp = repositorioExpediente.ObtenerPorId(ExpedienteId); 
 
         if(exp == null)
         {
@@ -17,10 +18,9 @@ public class ActualizacionEstadoExpediente(IExpedienteRepository repositorioExpe
         }
 
         IEnumerable<Tramite> tramites = repositorioTramite.ObtenerPorExpedienteId(ExpedienteId);
-        Tramite? ultimoTramite = tramites.MaxBy(t => t.FechaCreacion);
+        Tramite? UltimoTramite = tramites.MaxBy(t => t.FechaCreacion);
 
-        //si mi ultimo tramite es null (no hay) cambia el estado del expediente a Recien Iniciado
-        bool cambio = exp.ActualizarEstado(ultimoTramite?.Etiqueta, idUsuario);
+        bool cambio = exp.ActualizarEstado(UltimoTramite?.Etiqueta, idUsuario);
 
         if (cambio)
         {
