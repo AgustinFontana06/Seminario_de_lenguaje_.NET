@@ -17,7 +17,7 @@ public record class DireccionEmail
     //constructor vacio para EF CORE
     private DireccionEmail(){}
 
-    public DireccionEmail(string emailCompleto){
+    public  DireccionEmail Parse(string emailCompleto){
         if (string.IsNullOrWhiteSpace(emailCompleto) || !emailCompleto.Contains('@'))
         {
             throw new DominioException("El formato del email es inválido.");
