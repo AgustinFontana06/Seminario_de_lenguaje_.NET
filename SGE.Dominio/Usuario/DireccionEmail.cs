@@ -1,6 +1,6 @@
 namespace SGE.Dominio.Usuario;
-
-public class DireccionEmail
+using SGE.Dominio.Excepciones;
+public record class DireccionEmail
 {
     public string Cuenta {get; private set;}
     public string Dominio {get; private set;}

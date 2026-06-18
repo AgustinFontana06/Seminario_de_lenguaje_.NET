@@ -1,6 +1,0 @@
-8263f3fd-790f-4260-a907-5c9a0d8f0c7c|401c45bc-9ebf-4dd7-b364-5d11491e8ed4|EscritoPresentado|Recepción de documentación técnica para evaluación|6/17/2026 10:16:28 AM|6/17/2026 10:16:28 AM|f1d92c50-822f-4772-a2cd-0e5b62533d8a
-8a2e7211-d90f-47bd-adc5-44ceb6ba9c8b|7874263b-e634-4d5f-8aad-277fb9214f79|EscritoPresentado|Versión actualizada: planos revisados y observaciones incorporadas|6/17/2026 10:16:28 AM|6/17/2026 10:16:28 AM|f1d92c50-822f-4772-a2cd-0e5b62533d8a
-5239bfd6-c583-4e66-b358-3523979810aa|e69cc7eb-933b-43a0-adbc-b42240f8069d|EscritoPresentado|Entrega inicial de antecedentes técnicos|6/17/2026 10:16:28 AM|6/17/2026 10:16:28 AM|f1d92c50-822f-4772-a2cd-0e5b62533d8a
-3f8be3df-7e18-43e2-ba4b-da323d1eadf7|b8e93172-d362-4568-b069-b883a89a93c3|EscritoPresentado|Entrega de documentación técnica|6/17/2026 10:16:28 AM|6/17/2026 10:16:28 AM|f1d92c50-822f-4772-a2cd-0e5b62533d8a
-88498f6e-16fb-4a6e-83fb-01a3b30f141d|8bce89ef-df21-484b-bd98-7639ce2a5927|EscritoPresentado|Trámite 1: Recepción de documentación|6/17/2026 10:16:28 AM|6/17/2026 10:16:28 AM|f1d92c50-822f-4772-a2cd-0e5b62533d8a
-cc32a486-cb5a-4d3f-9166-cec98fc3ca31|8bce89ef-df21-484b-bd98-7639ce2a5927|EscritoPresentado|Trámite 2: Evaluación técnica preliminar|6/17/2026 10:16:28 AM|6/17/2026 10:16:28 AM|f1d92c50-822f-4772-a2cd-0e5b62533d8a

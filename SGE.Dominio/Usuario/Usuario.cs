@@ -27,8 +27,10 @@ public class Usuario: Entidad
           Nombre=nombre;
           Email= email;
           ContrasenaHash=password;
+          EsAdministrador = false;
           ListaDePermisos = Enumerable.Empty<Permiso>(); // raro pero supustamente es mejor en terminos de memoria;
     }
+    /*
     public static Usuario Reconstruir(Guid id, String nombre, DireccionEmail email, String password, bool esAdministrador, IEnumerable<Permiso> listaDePermisos)
     {
         return new Usuario(id, nombre, email, password);
@@ -36,5 +38,7 @@ public class Usuario: Entidad
     private Usuario(Guid id, String nombre, DireccionEmail email, String password, bool esAdministrador, IEnumerable<Permiso> listaDePermisos)
     {
         Id = id;
-    }
+    }*/
+
+    protected Usuario() { }
 }
