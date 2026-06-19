@@ -1,16 +1,32 @@
 namespace SGE.Infraestructura.Autorizaciones;
 using SGE.Dominio.Permisos;
-using SGE.Aplicacion.Autorizaciones;
+using SGE.Aplicacion.Abstracciones;
 using SGE.Dominio.Usuario;
-public class AutorizacionService(GestionContext context) : IAutorizacionService
+using SGE.Aplicacion.Excepciones;
+using System.Runtime.CompilerServices;
+
+public class AutorizacionService : IAutorizacionService
 {
+
+    private readonly IUsuarioRepository _usuarioRepository;
+    public AutorizacionService(IUsuarioRepository repositorioUsuario)
+    {
+        _usuarioRepository = repositorioUsuario;
+    }
      public bool PoseeElPermiso(Guid idUsuario, Permiso permisoRequerido)
     {
-        var usuario = context.Set<Usuario>().Find(idUsuario);
-        if (usuario == null) return false;
-
-        IEnumerable<Permiso> enum = usuario.listaDePermiso;
-
-        return enum.a
+        var usuario = _usuarioRepository.obtenerPorEmail(idUsuario);
+        if (usuario == null) throw new EntidadNoEncontradaException($"el usuario con id {idUsuario} no se encuentra en la base de datos.");
+        bool permitido = false;
+        //infiere el tipo de dato.
+        var permisos = usuario.ListaDePermisos.ToList();
+        foreach(Permiso p in permisos)
+        {
+            if(p == permisoRequerido)
+            {
+                permitido = true;
+            }
+        }
+        return permitido;
     }
 }

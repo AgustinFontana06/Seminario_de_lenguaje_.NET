@@ -26,11 +26,7 @@ public class Expediente : Entidad
         Estado = EstadoExpediente.RecienIniciado;
     }
 
-    public static Expediente Reconstruir (Guid id, Caratula caratula, DateTime fechaCreacion, DateTime fechaUltimaModificacion, Guid usuarioUltimoCambio, EstadoExpediente estado)
-    {
-        // no debe cheque nada debido  que solo reconstruye el expediente que antes ya creado
-        return new Expediente(id, caratula, fechaCreacion, fechaUltimaModificacion, usuarioUltimoCambio, estado);
-    }
+    protected Expediente () {}
     private Expediente(Guid id, Caratula caratula, DateTime fechaCreacion, DateTime fechaUltimaModificacion, Guid usuarioUltimoCambio, EstadoExpediente estado)
     {
         if(fechaUltimaModificacion < fechaCreacion)

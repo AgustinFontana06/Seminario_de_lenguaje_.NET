@@ -5,7 +5,7 @@ using SGE.Aplicacion.Abstracciones;
 
 namespace SGE.Infraestructura.Extensiones;
 
-public static class InfreaestructuraExtension()
+public static class InfreaestructuraExtension
 {
     public static IServiceCollection AddInfraestructura(this IServiceCollection services, IConfiguration configuration)
     {

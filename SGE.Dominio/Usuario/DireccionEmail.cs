@@ -15,7 +15,7 @@ public record class DireccionEmail
     }
 
     //constructor vacio para EF CORE
-    private DireccionEmail(){}
+    protected DireccionEmail(){}
 
     public  DireccionEmail Parse(string emailCompleto){
         if (string.IsNullOrWhiteSpace(emailCompleto) || !emailCompleto.Contains('@'))

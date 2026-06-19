@@ -26,12 +26,8 @@ public class Tramite : Entidad
         FechaUltimaModificacion = FechaCreacion;
         UsuarioUltimoCambio = usuarioUltimoCambio;
     }
-    public static Tramite Reconstruir (Guid id, Guid expedienteId,EtiquetaTramite etiqueta,ContenidoTramite contenido , DateTime fechaDeCreacion, DateTime fechaDeUltimaModificacion, Guid usuarioUltimoCambio)
-    {
-        // no debe cheque nada debido  que solo reconstruye el expediente que antes ya creado
 
-        return new Tramite(id,expedienteId,etiqueta,contenido,fechaDeCreacion,fechaDeUltimaModificacion, usuarioUltimoCambio);
-    }
+    protected Tramite() {}
 
     private Tramite(Guid id, Guid expedienteId, EtiquetaTramite etiqueta, ContenidoTramite contenido, DateTime fechaCreacion, DateTime fechaUltimaModificacion, Guid usuarioUltimoCambio)
     {
