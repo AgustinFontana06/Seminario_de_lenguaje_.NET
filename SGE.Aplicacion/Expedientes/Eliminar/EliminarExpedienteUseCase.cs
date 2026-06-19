@@ -8,7 +8,7 @@ using SGE.Dominio.Permisos;
 
 
 public class EliminarExpedienteUseCase(IExpedienteRepository repositorioExpediente, ITramiteRepository repositorioTramite,
-    IAutorizacionService autorizacionService)
+    IAutorizacionService autorizacionService, IUnidadDeTrabajo udt)
 {
     public EliminarExpedienteResponse Ejecutar(EliminarExpedienteRequest request)
     {
@@ -29,6 +29,8 @@ public class EliminarExpedienteUseCase(IExpedienteRepository repositorioExpedien
         // 4. Eliminar el expediente
         repositorioExpediente.Eliminar(request.idExpediente);
 
+
+        udt.GuardarCambios();
         return new EliminarExpedienteResponse(exp.Id);
 
         //nota: se debe actualizar el ultimo cambio por usuario?

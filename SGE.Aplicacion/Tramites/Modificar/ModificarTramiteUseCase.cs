@@ -5,7 +5,7 @@ using SGE.Dominio.Tramites;
 using SGE.Aplicacion.Abstracciones;
 using SGE.Dominio.Permisos;
 
-public class ModificarTramiteUseCase(ITramiteRepository repositorioTramite,IActualizacionEstadoExpedienteService actualizacion, IAutorizacionService autorizacion)
+public class ModificarTramiteUseCase(ITramiteRepository repositorioTramite,IActualizacionEstadoExpedienteService actualizacion, IAutorizacionService autorizacion, IUnidadDeTrabajo udt)
 {
     public ModificarTramiteResponse Ejecutar(ModificarTramiteRequest request)
     {
@@ -30,6 +30,8 @@ public class ModificarTramiteUseCase(ITramiteRepository repositorioTramite,IActu
         repositorioTramite.Modificar(tramite);
 
         actualizacion.ActualizacionEstado(tramite.ExpedienteId, request.idUsuario);
+
+        udt.GuardarCambios();
 
         return new ModificarTramiteResponse(tramite.Id, tramite.Contenido.Texto);
     }
