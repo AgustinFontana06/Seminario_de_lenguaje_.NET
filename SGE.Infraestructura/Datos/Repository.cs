@@ -1,5 +1,5 @@
 using SGE.Aplicacion.Abstracciones;
-using EscuelaApi.Infraestructura;
+using SGE.Infraestructura;
 using SGE.Dominio.Abstracciones;
 using Microsoft.EntityFrameworkCore;
 

@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SGE.Aplicacion.Abstracciones;
+using SGE.Infraestructura.UDT;
 
 namespace SGE.Infraestructura.Extensiones;
 

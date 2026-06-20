@@ -3,7 +3,7 @@ using SGE.Infraestructura.Datos;
 using Microsoft.EntityFrameworkCore;
 
 
-namespace SGE.Infraestructura.UnidadDeTrabajo;
+namespace SGE.Infraestructura.UDT;
 
 public class UnidadDeTrabajo : IUnidadDeTrabajo
 {
