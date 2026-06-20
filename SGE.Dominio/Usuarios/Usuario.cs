@@ -1,4 +1,4 @@
-namespace SGE.Dominio.Usuario;
+namespace SGE.Dominio.Usuarios;
 using SGE.Dominio.Excepciones;
 using SGE.Dominio.Permisos;
 using SGE.Dominio.Abstracciones;
@@ -6,10 +6,10 @@ using SGE.Dominio.Abstracciones;
 public class Usuario: Entidad
 {
     public String Nombre {get; private set;} ="";
-    public DireccionEmail Email {get; private set;}
-    public String ContrasenaHash {get; private set;}
+    public DireccionEmail Email {get; private set;}= new DireccionEmail("vacio","vacio.com");
+    public String ContrasenaHash {get; private set;}="";
     public bool EsAdministrador {get; private set;} = false; // por defecto no es administrador.
-    public IEnumerable <Permiso> ListaDePermisos {get; private set;}
+    public IEnumerable <Permiso> ListaDePermisos {get; private set;}=[];
 
 
     public Usuario(String nombre, DireccionEmail email,String password)
@@ -28,7 +28,7 @@ public class Usuario: Entidad
           Email= email;
           ContrasenaHash=password;
           EsAdministrador = false;
-          ListaDePermisos = Enumerable.Empty<Permiso>(); // raro pero supustamente es mejor en terminos de memoria;
+          ListaDePermisos = [] ;// raro pero supustamente es mejor en terminos de memoria;
     }
 
     public void setAdmin() => EsAdministrador = true;

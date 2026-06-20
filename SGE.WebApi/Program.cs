@@ -1,15 +1,18 @@
 ﻿using SGE.Aplicacion.Abstracciones;
 using SGE.Infraestructura.Extensiones;
+using SGE.Aplicacion.Extensiones;
 using SGE.WebApi;
 using SGE.Aplicacion.Usuarios;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using System.Security.Claims;
 using Microsoft.Extensions.DependencyInjection; // esto para inyectarmejor las dependencias nose si va aca
 
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddAplicacion();
+builder.Services.AddAplicacion(builder.Configuration);
 builder.Services.AddInfraestructura(builder.Configuration);
 builder.Services.AddScoped<ITokenProvider, JwtTokenProvider>();
 builder.Services.AddScoped<LoginUsuarioUseCase>();
@@ -45,7 +48,7 @@ app.MapPost("/api/login", (LoginUsuarioRequest request, LoginUsuarioUseCase useC
  var response = useCase.Ejecutar(request);
  return Results.Ok(response);
 });
-Api.MapPost("/", ( // esot raro a chequear so es asi tuve que modficar un poco con lo del profe
+WebApi.MapPost("/", ( // esot raro a chequear so es asi tuve que modficar un poco con lo del profe
  ModificarMisDatosRequest request,
  ClaimsPrincipal user, // <- Acá .NET deja los datos del JWT ya validados
  ModificarMisDatosUseCase useCase) =>

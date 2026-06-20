@@ -13,7 +13,7 @@ public class AutorizacionService : IAutorizacionService
     {
         _usuarioRepository = repositorioUsuario;
     }
-     public bool PoseeElPermiso(Guid idUsuario, Permiso permisoRequerido)
+     public bool PoseeElPermiso(Usuario u, Permiso permisoRequerido)
     {
         var usuario = _usuarioRepository.obtenerPorEmail(idUsuario);
         if (usuario == null) throw new EntidadNoEncontradaException($"el usuario con id {idUsuario} no se encuentra en la base de datos.");

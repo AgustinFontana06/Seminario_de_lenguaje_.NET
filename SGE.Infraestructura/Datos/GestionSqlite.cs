@@ -1,6 +1,4 @@
-using SGE.Infraestructura.Datos;
-using SGE.Dominio;
-using SGE.Dominio.Usuario;
+using SGE.Dominio.Usuarios;
 using Microsoft.EntityFrameworkCore;
 using SGE.Dominio.Expedientes;
 

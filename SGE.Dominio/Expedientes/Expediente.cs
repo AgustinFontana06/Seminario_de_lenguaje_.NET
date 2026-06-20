@@ -6,7 +6,7 @@ using SGE.Dominio.Abstracciones;
 
 public class Expediente : Entidad
 {
-    public Caratula Caratula {get; private set;}
+    public Caratula Caratula {get; private set;} = new Caratula ("vacio");
     public DateTime FechaCreacion {get; private set;}
     public DateTime FechaUltimaModificacion {get; private set;}
     public Guid UsuarioUltimoCambio {get; private set;}

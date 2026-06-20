@@ -1,5 +1,5 @@
 namespace SGE.Aplicacion.Abstracciones;
-using SGE.Dominio.Usuario;
+using SGE.Dominio.Usuarios;
 
 public interface IUsuarioRepository : IRepository<Usuario>
 {

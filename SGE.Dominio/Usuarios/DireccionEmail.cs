@@ -1,9 +1,9 @@
-namespace SGE.Dominio.Usuario;
+namespace SGE.Dominio.Usuarios;
 using SGE.Dominio.Excepciones;
 public record class DireccionEmail
 {
-    public string Cuenta {get; private set;}
-    public string Dominio {get; private set;}
+    public string Cuenta {get; private set;}="";
+    public string Dominio {get; private set;}="";
 
     public DireccionEmail(string cuenta, string dominio){
         if(string.IsNullOrWhiteSpace(cuenta) || string.IsNullOrWhiteSpace(dominio))

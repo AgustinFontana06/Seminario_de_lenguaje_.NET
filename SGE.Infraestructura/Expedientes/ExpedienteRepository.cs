@@ -3,7 +3,7 @@ namespace SGE.Infraestructura.Expedientes;
 using SGE.Dominio.Expedientes;
 using SGE.Aplicacion.Abstracciones;
 using SGE.Infraestructura.Datos;
-using EscuelaApi.Infraestructura;
+using SGE.Infraestructura;
 
 public class ExpedienteRepository : Repository<Expediente>, IExpedienteRepository
 {

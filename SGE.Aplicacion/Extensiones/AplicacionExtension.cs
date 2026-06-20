@@ -10,29 +10,29 @@ using SGE.Aplicacion.Tramites.ObtenerExpedientePorId;
 using SGE.Aplicacion.Tramites.ObtenerPorId;
 using SGE.Aplicacion.Usuarios.Registrar;
 using Microsoft.Extensions.DependencyInjection;
-
+using Microsoft.Extensions.Configuration;
 namespace SGE.Aplicacion.Extensiones;
 
-public static class AplicacionExtension()
+public static class AplicacionExtension
 {
-    public static IServiceCollection AddAplicacion(this IServiceCollection services)
+    public static IServiceCollection AddAplicacion(this IServiceCollection services,IConfiguration configuration)
     {
         //se crea una sola instancia por peticion, es decir se reutiliza cada scoped por use case requerido
-        services.addScoped<AgregarExpedienteUseCase>();
-        services.addScoped<EliminarExpedienteUseCase>();
-        services.addScoped<ModificarCaratulaExpedienteUseCase>();
-        services.addScoped<CambiarEstadoUseCase>();
-        services.addScoped<ObtenerPorIdUseCase>();
-        services.addScoped<ObtenerTodosUseCase>();
+        services.AddScoped<AgregarExpedienteUseCase>();
+        services.AddScoped<EliminarExpedienteUseCase>();
+        services.AddScoped<ModificarCaratulaExpedienteUseCase>();
+        services.AddScoped<CambiarEstadoUseCase>();
+        services.AddScoped<ObtenerPorIdUseCase>();
+        services.AddScoped<ObtenerTodosUseCase>();
 
-        services.addScoped<AgregarTramiteUseCase>();
-        services.addScoped<EliminarTramiteUseCase>();
-        services.addScoped<ModificarTramiteUseCase>();
+        services.AddScoped<AgregarTramiteUseCase>();
+        services.AddScoped<EliminarTramiteUseCase>();
+        services.AddScoped<ModificarTramiteUseCase>();
 
-        services.addScoped<Tramites.ObtenerPorId.ObtenerPorIdUseCase>();
-        services.addScoped<ObtenerPorExpedienteIdUseCase>();
+        services.AddScoped<Tramites.ObtenerPorId.ObtenerPorIdUseCase>();
+        services.AddScoped<ObtenerPorExpedienteIdUseCase>();
 
-        services.addScoped<RegistrarUsuarioUseCase>();
+        services.AddScoped<RegistrarUsuarioUseCase>();
 
         return services;
     }

@@ -7,7 +7,7 @@ public class Tramite : Entidad
 
     public Guid ExpedienteId {get; private set;}
     public EtiquetaTramite Etiqueta {get; private set;}
-    public ContenidoTramite Contenido {get; private set;}
+    public ContenidoTramite Contenido {get; private set;} = new ContenidoTramite("vacio");
     public DateTime FechaCreacion {get; private set;}
     public DateTime FechaUltimaModificacion {get; private set;}
     public Guid UsuarioUltimoCambio {get; private set;}

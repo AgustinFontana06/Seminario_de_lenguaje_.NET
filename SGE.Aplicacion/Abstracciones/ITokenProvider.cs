@@ -1,6 +1,5 @@
-using SGE.Dominio;
 namespace SGE.Aplicacion.Abstracciones;
-using SGE.Dominio.Usuario;
+using SGE.Dominio.Usuarios;
 public interface ITokenProvider
 {
  string GenerarToken(Usuario usuario);
