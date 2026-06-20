@@ -1,7 +1,9 @@
-using SGE.Dominio;
+using SGE.Dominio.Tramites;
+using SGE.Dominio.Usuario;
+using SGE.Dominio.Expedientes;
 using Microsoft.EntityFrameworkCore;
 
-namespace EscuelaApi.Infraestructura;
+namespace SGE.Infraestructura.Datos;
 
 public class GestionContext : DbContext
 {
@@ -18,8 +20,8 @@ public class GestionContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
         // Le indicamos a EF Core que Email es un "Tipo Complejo" (Value Object)
-        modelBuilder.Entity<Expediente>().complexProperty(e => e.Caratula);
-        modelBuilder.Entity<Tramite>().complexProperty(t => t.ContenidoTramite);
+        modelBuilder.Entity<Expediente>().ComplexProperty(e => e.Caratula);
+        modelBuilder.Entity<Tramite>().ComplexProperty(t => t.Contenido);
         modelBuilder.Entity<Usuario>().ComplexProperty(u => u.Email);
     }
 }

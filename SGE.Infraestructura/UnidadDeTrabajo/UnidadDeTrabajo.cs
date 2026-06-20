@@ -1,10 +1,11 @@
 using SGE.Aplicacion.Abstracciones;
-using SGE.Infraestructura.
-using SGE.Ap
+using SGE.Infraestructura.Datos;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace SGE.Infraestructura.UnidadDeTrabajo;
 
-public interface UnidadDeTrabajo : IUnidadDeTrabajo
+public class UnidadDeTrabajo : IUnidadDeTrabajo
 {
     private readonly GestionContext _context;
     public UnidadDeTrabajo(GestionContext context)

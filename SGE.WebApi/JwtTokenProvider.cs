@@ -2,8 +2,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using SGE.Aplicacion;
-using SGE.Dominio;
+using SGE.Aplicacion.Abstracciones;
+using SGE.Dominio.Usuario;
 namespace SGE.WebApi;
 public class JwtTokenProvider(IConfiguration config) : ITokenProvider
 {

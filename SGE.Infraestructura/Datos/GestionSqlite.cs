@@ -1,4 +1,4 @@
-using EscuelaApi.Infraestructura;
+using SGE.Infraestructura.Datos;
 using SGE.Dominio;
 using SGE.Dominio.Usuario;
 using Microsoft.EntityFrameworkCore;
