@@ -2,11 +2,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SGE.Aplicacion.Abstracciones;
+<<<<<<< HEAD
 using SGE.Infraestructura.Datos;
 using SGE.Infraestructura.Tramites;
 using SGE.Infraestructura.Expedientes;
 using SGE.Infraestructura.Autorizaciones;
 using SGE.Infraestructura.Usuario;
+=======
+>>>>>>> 3918b64837d905cdd4a2432405f4381c7c720f71
 using SGE.Infraestructura.UDT;
 
 namespace SGE.Infraestructura.Extensiones;

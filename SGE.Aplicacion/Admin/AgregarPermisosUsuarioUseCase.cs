@@ -1,0 +1,41 @@
+using SGE.Aplicacion.Abstracciones;
+using SGE.Aplicacion.Excepciones;
+using SGE.Dominio.Permisos;
+namespace SGE.Aplicacion.Admin;
+
+public class AgregarPermisosUsuarioUseCase(IUsuarioRepository usuarioRepository)
+{
+    public AgregarPermisosUsuarioResponse Ejecutar(AgregarPermisosUsuarioRequest request)
+    {
+        var ejecutor = usuarioRepository.ObtenerPorId(request.UsuarioEjecutorId);
+
+        if(ejecutor == null || !ejecutor.EsAdministrador)
+        {
+            throw new AutorizacionException("Se requieren permisos de admnistrador");
+        }
+
+        var usuario = usuarioRepository.ObtenerPorId(request.id);
+
+        if(usuario == null)
+        {
+            throw new EntidadNoEncontradaException("No se encontro el usuario");
+        }
+
+        var permisosFaltantes = request.permisos
+            .Except(usuario.ListaDePermisos)
+            .ToList();
+
+        if (permisosFaltantes.Any())
+        {
+            foreach (var permiso in permisosFaltantes)
+            {
+                usuario.Add(permiso);
+            }
+
+            usuarioRepository.AgregarPermiso(usuario);
+        }
+
+        return new AgregarPermisosUsuarioResponse("permisos agregados correctamente");
+        
+    }
+}
