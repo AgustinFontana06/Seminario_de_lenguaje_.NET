@@ -1,4 +1,4 @@
-namespace SGE.Aplicacion.Usuarios.Login;
+namespace SGE.Aplicacion.Usuarios;
 
 
-public record LoginUsuarioResponse(Guid id){}
+public record LoginUsuarioResponse(String token){}

@@ -5,7 +5,7 @@ using SGE.Dominio.Abstracciones;
 
 public class Usuario: Entidad
 {
-    public String Nombre {get; private set;}
+    public String Nombre {get; private set;} ="";
     public DireccionEmail Email {get; private set;}
     public String ContrasenaHash {get; private set;}
     public bool EsAdministrador {get; private set;} = false; // por defecto no es administrador.

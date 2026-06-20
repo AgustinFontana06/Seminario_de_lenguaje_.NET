@@ -3,14 +3,25 @@ using System.Text;
 using SGE.Aplicacion.Abstracciones;
 using SGE.Aplicacion.Excepciones;
 using SGE.Dominio.Usuario;
-
+using SGE.Dominio.Excepciones;
 namespace SGE.Aplicacion.Usuarios.Login;
 
-public class LoginUsuarioUseCase(IUnidadDeTrabajo unidadDeTrabajo, IUsuarioRepository usuarioRepository)
+public class LoginUsuarioUseCase(IUnidadDeTrabajo unidadDeTrabajo, IUsuarioRepository usuarioRepository,ITokenProvider tokenProvider)
 {
     public LoginUsuarioResponse Ejecutar( LoginUsuarioRequest request)
     {
-        var usuarioBuscado = usuarioRepository.obtenerPorEmail(request.email);
+        DireccionEmail emailIngresado;
+         // 1. Delegamos la validación al Dominio intentando crear el Value Object
+        try
+        {
+            emailIngresado = DireccionEmail.Parse(request.email);
+        }
+        catch (DominioException) // Atrapamos la regla de dominio rota
+        {
+            throw new AutorizacionException("El formato del email o la contraseña son incorrectos.");
+        }
+ //
+        var usuarioBuscado = usuarioRepository.obtenerPorEmail(emailIngresado);
         if (usuarioBuscado == null)
         {
             throw new EntidadNoEncontradaException("El usuario con el que se esta queriendo loguear no existe.");
@@ -24,7 +35,8 @@ public class LoginUsuarioUseCase(IUnidadDeTrabajo unidadDeTrabajo, IUsuarioRepos
         {
            throw new AutorizacionException($"las credenciales utilizadas para el email {request.email} no son validas.");
         }
-
-        return new LoginUsuarioResponse(usuarioBuscado.Id);
+        // 4. Delegamos la creación del token a la infraestructura
+        var token = tokenProvider.GenerarToken(usuarioBuscado);
+        return new LoginUsuarioResponse(token);
     }
 }
