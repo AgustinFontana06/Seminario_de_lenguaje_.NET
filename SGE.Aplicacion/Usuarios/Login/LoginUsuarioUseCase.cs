@@ -26,6 +26,8 @@ public class LoginUsuarioUseCase(IUnidadDeTrabajo unidadDeTrabajo, IUsuarioRepos
         {
             throw new EntidadNoEncontradaException("El usuario con el que se esta queriendo loguear no existe.");
         }
+
+        //hashear en infraestructura
         var bytes = Encoding.UTF8.GetBytes(request.password);
         var hashBytes = SHA256.HashData(bytes);
         var passwordRequestHash = Convert.ToHexString(hashBytes); // o Convert.ToBase64String(hashBytes) dependiendo de cómo lo guardes

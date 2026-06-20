@@ -6,7 +6,7 @@ using SGE.Aplicacion.Abstracciones;
 using SGE.Dominio.Permisos;
 
 
-public class CambiarEstadoUseCase(IExpedienteRepository repositorio, IAutorizacionService autorizacion)
+public class CambiarEstadoUseCase(IExpedienteRepository repositorio, IAutorizacionService autorizacion, IUnidadDeTrabajo udt)
 {
     public CambiarEstadoResponse Ejecutar(CambiarEstadoRequest request)
     {
@@ -28,6 +28,7 @@ public class CambiarEstadoUseCase(IExpedienteRepository repositorio, IAutorizaci
 
         //nota: creo que no es necesario un propio metodo de repositorio de cambiar estado, con el modificar ya basta
         repositorio.Modificar(exp);
+        udt.GuardarCambios();
 
 
         return new CambiarEstadoResponse(exp.Id, exp.Estado);

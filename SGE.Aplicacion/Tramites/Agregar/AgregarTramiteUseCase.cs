@@ -6,7 +6,7 @@ using SGE.Aplicacion.Tramites;
 using SGE.Dominio.Tramites;
 using SGE.Dominio.Permisos;
 
-public class AgregarTramiteUseCase(ITramiteRepository repositorio, IActualizacionEstadoExpedienteService actualizacion, IAutorizacionService autorizacion)
+public class AgregarTramiteUseCase(ITramiteRepository repositorio, IActualizacionEstadoExpedienteService actualizacion, IAutorizacionService autorizacion, IUnidadDeTrabajo udt)
 {
     public AgregarTramiteResponse Ejecutar(AgregarTramiteRequest request)
     {
@@ -20,6 +20,7 @@ public class AgregarTramiteUseCase(ITramiteRepository repositorio, IActualizacio
         //llamamos al servicio por si hay que cambiar automaticamente el state del expediente.
         repositorio.Agregar(tramite);
         actualizacion.ActualizacionEstado(request.expedienteId, request.idUsuario);
+        udt.GuardarCambios();
         return new AgregarTramiteResponse(tramite.Id, request.idUsuario);
     }
 }

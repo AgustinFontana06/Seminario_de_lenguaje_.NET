@@ -4,7 +4,7 @@ using SGE.Aplicacion.Abstracciones;
 using SGE.Dominio.Tramites;
 using SGE.Dominio.Permisos;
 
-public class EliminarTramiteUseCase(ITramiteRepository repositorioTramite, IActualizacionEstadoExpedienteService actualizacion, IAutorizacionService autorizacion)
+public class EliminarTramiteUseCase(ITramiteRepository repositorioTramite, IActualizacionEstadoExpedienteService actualizacion, IAutorizacionService autorizacion, IUnidadDeTrabajo udt)
 {
     public EliminarTramiteResponse Ejecutar(EliminarTramiteRequest request)
     {
@@ -24,6 +24,8 @@ public class EliminarTramiteUseCase(ITramiteRepository repositorioTramite, IActu
 
         //actualizo estado del expediente
         actualizacion.ActualizacionEstado(tramite.ExpedienteId, request.idUsuario);
+
+        udt.GuardarCambios();
     
         return new EliminarTramiteResponse(request.idTramite);
     }

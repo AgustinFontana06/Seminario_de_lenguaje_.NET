@@ -5,7 +5,7 @@ using SGE.Aplicacion.Excepciones;
 using SGE.Aplicacion.Abstracciones;
 using SGE.Dominio.Permisos;
 
-public class AgregarExpedienteUseCase(IExpedienteRepository repositorio, IAutorizacionService autorizacion)
+public class AgregarExpedienteUseCase(IExpedienteRepository repositorio, IAutorizacionService autorizacion, IUnidadDeTrabajo udt)
 {
     public AgregarExpedienteResponse Ejecutar(AgregarExpedienteRequest request)
     {
@@ -20,6 +20,7 @@ public class AgregarExpedienteUseCase(IExpedienteRepository repositorio, IAutori
 
         var expediente = new Expediente(caratula, request.idUsuario);
         repositorio.Agregar(expediente);
+        udt.GuardarCambios();
         return new AgregarExpedienteResponse(expediente.Id);
     }
 }
