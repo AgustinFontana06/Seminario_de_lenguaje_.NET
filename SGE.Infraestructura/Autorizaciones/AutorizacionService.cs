@@ -1,7 +1,7 @@
 namespace SGE.Infraestructura.Autorizaciones;
 using SGE.Dominio.Permisos;
 using SGE.Aplicacion.Abstracciones;
-using SGE.Dominio.Usuario;
+using SGE.Dominio.Usuarios;
 using SGE.Aplicacion.Excepciones;
 using System.Runtime.CompilerServices;
 
@@ -13,7 +13,7 @@ public class AutorizacionService : IAutorizacionService
     {
         _usuarioRepository = repositorioUsuario;
     }
-     public bool PoseeElPermiso(Usuario u, Permiso permisoRequerido)
+     public bool PoseeElPermiso(Usuario u, Permiso permisoRequerido)//modficar eerores
     {
         var usuario = _usuarioRepository.obtenerPorEmail(idUsuario);
         if (usuario == null) throw new EntidadNoEncontradaException($"el usuario con id {idUsuario} no se encuentra en la base de datos.");

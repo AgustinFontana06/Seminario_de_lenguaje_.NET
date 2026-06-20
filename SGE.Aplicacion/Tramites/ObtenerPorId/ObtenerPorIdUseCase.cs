@@ -1,6 +1,7 @@
 namespace SGE.Aplicacion.Tramites.ObtenerPorId;
 using SGE.Aplicacion.Excepciones;
 using SGE.Dominio.Tramites;
+using SGE.Aplicacion.Abstracciones;
 
 public class ObtenerPorIdUseCase(ITramiteRepository repositorioTramite)
 {

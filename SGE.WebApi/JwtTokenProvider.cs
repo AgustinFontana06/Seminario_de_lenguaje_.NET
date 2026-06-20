@@ -3,7 +3,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using SGE.Aplicacion.Abstracciones;
-using SGE.Dominio.Usuario;
+using SGE.Dominio.Usuarios;
 namespace SGE.WebApi;
 public class JwtTokenProvider(IConfiguration config) : ITokenProvider
 {

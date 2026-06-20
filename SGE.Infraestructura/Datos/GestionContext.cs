@@ -2,8 +2,8 @@ using Microsoft.EntityFrameworkCore;
 using System.Text.Json;
 using SGE.Dominio.Expedientes;
 using SGE.Dominio.Tramites;
-using SGE.Dominio.Usuario;
 using SGE.Dominio.Permisos;
+using SGE.Dominio.Usuarios;
 
 namespace SGE.Infraestructura.Datos;
 

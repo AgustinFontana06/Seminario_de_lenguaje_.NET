@@ -5,7 +5,7 @@ using SGE.Aplicacion.Excepciones;
 using SGE.Aplicacion.Abstracciones;
 using SGE.Dominio.Permisos;
 
-public class ModificarCaratulExpedienteUseCase(IExpedienteRepository repositorio, IAutorizacionService autorizacion, IUnidadDeTrabajo udt)
+public class ModificarCaratulaExpedienteUseCase(IExpedienteRepository repositorio, IAutorizacionService autorizacion, IUnidadDeTrabajo udt)
 {
     public ModificarCaratulaExpedienteResponse Ejecutar(ModificarCaratulaExpedienteRequest request)
     {

@@ -1,10 +1,10 @@
-namespace SGE.Infraestructura.Usuario;
+namespace SGE.Infraestructura.Usuarios;
 
 using SGE.Aplicacion.Abstracciones;
 using SGE.Dominio.Usuarios;
 using SGE.Infraestructura.Datos;
 
-public class UsuarioRepository(GestionContext context) : Repository<Usuario>(context), IUsuarioRepository
+public class UsuarioRepository(GestionContext context) : Repository<Usuario>(context), IUsuarioRepository // falta implementar cosas
 {
 
     public bool ExisteUsuario(Guid id)

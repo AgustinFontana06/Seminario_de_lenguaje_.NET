@@ -2,7 +2,7 @@ using System.Security.Cryptography;
 using System.Text;
 using SGE.Aplicacion.Abstracciones;
 using SGE.Aplicacion.Excepciones;
-using SGE.Dominio.Usuario;
+using SGE.Dominio.Usuarios;
 using SGE.Dominio.Excepciones;
 namespace SGE.Aplicacion.Usuarios.Login;
 
