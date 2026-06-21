@@ -14,4 +14,6 @@ public record class ContenidoTramite
 
         Texto = texto;
     }
+
+    protected ContenidoTramite() {}
 }
