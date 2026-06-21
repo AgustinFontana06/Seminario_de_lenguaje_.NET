@@ -2,10 +2,6 @@ using Microsoft.EntityFrameworkCore;
 using System.Text.Json;
 using SGE.Dominio.Expedientes;
 using SGE.Dominio.Tramites;
-<<<<<<< Updated upstream
-=======
-using SGE.Dominio.Usuarios
->>>>>>> Stashed changes
 using SGE.Dominio.Permisos;
 using SGE.Dominio.Usuarios;
 

@@ -1,7 +1,7 @@
 namespace SGE.Dominio.Permisos;
 public enum Permiso
 {
-    ExpendienteAlta,
+    ExpedienteAlta,
     ExpedienteBaja,
     ExpedienteModificacion,
     TramiteAlta,
