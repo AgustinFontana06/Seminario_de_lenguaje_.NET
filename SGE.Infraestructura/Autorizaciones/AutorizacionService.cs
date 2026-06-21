@@ -4,29 +4,26 @@ using SGE.Aplicacion.Abstracciones;
 using SGE.Dominio.Usuarios;
 using SGE.Aplicacion.Excepciones;
 using System.Runtime.CompilerServices;
-
-public class AutorizacionService : IAutorizacionService
+public class AutorizacionService(IUsuarioRepository usuarioRepository) : IAutorizacionService
 {
+     public bool PoseeElPermiso(Guid id, Permiso permisoRequerido)
+    {
+        var usuario = usuarioRepository.ObtenerPorId(id);
 
-    private readonly IUsuarioRepository _usuarioRepository;
-    public AutorizacionService(IUsuarioRepository repositorioUsuario)
-    {
-        _usuarioRepository = repositorioUsuario;
-    }
-     public bool PoseeElPermiso(Usuario u, Permiso permisoRequerido)//modficar eerores
-    {
-        var usuario = _usuarioRepository.obtenerPorEmail(idUsuario);
-        if (usuario == null) throw new EntidadNoEncontradaException($"el usuario con id {idUsuario} no se encuentra en la base de datos.");
-        bool permitido = false;
-        //infiere el tipo de dato.
-        var permisos = usuario.ListaDePermisos.ToList();
-        foreach(Permiso p in permisos)
+        if (usuario == null) return false;
+
+        if (usuario.EsAdministrador) return true;
+
+        if (permisoRequerido == Permiso.TramiteBaja && usuario.ListaDePermisos.Contains(Permiso.ExpedienteBaja))
         {
-            if(p == permisoRequerido)
-            {
-                permitido = true;
-            }
+            return true;
         }
-        return permitido;
+
+        IEnumerable<Permiso> permisos = usuario.ListaDePermisos;
+        if (permisos.Contains(permisoRequerido))
+        {
+            return true;
+        }
+        return false;
     }
 }
