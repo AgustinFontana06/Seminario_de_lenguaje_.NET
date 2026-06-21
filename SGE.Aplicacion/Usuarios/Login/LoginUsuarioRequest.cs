@@ -1,4 +1,4 @@
-using SGE.Dominio.Usuario;
+using SGE.Dominio.Usuarios;
 
 namespace SGE.Aplicacion.Usuarios;
 

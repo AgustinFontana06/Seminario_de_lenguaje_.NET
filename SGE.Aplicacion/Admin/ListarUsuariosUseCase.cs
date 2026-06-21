@@ -1,4 +1,3 @@
-using SGE.Dominio;
 using SGE.Aplicacion.Abstracciones;
 using SGE.Aplicacion.Excepciones;
 namespace SGE.Aplicacion.Admin;

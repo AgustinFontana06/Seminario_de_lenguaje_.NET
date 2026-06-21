@@ -29,7 +29,7 @@ public class AgregarPermisosUsuarioUseCase(IUsuarioRepository usuarioRepository)
         {
             foreach (var permiso in permisosFaltantes)
             {
-                usuario.Add(permiso);
+                usuario.AgregarPermiso(permiso);
             }
 
             usuarioRepository.AgregarPermiso(usuario);

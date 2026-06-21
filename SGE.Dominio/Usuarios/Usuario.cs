@@ -44,6 +44,15 @@ public class Usuario: Entidad
           ListaDePermisos.Remove(permiso);
      }
 
+     public void ModificarDatos(string nombre, DireccionEmail email, string contrasenaHash)
+     {
+          if (string.IsNullOrWhiteSpace(nombre))
+               throw new DominioException("El nombre no puede estar vacío.");
+          Nombre = nombre;
+          Email = email;
+          ContrasenaHash = contrasenaHash;
+     }
+
     public void setAdmin() => EsAdministrador = true;
     
     protected Usuario() { }

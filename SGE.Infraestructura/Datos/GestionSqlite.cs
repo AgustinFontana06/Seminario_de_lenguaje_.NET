@@ -30,12 +30,12 @@ public class GestionSqlite()
             context.Usuarios.Add(admin);
 
             var hashUsuario1 = Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes("juan123")));
-            var usuario1 = new Usuario("Juan", new DireccionEmail("Juan", "sge.com"), hashUsuario1);
+            var usuario1 = new Usuario("juan", new DireccionEmail("juan", "sge.com"), hashUsuario1);
             usuario1.AgregarPermiso(Permiso.ExpedienteAlta);
             context.Usuarios.Add(usuario1);
 
-            var hashUsuario2 = Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes("Maria123")));
-            var usuario2 = new Usuario("Maria", new DireccionEmail("Maria", "sge.com"), hashUsuario2);
+            var hashUsuario2 = Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes("maria123")));
+            var usuario2 = new Usuario("maria", new DireccionEmail("maria", "sge.com"), hashUsuario2);
             context.Usuarios.Add(usuario2);
 
             context.SaveChanges();    

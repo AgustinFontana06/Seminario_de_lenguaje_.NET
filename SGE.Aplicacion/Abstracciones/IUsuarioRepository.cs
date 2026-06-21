@@ -3,7 +3,7 @@ using SGE.Dominio.Usuarios;
 
 public interface IUsuarioRepository : IRepository<Usuario>
 {
-    bool ExisteUsuario(Guid id);
+    bool ExisteUsuarioPorMail(string email);
     Usuario? obtenerPorEmail(DireccionEmail email);
     void AgregarUsuario(Usuario usuario);
     void AgregarPermiso(Usuario u);

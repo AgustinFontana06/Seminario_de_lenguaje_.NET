@@ -11,7 +11,7 @@ public class RegistrarUsuarioUseCase(IUnidadDeTrabajo udt, IUsuarioRepository us
     public RegistrarUsuarioResponse Ejecutar(RegistrarUsuarioRequest request)
     {
         //1.Validar que el usuario no existe
-        if(usuarioRepository.ExisteUsuario(request.email))
+        if(usuarioRepository.ExisteUsuarioPorMail(request.email))
         {
             throw new EntidadNoEncontradaException("El usuario ya existe");
         }
