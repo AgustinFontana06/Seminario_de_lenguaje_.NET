@@ -1,6 +1,30 @@
 @SGE.WebApi_HostAddress = http://localhost:5049
 
-GET {{SGE.WebApi_HostAddress}}/weatherforecast/
+### LOGIN
+POST {{SGE.WebApi_HostAddress}}/api/login
+Content-Type: application/json
+
+{
+  "email": "admin@mail.com",
+  "password": "1234"
+}
+
+### OBTENER TODOS LOS EXPEDIENTES
+GET {{SGE.WebApi_HostAddress}}/expedientes
 Accept: application/json
+
+### OBTENER EXPEDIENTE POR ID
+GET {{SGE.WebApi_HostAddress}}/expedientes/11112222-3333-4444-5555-666677778888
+Accept: application/json
+
+### CREAR EXPEDIENTE
+POST {{SGE.WebApi_HostAddress}}/expedientes
+Content-Type: application/json
+Authorization: Bearer <token>
+
+{
+  "caratulaText": "Expediente de prueba",
+  "idUsuario": "00000000-0000-0000-0000-000000000001"
+}
 
 ###

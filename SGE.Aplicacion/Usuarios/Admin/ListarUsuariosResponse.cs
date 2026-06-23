@@ -1,6 +1,6 @@
 using SGE.Dominio.Permisos;
 
-namespace SGE.Aplicacion.Admin;
+namespace SGE.Aplicacion.Usuarios.Admin;
 
 public record class UsuarioItemDTO(
     Guid Id,

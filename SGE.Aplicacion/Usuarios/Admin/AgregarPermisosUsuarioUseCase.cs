@@ -1,7 +1,7 @@
 using SGE.Aplicacion.Abstracciones;
 using SGE.Aplicacion.Excepciones;
 using SGE.Dominio.Permisos;
-namespace SGE.Aplicacion.Admin;
+namespace SGE.Aplicacion.Usuarios.Admin;
 
 public class AgregarPermisosUsuarioUseCase(IUsuarioRepository usuarioRepository)
 {

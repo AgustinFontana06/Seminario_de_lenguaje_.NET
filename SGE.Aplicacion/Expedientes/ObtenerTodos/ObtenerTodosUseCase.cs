@@ -6,7 +6,7 @@ using SGE.Aplicacion.Abstracciones;
 
 public class ObtenerTodosUseCase(IExpedienteRepository repositorio)
 {
-    public ObtenerTodosResponse Ejecutar()
+    public ObtenerTodosResponse Ejecutar(ObtenerTodosRequest request)
     {
         IEnumerable<Expediente> expedientes = repositorio.ObtenerTodos();
 

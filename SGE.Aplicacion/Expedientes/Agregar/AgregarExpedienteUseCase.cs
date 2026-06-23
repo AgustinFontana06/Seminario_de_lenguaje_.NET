@@ -10,7 +10,7 @@ public class AgregarExpedienteUseCase(IExpedienteRepository repositorio, IAutori
     public AgregarExpedienteResponse Ejecutar(AgregarExpedienteRequest request)
     {
 
-        if(!autorizacion.PoseeElPermiso(request.idUsuario, Permiso.ExpendienteAlta))
+        if(!autorizacion.PoseeElPermiso(request.idUsuario, Permiso.ExpedienteAlta))
         {
             throw new AutorizacionException("No tienes permiso para dar de alta el expediente.");
         }
