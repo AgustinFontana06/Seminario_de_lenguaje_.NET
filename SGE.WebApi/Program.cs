@@ -2,6 +2,7 @@
 using SGE.Infraestructura.Extensiones;
 using SGE.Aplicacion.Extensiones;
 using SGE.WebApi;
+using SGE.WebApi.Excepciones;
 using SGE.WebApi.Endpoints;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -13,6 +14,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddOpenApi();
+
+//agrego el formato de excepciones globales
+builder.Services.AddProblemDetails();
+//registro el manejador personalizado
+builder.Services.AddExceptionHandler<ManejadorDeExcepcionesGlobales>();
 
 builder.Services.AddAplicacion(builder.Configuration);
 builder.Services.AddInfraestructura(builder.Configuration);
@@ -35,6 +41,9 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Services.AddAuthorization();
 
 var app = builder.Build();
+
+//agregamos middleware al principio del pipeline
+app.UseExceptionHandler();
 
 //inicializamos base de datos:
 using (var scope = app.Services.CreateScope())
