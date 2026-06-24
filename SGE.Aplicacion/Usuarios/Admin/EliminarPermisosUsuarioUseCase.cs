@@ -27,7 +27,7 @@ public class EliminarPermisosUsuarioUseCase(IUsuarioRepository usuarioRepository
         {
             foreach (var permiso in permisosAEliminar)
             {
-                usuario.ListaDePermisos.Remove(permiso);
+                usuario.EliminarPermiso(permiso);
             }
 
             usuarioRepository.EliminarPermiso(usuario);

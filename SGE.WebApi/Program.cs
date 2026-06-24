@@ -6,7 +6,7 @@ using SGE.WebApi.Endpoints;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-
+using SGE.Infraestructura.Datos;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -36,6 +36,14 @@ builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
+//inicializamos base de datos:
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<GestionContext>();
+    GestionSqlite.Inicializar(context);
+}
+
+
 app.UseAuthentication();
 app.UseAuthorization();
 
@@ -45,5 +53,7 @@ app.MapScalarApiReference();
 app.MapUsuariosEndpoints();
 app.MapExpedientesEndpoints();
 app.MapTramitesEndpoints();
+
+app.MapGet("/", () => "¡La API está funcionando correctamente!");
 
 app.Run();

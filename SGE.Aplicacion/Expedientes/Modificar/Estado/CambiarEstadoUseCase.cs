@@ -20,7 +20,7 @@ public class CambiarEstadoUseCase(IExpedienteRepository repositorio, IAutorizaci
 
         if(exp == null)
         {
-            throw new EntidadNoEncontradaException($"No se encontro el expediente con el id {request.idUsuario}");
+            throw new EntidadNoEncontradaException($"No se encontro el expediente con el id {request.idExpediente}");
         }
 
 
