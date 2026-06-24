@@ -14,20 +14,20 @@ public static class TramitesEndpoints
         var grupo = app.MapGroup("/tramites").WithTags("Tramites");
 
         //---- METODOS GET ----
-        grupo.MapGet("/{id}", (Guid id, ObtenerPorIdUseCase useCase) =>
+        grupo.MapGet("/obtener-por-{id}", (Guid id, ObtenerPorIdUseCase useCase) =>
         {
             var resultado = useCase.Ejecutar(new ObtenerPorIdRequest(id));
             return Results.Ok(resultado);
         });
 
-        grupo.MapGet("/expediente/{expedienteId}", (Guid expedienteId, ObtenerPorExpedienteIdUseCase useCase) =>
+        grupo.MapGet("/obtener-por-expediente/{expedienteId}", (Guid expedienteId, ObtenerPorExpedienteIdUseCase useCase) =>
         {
             var resultado = useCase.Ejecutar(new ObtenerPorExpedienteIdRequest(expedienteId));
             return Results.Ok(resultado);
         });
 
         //---- METODO POST ----
-        grupo.MapPost("/", (AgregarTramiteRequest request, ClaimsPrincipal user, AgregarTramiteUseCase useCase) =>
+        grupo.MapPost("/agregar-tramite", (AgregarTramiteRequest request, ClaimsPrincipal user, AgregarTramiteUseCase useCase) =>
         {
             var userIdString = user.FindFirst("ID")?.Value;
             var idUsuario = Guid.Parse(userIdString!);
@@ -36,7 +36,7 @@ public static class TramitesEndpoints
         });
 
         //---- METODO DELETE ----
-        grupo.MapDelete("/{id}", (Guid id, ClaimsPrincipal user, EliminarTramiteUseCase useCase) =>
+        grupo.MapDelete("/eliminar-tramite-{id}", (Guid id, ClaimsPrincipal user, EliminarTramiteUseCase useCase) =>
         {
             var userIdString = user.FindFirst("ID")?.Value;
             var idUsuario = Guid.Parse(userIdString!);
@@ -45,7 +45,7 @@ public static class TramitesEndpoints
         });
 
         //---- METODO PUT ----
-        grupo.MapPut("/{id}", (Guid id, ModificarTramiteRequest request, ClaimsPrincipal user, ModificarTramiteUseCase useCase) =>
+        grupo.MapPut("/modificar-tramite-{id}", (Guid id, ModificarTramiteRequest request, ClaimsPrincipal user, ModificarTramiteUseCase useCase) =>
         {
             var userIdString = user.FindFirst("ID")?.Value;
             var idUsuario = Guid.Parse(userIdString!);

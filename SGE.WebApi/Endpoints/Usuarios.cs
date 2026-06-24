@@ -1,6 +1,7 @@
 using SGE.Aplicacion.Usuarios.Login;
 using SGE.Aplicacion.Usuarios.Modificar;
 using SGE.Aplicacion.Usuarios.Admin;
+using SGE.Aplicacion.Usuarios.Registrar;
 using SGE.Dominio.Permisos;
 using System.Security.Claims;
 
@@ -12,6 +13,13 @@ public static class UsuariosEndpoints
     {
         //---- METODO POST (LOGIN) ----
         app.MapPost("/api/login", (LoginUsuarioRequest request, LoginUsuarioUseCase useCase) =>
+        {
+            var response = useCase.Ejecutar(request);
+            return Results.Ok(response);
+        });
+
+        //---- METODO POST (REGISTER) ----
+        app.MapPost("/api/register", (RegistrarUsuarioRequest request, RegistrarUsuarioUseCase useCase) =>
         {
             var response = useCase.Ejecutar(request);
             return Results.Ok(response);

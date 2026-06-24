@@ -15,27 +15,27 @@ public static class ExpedientesEndpoints
         var grupo = app.MapGroup("/expedientes").WithTags("Expedientes");
 
         // ----    METODOS GET ----
-        grupo.MapGet("/", (ObtenerTodosUseCase useCase) =>
+        grupo.MapGet("/obtener-todos", (ObtenerTodosUseCase useCase) =>
         {
             var resultado = useCase.Ejecutar(new ObtenerTodosRequest());
             return Results.Ok(resultado);
         });
 
-        grupo.MapGet("/{id}", (Guid id, ObtenerPorIdUseCase useCase) =>
+        grupo.MapGet("/obtener-por-{id}", (Guid id, ObtenerPorIdUseCase useCase) =>
         {
             var resultado = useCase.Ejecutar(new ObtenerPorIdRequest(id));
             return Results.Ok(resultado);
         });
 
         //---- METODOS POST ----
-        grupo.MapPost("/", (AgregarExpedienteRequest request, AgregarExpedienteUseCase useCase) =>
+        grupo.MapPost("/agregar-expediente", (AgregarExpedienteRequest request, AgregarExpedienteUseCase useCase) =>
         {
             var resultado = useCase.Ejecutar(request);
             return Results.Created($"/expedientes/{resultado.id}", resultado);
         });
 
         //---- METODO DELETE ----
-        grupo.MapDelete("/{id}", (Guid id, ClaimsPrincipal user, EliminarExpedienteUseCase useCase) =>
+        grupo.MapDelete("/eliminar-expediente-{id}", (Guid id, ClaimsPrincipal user, EliminarExpedienteUseCase useCase) =>
         {
             var userIdString = user.FindFirst("ID")?.Value;
             var idUsuario = Guid.Parse(userIdString!);
@@ -44,7 +44,7 @@ public static class ExpedientesEndpoints
         });
 
         //---- METODOS PUT ----
-        grupo.MapPut("/{id}/caratula", (Guid id, ModificarCaratulaExpedienteRequest request, ClaimsPrincipal user, ModificarCaratulaExpedienteUseCase useCase) =>
+        grupo.MapPut("/modificar-caratula-{id}", (Guid id, ModificarCaratulaExpedienteRequest request, ClaimsPrincipal user, ModificarCaratulaExpedienteUseCase useCase) =>
         {
             var userIdString = user.FindFirst("ID")?.Value;
             var idUsuario = Guid.Parse(userIdString!);
@@ -52,7 +52,7 @@ public static class ExpedientesEndpoints
             return Results.Ok(resultado);
         });
 
-        grupo.MapPut("/{id}/estado", (Guid id, CambiarEstadoRequest request, ClaimsPrincipal user, CambiarEstadoUseCase useCase) =>
+        grupo.MapPut("/cambiar-estado{id}", (Guid id, CambiarEstadoRequest request, ClaimsPrincipal user, CambiarEstadoUseCase useCase) =>
         {
             var userIdString = user.FindFirst("ID")?.Value;
             var idUsuario = Guid.Parse(userIdString!);

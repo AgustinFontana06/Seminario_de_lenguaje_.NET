@@ -3,7 +3,7 @@ using SGE.Aplicacion.Excepciones;
 using SGE.Dominio.Permisos;
 namespace SGE.Aplicacion.Usuarios.Admin;
 
-public class AgregarPermisosUsuarioUseCase(IUsuarioRepository usuarioRepository)
+public class AgregarPermisosUsuarioUseCase(IUsuarioRepository usuarioRepository, IUnidadDeTrabajo udt)
 {
     public AgregarPermisosUsuarioResponse Ejecutar(AgregarPermisosUsuarioRequest request)
     {
@@ -35,6 +35,7 @@ public class AgregarPermisosUsuarioUseCase(IUsuarioRepository usuarioRepository)
             usuarioRepository.AgregarPermiso(usuario);
         }
 
+        udt.GuardarCambios();
         return new AgregarPermisosUsuarioResponse("permisos agregados correctamente");
         
     }

@@ -10,12 +10,7 @@ public class ModificarMisDatosUseCase(IUsuarioRepository usuarioRepository, IUni
 {
     public ModificarMisDatosResponse Ejecutar(ModificarMisDatosRequest request, Guid usuarioAutenticadoId)
     {
-        if(request.id != usuarioAutenticadoId)
-        {
-            throw new AutorizacionException("No podes modificar los datos de otro usuario");
-        }
-
-        var usuario = usuarioRepository.ObtenerPorId(request.id);
+        var usuario = usuarioRepository.ObtenerPorId(usuarioAutenticadoId);
         if (usuario == null)
         {
             throw new EntidadNoEncontradaException("Usuario no encontrado");

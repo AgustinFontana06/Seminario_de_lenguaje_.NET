@@ -21,6 +21,6 @@ public class ObtenerPorExpedienteIdUseCase(IExpedienteRepository repositorioExpe
 
         IEnumerable<TramiteDto> tramitesDto = tramites.Select(t => new TramiteDto(t.Id, t.Etiqueta, t.Contenido, t.FechaCreacion, t.FechaUltimaModificacion, t.UsuarioUltimoCambio));
 
-        return new ObtenerPorExpedienteIdResponse(tramitesDto);
+        return new ObtenerPorExpedienteIdResponse(exp.Id, exp.Caratula.Texto, exp.Estado, exp.FechaCreacion, exp.FechaUltimaModificacion, tramitesDto);
     }
 }

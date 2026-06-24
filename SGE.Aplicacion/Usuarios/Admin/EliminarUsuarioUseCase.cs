@@ -3,7 +3,7 @@ using SGE.Aplicacion.Excepciones;
 namespace SGE.Aplicacion.Usuarios.Admin;
 
 
-public class EliminarUsuarioUseCase(IUsuarioRepository usuarioRepository)
+public class EliminarUsuarioUseCase(IUsuarioRepository usuarioRepository, IUnidadDeTrabajo udt)
 {
     public EliminarUsuarioResponse Ejecutar(EliminarUsuarioRequest request)
     {
@@ -27,7 +27,7 @@ public class EliminarUsuarioUseCase(IUsuarioRepository usuarioRepository)
         }
 
         usuarioRepository.Eliminar(request.id);
-
+        udt.GuardarCambios();
         return new EliminarUsuarioResponse("Usuario eliminado con exito");
     }
 }

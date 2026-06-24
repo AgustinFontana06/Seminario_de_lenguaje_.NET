@@ -3,7 +3,7 @@ using SGE.Aplicacion.Excepciones;
 using SGE.Dominio.Permisos;
 namespace SGE.Aplicacion.Usuarios.Admin;
 
-public class EliminarPermisosUsuarioUseCase(IUsuarioRepository usuarioRepository)
+public class EliminarPermisosUsuarioUseCase(IUsuarioRepository usuarioRepository, IUnidadDeTrabajo udt)
 {
     public EliminarPermisosUsuarioResponse Ejecutar(EliminarPermisosUsuarioRequest request)
     {
@@ -33,6 +33,7 @@ public class EliminarPermisosUsuarioUseCase(IUsuarioRepository usuarioRepository
             usuarioRepository.EliminarPermiso(usuario);
         }
 
+        udt.GuardarCambios();
         return new EliminarPermisosUsuarioResponse("permisos removidos correctamente");
         
     }
