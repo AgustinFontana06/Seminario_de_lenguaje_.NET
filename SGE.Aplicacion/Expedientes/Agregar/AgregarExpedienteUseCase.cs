@@ -7,10 +7,10 @@ using SGE.Dominio.Permisos;
 
 public class AgregarExpedienteUseCase(IExpedienteRepository repositorio, IAutorizacionService autorizacion, IUnidadDeTrabajo udt)
 {
-    public AgregarExpedienteResponse Ejecutar(AgregarExpedienteRequest request)
+    public AgregarExpedienteResponse Ejecutar(AgregarExpedienteRequest request, Guid idUsuario)
     {
 
-        if(!autorizacion.PoseeElPermiso(request.idUsuario, Permiso.ExpedienteAlta))
+        if(!autorizacion.PoseeElPermiso(idUsuario, Permiso.ExpedienteAlta))
         {
             throw new AutorizacionException("No tienes permiso para dar de alta el expediente.");
         }
@@ -18,7 +18,7 @@ public class AgregarExpedienteUseCase(IExpedienteRepository repositorio, IAutori
         var caratula = new Caratula(request.caratulaText);
         //no es necesario un value object del user Id
 
-        var expediente = new Expediente(caratula, request.idUsuario);
+        var expediente = new Expediente(caratula, idUsuario);
         repositorio.Agregar(expediente);
         udt.GuardarCambios();
         return new AgregarExpedienteResponse(expediente.Id);

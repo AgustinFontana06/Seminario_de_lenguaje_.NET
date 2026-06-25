@@ -8,23 +8,23 @@ using SGE.Dominio.Permisos;
 
 public class CambiarEstadoUseCase(IExpedienteRepository repositorio, IAutorizacionService autorizacion, IUnidadDeTrabajo udt)
 {
-    public CambiarEstadoResponse Ejecutar(CambiarEstadoRequest request)
+    public CambiarEstadoResponse Ejecutar(CambiarEstadoRequest request, Guid idUsuario, Guid idExpediente)
     {
         //verifico autorizacion
-        if(!autorizacion.PoseeElPermiso(request.idUsuario, Permiso.ExpedienteModificacion))
+        if(!autorizacion.PoseeElPermiso(idUsuario, Permiso.ExpedienteModificacion))
         {
             throw new AutorizacionException("No tienes permiso para modificar la caratula");
         }
 
-        Expediente? exp = repositorio.ObtenerPorId(request.idExpediente);
+        Expediente? exp = repositorio.ObtenerPorId(idExpediente);
 
         if(exp == null)
         {
-            throw new EntidadNoEncontradaException($"No se encontro el expediente con el id {request.idExpediente}");
+            throw new EntidadNoEncontradaException($"No se encontro el expediente con el id {idExpediente}");
         }
 
 
-        exp.CambiarEstado(request.estado, request.idUsuario);
+        exp.CambiarEstado(request.estado, idUsuario);
 
         //nota: creo que no es necesario un propio metodo de repositorio de cambiar estado, con el modificar ya basta
         repositorio.Modificar(exp);

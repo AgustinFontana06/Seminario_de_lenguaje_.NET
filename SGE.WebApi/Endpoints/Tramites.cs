@@ -14,7 +14,7 @@ public static class TramitesEndpoints
         var grupo = app.MapGroup("/tramites").WithTags("Tramites");
 
         //---- METODOS GET ----
-        grupo.MapGet("/obtener-por-{id}", (Guid id, ObtenerPorIdUseCase useCase) =>
+        grupo.MapGet("/obtener-por/{id}", (Guid id, ObtenerPorIdUseCase useCase) =>
         {
             var resultado = useCase.Ejecutar(new ObtenerPorIdRequest(id));
             return Results.Ok(resultado);
@@ -29,29 +29,26 @@ public static class TramitesEndpoints
         //---- METODO POST ----
         grupo.MapPost("/agregar-tramite", (AgregarTramiteRequest request, ClaimsPrincipal user, AgregarTramiteUseCase useCase) =>
         {
-            var userIdString = user.FindFirst("ID")?.Value;
-            var idUsuario = Guid.Parse(userIdString!);
-            var resultado = useCase.Ejecutar(new AgregarTramiteRequest(request.contenidoText, idUsuario, request.expedienteId));
+            var idUsuario = Guid.Parse(user.FindFirst("ID")!.Value);
+            var resultado = useCase.Ejecutar(request, idUsuario);
             return Results.Created($"/tramites/{resultado.idTramite}", resultado);
-        });
+        }).RequireAuthorization();
 
         //---- METODO DELETE ----
-        grupo.MapDelete("/eliminar-tramite-{id}", (Guid id, ClaimsPrincipal user, EliminarTramiteUseCase useCase) =>
+        grupo.MapDelete("/eliminar-tramite/{id}", (Guid id, ClaimsPrincipal user, EliminarTramiteUseCase useCase) =>
         {
-            var userIdString = user.FindFirst("ID")?.Value;
-            var idUsuario = Guid.Parse(userIdString!);
-            var resultado = useCase.Ejecutar(new EliminarTramiteRequest(id, idUsuario));
+            var idUsuario = Guid.Parse(user.FindFirst("ID")!.Value);
+            var resultado = useCase.Ejecutar(new EliminarTramiteRequest(id), idUsuario);
             return Results.Ok(resultado);
-        });
+        }).RequireAuthorization();
 
         //---- METODO PUT ----
-        grupo.MapPut("/modificar-tramite-{id}", (Guid id, ModificarTramiteRequest request, ClaimsPrincipal user, ModificarTramiteUseCase useCase) =>
+        grupo.MapPut("/modificar-tramite/{id}", (Guid id, ModificarTramiteRequest request, ClaimsPrincipal user, ModificarTramiteUseCase useCase) =>
         {
-            var userIdString = user.FindFirst("ID")?.Value;
-            var idUsuario = Guid.Parse(userIdString!);
-            var resultado = useCase.Ejecutar(new ModificarTramiteRequest(id, request.texto, idUsuario));
+            var idUsuario = Guid.Parse(user.FindFirst("ID")!.Value);
+            var resultado = useCase.Ejecutar(request, idUsuario, id);
             return Results.Ok(resultado);
-        });
+        }).RequireAuthorization();
 
         return app;
     }

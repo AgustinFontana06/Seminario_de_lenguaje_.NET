@@ -6,9 +6,9 @@ using SGE.Dominio.Permisos;
 
 public class EliminarTramiteUseCase(ITramiteRepository repositorioTramite, IActualizacionEstadoExpedienteService actualizacion, IAutorizacionService autorizacion, IUnidadDeTrabajo udt)
 {
-    public EliminarTramiteResponse Ejecutar(EliminarTramiteRequest request)
+    public EliminarTramiteResponse Ejecutar(EliminarTramiteRequest request, Guid idUsuario)
     {
-        if(!autorizacion.PoseeElPermiso(request.idUsuario, Permiso.TramiteBaja))
+        if(!autorizacion.PoseeElPermiso(idUsuario, Permiso.TramiteBaja))
         {
             throw new AutorizacionException("No tienes permiso para dar de baja el tramite.");
         }
@@ -23,7 +23,7 @@ public class EliminarTramiteUseCase(ITramiteRepository repositorioTramite, IActu
         repositorioTramite.Eliminar(request.idTramite);
 
         //actualizo estado del expediente
-        actualizacion.ActualizacionEstado(tramite.ExpedienteId, request.idUsuario);
+        actualizacion.ActualizacionEstado(tramite.ExpedienteId, idUsuario);
 
         udt.GuardarCambios();
     

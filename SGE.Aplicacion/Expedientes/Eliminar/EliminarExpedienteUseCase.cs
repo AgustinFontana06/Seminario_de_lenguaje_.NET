@@ -10,9 +10,9 @@ using SGE.Dominio.Permisos;
 public class EliminarExpedienteUseCase(IExpedienteRepository repositorioExpediente, ITramiteRepository repositorioTramite,
     IAutorizacionService autorizacionService, IUnidadDeTrabajo udt)
 {
-    public EliminarExpedienteResponse Ejecutar(EliminarExpedienteRequest request)
+    public EliminarExpedienteResponse Ejecutar(EliminarExpedienteRequest request, Guid idUsuario)
     {
-        if (!autorizacionService.PoseeElPermiso(request.idUsuario, Permiso.ExpedienteBaja)){
+        if (!autorizacionService.PoseeElPermiso(idUsuario, Permiso.ExpedienteBaja)){
             throw new AutorizacionException("No tenes permiso para eliminar expedientes");
         }
 
