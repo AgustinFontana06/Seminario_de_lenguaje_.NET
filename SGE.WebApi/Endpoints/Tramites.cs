@@ -27,10 +27,10 @@ public static class TramitesEndpoints
         });
 
         //---- METODO POST ----
-        grupo.MapPost("/agregar-tramite", (AgregarTramiteRequest request, ClaimsPrincipal user, AgregarTramiteUseCase useCase) =>
+        grupo.MapPost("/agregar-tramite/{expedienteId}", (Guid expedienteId, AgregarTramiteRequest request, ClaimsPrincipal user, AgregarTramiteUseCase useCase) =>
         {
             var idUsuario = Guid.Parse(user.FindFirst("ID")!.Value);
-            var resultado = useCase.Ejecutar(request, idUsuario);
+            var resultado = useCase.Ejecutar(request, idUsuario, expedienteId);
             return Results.Created($"/tramites/{resultado.idTramite}", resultado);
         }).RequireAuthorization();
 

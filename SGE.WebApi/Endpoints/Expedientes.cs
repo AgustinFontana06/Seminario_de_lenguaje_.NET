@@ -21,11 +21,12 @@ public static class ExpedientesEndpoints
             return Results.Ok(resultado);
         });
 
+        /*
         grupo.MapGet("/obtener-por/{id}", (Guid id, ObtenerPorIdUseCase useCase) =>
         {
             var resultado = useCase.Ejecutar(new ObtenerPorIdRequest(id));
             return Results.Ok(resultado);
-        });
+        });*/ //innecesario
 
         //---- METODOS POST ----
         grupo.MapPost("/agregar-expediente", (AgregarExpedienteRequest request, ClaimsPrincipal user, AgregarExpedienteUseCase useCase) =>

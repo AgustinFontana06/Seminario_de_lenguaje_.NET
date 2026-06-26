@@ -1,6 +1,7 @@
 using SGE.Aplicacion.Abstracciones;
 using SGE.Aplicacion.Excepciones;
 using SGE.Dominio.Permisos;
+using SGE.Dominio.Excepciones;
 namespace SGE.Aplicacion.Usuarios.Admin;
 
 public class AgregarPermisosUsuarioUseCase(IUsuarioRepository usuarioRepository, IUnidadDeTrabajo udt)
@@ -19,6 +20,12 @@ public class AgregarPermisosUsuarioUseCase(IUsuarioRepository usuarioRepository,
         if(usuario == null)
         {
             throw new EntidadNoEncontradaException("No se encontro el usuario");
+        }
+
+        foreach (var permiso in request.permisos)
+        {
+            if (!Enum.IsDefined(typeof(Permiso), permiso))
+                throw new DominioException($"El permiso '{permiso}' no es válido.");
         }
 
         var permisosFaltantes = request.permisos

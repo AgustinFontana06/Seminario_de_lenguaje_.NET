@@ -1,3 +1,3 @@
 namespace SGE.Aplicacion.Tramites.Agregar;
 
-public record AgregarTramiteRequest(string contenidoText, Guid expedienteId);
+public record AgregarTramiteRequest(string contenidoText);

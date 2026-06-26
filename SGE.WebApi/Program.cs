@@ -4,6 +4,8 @@ using SGE.Aplicacion.Extensiones;
 using SGE.WebApi;
 using SGE.WebApi.Excepciones;
 using SGE.WebApi.Endpoints;
+using SGE.Aplicacion.Excepciones;
+using SGE.Dominio.Excepciones;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -14,6 +16,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddOpenApi();
+builder.Services.ConfigureHttpJsonOptions(options =>
+{
+    options.SerializerOptions.Converters.Add(new System.Text.Json.Serialization.JsonStringEnumConverter());
+});
 
 //agrego el formato de excepciones globales
 builder.Services.AddProblemDetails();
@@ -43,7 +49,24 @@ builder.Services.AddAuthorization();
 var app = builder.Build();
 
 //agregamos middleware al principio del pipeline
-app.UseExceptionHandler();
+app.UseExceptionHandler(errorApp =>
+{
+    errorApp.Run(async context =>
+    {
+        var ex = context.Features.Get<Microsoft.AspNetCore.Diagnostics.IExceptionHandlerFeature>()?.Error;
+        context.Response.ContentType = "application/json";
+
+        context.Response.StatusCode = ex switch
+        {
+            AutorizacionException => 403,
+            EntidadNoEncontradaException => 404,
+            DominioException => 400,
+            _ => 500
+        };
+
+        await context.Response.WriteAsJsonAsync(new {error = ex?.Message });
+    });
+});
 
 //inicializamos base de datos:
 using (var scope = app.Services.CreateScope())
