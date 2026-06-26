@@ -25,7 +25,6 @@ public static class AplicacionExtension
 {
     public static IServiceCollection AddAplicacion(this IServiceCollection services, IConfiguration configuration)
     {  
-        var connectionString = configuration.GetConnectionString("SgeDb");
         //se crea una sola instancia por peticion, es decir se reutiliza cada scoped por use case requerido
         //expedientes
         services.AddScoped<AgregarExpedienteUseCase>();

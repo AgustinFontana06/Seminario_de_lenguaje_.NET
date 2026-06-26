@@ -47,7 +47,7 @@ public static class UsuariosEndpoints
             var idUsuario = Guid.Parse(userIdString!);
             var response = useCase.Ejecutar(new ListarUsuariosRequest(idUsuario));
             return Results.Ok(response);
-        });
+        }).RequireAuthorization();
 
         // DELETE /usuarios/admin/eliminar/{id}
         admin.MapDelete("/eliminar/{id}", (Guid id, ClaimsPrincipal user, EliminarUsuarioUseCase useCase) =>
@@ -56,7 +56,7 @@ public static class UsuariosEndpoints
             var idUsuario = Guid.Parse(userIdString!);
             var response = useCase.Ejecutar(new EliminarUsuarioRequest(idUsuario, id));
             return Results.Ok(response);
-        });
+        }).RequireAuthorization();
 
         // PUT /usuarios/admin/agregar-permisos/{id}
         admin.MapPut("/agregar-permisos/{id}", (Guid id, AgregarPermisosRequest request, ClaimsPrincipal user, AgregarPermisosUsuarioUseCase useCase) =>
@@ -65,7 +65,7 @@ public static class UsuariosEndpoints
             var idUsuario = Guid.Parse(userIdString!);
             var response = useCase.Ejecutar(new AgregarPermisosUsuarioRequest(idUsuario, id, request.permisos));
             return Results.Ok(response);
-        });
+        }).RequireAuthorization();
 
         // PUT /usuarios/admin/eliminar-permisos/{id}
         admin.MapPut("/eliminar-permisos/{id}", (Guid id, EliminarPermisosRequest request, ClaimsPrincipal user, EliminarPermisosUsuarioUseCase useCase) =>
@@ -74,7 +74,7 @@ public static class UsuariosEndpoints
             var idUsuario = Guid.Parse(userIdString!);
             var response = useCase.Ejecutar(new EliminarPermisosUsuarioRequest(idUsuario, id, request.permisos));
             return Results.Ok(response);
-        });
+        }).RequireAuthorization();
 
         return app;
     }

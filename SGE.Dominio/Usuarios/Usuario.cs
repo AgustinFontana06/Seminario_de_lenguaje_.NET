@@ -28,7 +28,7 @@ public class Usuario: Entidad
           Email= email;
           ContrasenaHash=HashedPassword;
           EsAdministrador = false;
-          ListaDePermisos = [] ;// raro pero supustamente es mejor en terminos de memoria;
+          ListaDePermisos = [] ;
     }
 
      public void AgregarPermiso(Permiso permiso)
