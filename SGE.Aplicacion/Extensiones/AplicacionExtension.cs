@@ -1,7 +1,6 @@
 using SGE.Aplicacion.Expedientes.Agregar;
 using SGE.Aplicacion.Expedientes.Eliminar;
 using SGE.Aplicacion.Expedientes.Modificar;
-using SGE.Aplicacion.Expedientes.ObtenerPorId;
 using SGE.Aplicacion.Expedientes.ObtenerTodos;
 using SGE.Aplicacion.Expedientes;
 using SGE.Aplicacion.Tramites.Agregar;
@@ -31,7 +30,6 @@ public static class AplicacionExtension
         services.AddScoped<EliminarExpedienteUseCase>();
         services.AddScoped<ModificarCaratulaExpedienteUseCase>();
         services.AddScoped<CambiarEstadoUseCase>();
-        //services.AddScoped<SGE.Aplicacion.Expedientes.ObtenerPorId.ObtenerPorIdUseCase>(); innecesario
         services.AddScoped<ObtenerTodosUseCase>();
 
         //tramites

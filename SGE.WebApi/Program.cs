@@ -49,6 +49,7 @@ builder.Services.AddAuthorization();
 var app = builder.Build();
 
 //agregamos middleware al principio del pipeline
+/*
 app.UseExceptionHandler(errorApp =>
 {
     errorApp.Run(async context =>
@@ -67,6 +68,8 @@ app.UseExceptionHandler(errorApp =>
         await context.Response.WriteAsJsonAsync(new {error = ex?.Message });
     });
 });
+*/
+app.UseExceptionHandler();
 
 //inicializamos base de datos:
 using (var scope = app.Services.CreateScope())

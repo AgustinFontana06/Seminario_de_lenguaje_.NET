@@ -29,6 +29,8 @@ public class ModificarTramiteUseCase(ITramiteRepository repositorioTramite,IActu
 
         repositorioTramite.Modificar(tramite);
 
+        udt.GuardarCambios();
+
         actualizacion.ActualizacionEstado(tramite.ExpedienteId, idUsuario);
 
         udt.GuardarCambios();

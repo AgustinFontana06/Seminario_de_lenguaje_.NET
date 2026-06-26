@@ -21,6 +21,7 @@ public class EliminarTramiteUseCase(ITramiteRepository repositorioTramite, IActu
         }
 
         repositorioTramite.Eliminar(request.idTramite);
+        udt.GuardarCambios();
 
         //actualizo estado del expediente
         actualizacion.ActualizacionEstado(tramite.ExpedienteId, idUsuario);

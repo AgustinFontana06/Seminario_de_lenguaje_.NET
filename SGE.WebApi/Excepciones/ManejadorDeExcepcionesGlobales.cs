@@ -30,8 +30,8 @@ public class ManejadorDeExcepcionesGlobales : IExceptionHandler
         problemDetails.Status = StatusCodes.Status500InternalServerError;
         problemDetails.Detail = "Ha ocurrido un error inesperado.";
     }   
-httpContext.Response.StatusCode = problemDetails.Status.Value;
-await httpContext.Response.WriteAsJsonAsync(problemDetails, cancellationToken);
+    httpContext.Response.StatusCode = problemDetails.Status.Value;
+    await httpContext.Response.WriteAsJsonAsync(problemDetails, cancellationToken);
 
     return true;
     }

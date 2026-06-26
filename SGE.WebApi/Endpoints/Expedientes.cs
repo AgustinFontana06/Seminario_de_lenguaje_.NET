@@ -1,6 +1,5 @@
 using SGE.Aplicacion.Expedientes.Agregar;
 using SGE.Aplicacion.Expedientes.ObtenerTodos;
-using SGE.Aplicacion.Expedientes.ObtenerPorId;
 using SGE.Aplicacion.Expedientes.Eliminar;
 using SGE.Aplicacion.Expedientes.Modificar;
 using SGE.Dominio.Expedientes;
@@ -20,13 +19,6 @@ public static class ExpedientesEndpoints
             var resultado = useCase.Ejecutar(new ObtenerTodosRequest());
             return Results.Ok(resultado);
         });
-
-        /*
-        grupo.MapGet("/obtener-por/{id}", (Guid id, ObtenerPorIdUseCase useCase) =>
-        {
-            var resultado = useCase.Ejecutar(new ObtenerPorIdRequest(id));
-            return Results.Ok(resultado);
-        });*/ //innecesario
 
         //---- METODOS POST ----
         grupo.MapPost("/agregar-expediente", (AgregarExpedienteRequest request, ClaimsPrincipal user, AgregarExpedienteUseCase useCase) =>

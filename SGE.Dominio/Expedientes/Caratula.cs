@@ -14,5 +14,5 @@ public record class Caratula
         Texto = texto;
     }
 
-    protected Caratula() { }
+    protected Caratula(){}
 }
