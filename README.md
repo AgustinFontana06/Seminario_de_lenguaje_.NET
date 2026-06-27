@@ -20,32 +20,9 @@ dotnet run
 | Nombre | Email | Contraseña | Característica |
 |---|---|---|---|
 | Admin del sistema | admin@sge.com | admin123 | Administrador (todos los permisos) |
-| juan | juan@sge.com | juan123 | Usuario con permisos: ExpedienteAlta, ExpedienteBaja, TramiteAlta |
+| juan | juan@sge.com | juan123 | Usuario con todos los permisos |
 | maria | maria@sge.com | maria123 | Usuario sin permisos |
 
----
-
-## Permisos disponibles
-
-Los valores posibles para el campo `permisos` son:
-- `ExpedienteAlta`
-- `ExpedienteBaja`
-- `ExpedienteModificacion`
-- `TramiteAlta`
-- `TramiteBaja`
-- `TramiteModificacion`
-
-> **Nota:** El permiso `ExpedienteBaja` implica automáticamente tener `TramiteBaja`.
-
----
-
-## Estados de expediente
-
-`RecienIniciado` | `ParaResolver` | `ConResolucion` | `EnNotificacion` | `Finalizado`
-
-## Etiquetas de trámite
-
-`EscritoPresentado` | `PaseAEstudio` | `Despacho` | `Resolucion` | `Notificacion` | `PaseAlArchivo`
 
 ---
 
@@ -53,8 +30,8 @@ Los valores posibles para el campo `permisos` son:
 
 1. Ejecutar `POST /api/login` con las credenciales deseadas
 2. Copiar el token JWT de la respuesta
-3. Hacer click en el ícono de candado en Scalar y pegar el token
-4. Todas las requests siguientes lo incluirán automáticamente
+3. Tocar "Test request" en algun caso de uso de Scalar 
+4. En el apartado "Header" crear un campo llamado "Authorization" donde al lado tendra la palabra "Bearer" y el token jwt
 
 ---
 
@@ -63,7 +40,7 @@ Los valores posibles para el campo `permisos` son:
 ### 1. Registrarse
 **`POST /api/register`** — no requiere token
 
-**Body:**
+**Body de ejemplo:**
 ```json
 {
   "nombre": "Carlos",
@@ -99,7 +76,7 @@ Devuelve un token JWT. Copiarlo y pegarlo en Scalar para autenticarse.
   "contrasena": "admin123"
 }
 ```
-Guardar el token generado y pegarlo en Scalar.
+Guardar el token generado y pegarlo en la parte de Authorization.
 
 ### 2. Modificar mis datos
 **`PUT /usuarios/me`** — requiere token
@@ -125,7 +102,7 @@ Devuelve la lista de todos los usuarios registrados en el sistema.
 #### Eliminar usuario
 **`DELETE /usuarios/admin/eliminar/{id}`** — requiere token de administrador
 
-Reemplazar `{id}` con el Guid del usuario a eliminar (obtenible desde el listado).
+Reemplazar `{id}` con el Guid del usuario a eliminar (obtenible desde el listado o la base de datos).
 
 #### Agregar permisos a un usuario
 **`PUT /usuarios/admin/agregar-permisos/{id}`** — requiere token de administrador
