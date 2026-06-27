@@ -34,6 +34,9 @@ public class SgeSqlite()
             usuario1.AgregarPermiso(Permiso.ExpedienteAlta);
             usuario1.AgregarPermiso(Permiso.ExpedienteBaja);
             usuario1.AgregarPermiso(Permiso.TramiteAlta);
+            usuario1.AgregarPermiso(Permiso.TramiteBaja);
+            usuario1.AgregarPermiso(Permiso.ExpedienteModificacion);
+            usuario1.AgregarPermiso(Permiso.TramiteModificacion);
             context.Usuarios.Add(usuario1);
 
             var hashUsuario2 = Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes("maria123")));
