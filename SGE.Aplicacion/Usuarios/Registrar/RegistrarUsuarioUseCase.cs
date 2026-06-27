@@ -20,7 +20,7 @@ public class RegistrarUsuarioUseCase(IUnidadDeTrabajo udt, IUsuarioRepository us
         var hash = Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(request.password)));
         var usuario = new Usuario(request.nombre, DireccionEmail.Parse(request.email), hash);
         usuarioRepository.AgregarUsuario(usuario);
-        udt.GuardarCambios();
+        udt.Guardar();
         return new RegistrarUsuarioResponse(usuario.Id);
     }
 }

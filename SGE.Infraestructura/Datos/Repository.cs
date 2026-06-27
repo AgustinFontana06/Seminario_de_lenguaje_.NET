@@ -7,10 +7,10 @@ namespace SGE.Infraestructura.Datos;
 
 public abstract class Repository<T> : IRepository<T> where T : Entidad
 {
-    protected readonly GestionContext _context;
+    protected readonly SgeContext _context;
     protected readonly DbSet<T> _dbSet;
 
-    protected Repository(GestionContext context)
+    protected Repository(SgeContext context)
     {
         _context = context;
         _dbSet = context.Set<T>();

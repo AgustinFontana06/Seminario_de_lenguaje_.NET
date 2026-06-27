@@ -17,7 +17,7 @@ public static class InfreaestructuraExtension
     {
         var connectionString = configuration.GetConnectionString("SgeDb");
         //registro GestionContext en el contenedor y lo configuro para que use sqlite y con la cadena "SgeDb"
-        services.AddDbContext<GestionContext>(opciones => opciones.UseSqlite(connectionString));
+        services.AddDbContext<SgeContext>(opciones => opciones.UseSqlite(connectionString));
 
         //cuando se requiera alguna de estas interfaces les devolvemos las implementaciones
         services.AddScoped<IUnidadDeTrabajo, UnidadDeTrabajo>();

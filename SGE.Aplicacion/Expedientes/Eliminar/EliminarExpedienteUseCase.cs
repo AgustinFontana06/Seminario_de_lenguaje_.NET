@@ -30,7 +30,7 @@ public class EliminarExpedienteUseCase(IExpedienteRepository repositorioExpedien
         repositorioExpediente.Eliminar(request.idExpediente);
 
 
-        udt.GuardarCambios();
+        udt.Guardar();
         return new EliminarExpedienteResponse(exp.Id);
 
         //nota: se debe actualizar el ultimo cambio por usuario?

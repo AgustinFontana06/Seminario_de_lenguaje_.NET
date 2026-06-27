@@ -19,7 +19,7 @@ public class ModificarMisDatosUseCase(IUsuarioRepository usuarioRepository, IUni
         usuario.ModificarDatos(request.nombre, DireccionEmail.Parse(request.email), Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(request.contraseña))));
 
         usuarioRepository.Modificar(usuario);
-        udt.GuardarCambios();
+        udt.Guardar();
         return new ModificarMisDatosResponse(usuario.Id);
     }
 }

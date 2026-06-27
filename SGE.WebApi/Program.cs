@@ -23,7 +23,6 @@ builder.Services.ConfigureHttpJsonOptions(options =>
 
 //agrego el formato de excepciones globales
 builder.Services.AddProblemDetails();
-//registro el manejador personalizado
 builder.Services.AddExceptionHandler<ManejadorDeExcepcionesGlobales>();
 
 builder.Services.AddAplicacion(builder.Configuration);
@@ -48,34 +47,15 @@ builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
-//agregamos middleware al principio del pipeline
-/*
-app.UseExceptionHandler(errorApp =>
-{
-    errorApp.Run(async context =>
-    {
-        var ex = context.Features.Get<Microsoft.AspNetCore.Diagnostics.IExceptionHandlerFeature>()?.Error;
-        context.Response.ContentType = "application/json";
 
-        context.Response.StatusCode = ex switch
-        {
-            AutorizacionException => 403,
-            EntidadNoEncontradaException => 404,
-            DominioException => 400,
-            _ => 500
-        };
 
-        await context.Response.WriteAsJsonAsync(new {error = ex?.Message });
-    });
-});
-*/
 app.UseExceptionHandler();
 
 //inicializamos base de datos:
 using (var scope = app.Services.CreateScope())
 {
-    var context = scope.ServiceProvider.GetRequiredService<GestionContext>();
-    GestionSqlite.Inicializar(context);
+    var context = scope.ServiceProvider.GetRequiredService<SgeContext>();
+    SgeSqlite.Inicializar(context);
 }
 
 

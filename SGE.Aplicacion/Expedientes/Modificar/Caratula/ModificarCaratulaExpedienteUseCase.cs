@@ -29,7 +29,7 @@ public class ModificarCaratulaExpedienteUseCase(IExpedienteRepository repositori
         exp.ModificarCaratula(nuevaCaratula, idUsuario);
 
         repositorio.Modificar(exp);
-        udt.GuardarCambios();
+        udt.Guardar();
 
         return new ModificarCaratulaExpedienteResponse(exp.Id, exp.Caratula.Texto);
     }

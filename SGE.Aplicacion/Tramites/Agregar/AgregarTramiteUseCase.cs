@@ -26,9 +26,9 @@ public class AgregarTramiteUseCase(ITramiteRepository repositorio, IActualizacio
         var tramite = new Tramite(expedienteId, contenido,idUsuario);
         //llamamos al servicio por si hay que cambiar automaticamente el state del expediente.
         repositorio.Agregar(tramite);
-        udt.GuardarCambios(); //se guarda antes porque en actualizacionEstado se busca en la base de datos en expediente a actualizar
+        udt.Guardar(); //se guarda antes porque en actualizacionEstado se busca en la base de datos en expediente a actualizar
         actualizacion.ActualizacionEstado(expedienteId, idUsuario);
-        udt.GuardarCambios();
+        udt.Guardar();
         return new AgregarTramiteResponse(tramite.Id, idUsuario);
     }
 }

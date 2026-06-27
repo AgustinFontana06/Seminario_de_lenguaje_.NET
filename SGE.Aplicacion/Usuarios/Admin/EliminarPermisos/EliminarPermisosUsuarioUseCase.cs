@@ -40,7 +40,7 @@ public class EliminarPermisosUsuarioUseCase(IUsuarioRepository usuarioRepository
             usuarioRepository.EliminarPermiso(usuario);
         }
 
-        udt.GuardarCambios();
+        udt.Guardar();
         return new EliminarPermisosUsuarioResponse("permisos removidos correctamente");
         
     }

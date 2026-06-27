@@ -18,7 +18,7 @@ public static class ExpedientesEndpoints
         {
             var resultado = useCase.Ejecutar(new ObtenerTodosRequest());
             return Results.Ok(resultado);
-        });
+        }).RequireAuthorization();
 
         //---- METODOS POST ----
         grupo.MapPost("/agregar-expediente", (AgregarExpedienteRequest request, ClaimsPrincipal user, AgregarExpedienteUseCase useCase) =>

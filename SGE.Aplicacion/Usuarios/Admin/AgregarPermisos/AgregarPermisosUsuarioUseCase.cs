@@ -42,7 +42,7 @@ public class AgregarPermisosUsuarioUseCase(IUsuarioRepository usuarioRepository,
             usuarioRepository.AgregarPermiso(usuario);
         }
 
-        udt.GuardarCambios();
+        udt.Guardar();
         return new AgregarPermisosUsuarioResponse("permisos agregados correctamente");
         
     }

@@ -18,13 +18,13 @@ public static class TramitesEndpoints
         {
             var resultado = useCase.Ejecutar(new ObtenerPorIdRequest(id));
             return Results.Ok(resultado);
-        });
+        }).RequireAuthorization();
 
         grupo.MapGet("/obtener-por-expediente/{expedienteId}", (Guid expedienteId, ObtenerPorExpedienteIdUseCase useCase) =>
         {
             var resultado = useCase.Ejecutar(new ObtenerPorExpedienteIdRequest(expedienteId));
             return Results.Ok(resultado);
-        });
+        }).RequireAuthorization();
 
         //---- METODO POST ----
         grupo.MapPost("/agregar-tramite/{expedienteId}", (Guid expedienteId, AgregarTramiteRequest request, ClaimsPrincipal user, AgregarTramiteUseCase useCase) =>

@@ -29,11 +29,11 @@ public class ModificarTramiteUseCase(ITramiteRepository repositorioTramite,IActu
 
         repositorioTramite.Modificar(tramite);
 
-        udt.GuardarCambios();
+        udt.Guardar();
 
         actualizacion.ActualizacionEstado(tramite.ExpedienteId, idUsuario);
 
-        udt.GuardarCambios();
+        udt.Guardar();
 
         return new ModificarTramiteResponse(tramite.Id, tramite.Contenido.Texto);
     }

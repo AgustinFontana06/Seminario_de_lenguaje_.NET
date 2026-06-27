@@ -4,7 +4,7 @@ using SGE.Aplicacion.Abstracciones;
 using SGE.Dominio.Usuarios;
 using SGE.Infraestructura.Datos;
 
-public class UsuarioRepository(GestionContext context) : Repository<Usuario>(context), IUsuarioRepository // falta implementar cosas
+public class UsuarioRepository(SgeContext context) : Repository<Usuario>(context), IUsuarioRepository 
 {
 
 

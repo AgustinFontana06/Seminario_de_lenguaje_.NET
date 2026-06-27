@@ -7,7 +7,7 @@ using SGE.Infraestructura;
 
 public class ExpedienteRepository : Repository<Expediente>, IExpedienteRepository
 {
-    public ExpedienteRepository(GestionContext context) : base(context)
+    public ExpedienteRepository(SgeContext context) : base(context)
     {
     }
 }

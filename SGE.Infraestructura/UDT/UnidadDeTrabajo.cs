@@ -7,13 +7,13 @@ namespace SGE.Infraestructura.UDT;
 
 public class UnidadDeTrabajo : IUnidadDeTrabajo
 {
-    private readonly GestionContext _context;
-    public UnidadDeTrabajo(GestionContext context)
+    private readonly SgeContext _context;
+    public UnidadDeTrabajo(SgeContext context)
     {
         _context = context ?? throw new ArgumentNullException(nameof(context));
     }
 
-    public void GuardarCambios()
+    public void Guardar()
     {
         _context.SaveChanges();
     }

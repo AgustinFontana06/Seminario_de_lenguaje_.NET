@@ -7,10 +7,10 @@ using SGE.Dominio.Usuarios;
 
 namespace SGE.Infraestructura.Datos;
 
-public class GestionContext : DbContext
+public class SgeContext : DbContext
 {
    
-    public GestionContext(DbContextOptions<GestionContext> options) : base(options)
+    public SgeContext(DbContextOptions<SgeContext> options) : base(options)
     {
     }
 

@@ -27,7 +27,7 @@ public class EliminarUsuarioUseCase(IUsuarioRepository usuarioRepository, IUnida
         }
 
         usuarioRepository.Eliminar(request.id);
-        udt.GuardarCambios();
+        udt.Guardar();
         return new EliminarUsuarioResponse("Usuario eliminado con exito");
     }
 }

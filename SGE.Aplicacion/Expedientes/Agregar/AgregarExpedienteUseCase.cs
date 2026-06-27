@@ -20,7 +20,7 @@ public class AgregarExpedienteUseCase(IExpedienteRepository repositorio, IAutori
 
         var expediente = new Expediente(caratula, idUsuario);
         repositorio.Agregar(expediente);
-        udt.GuardarCambios();
+        udt.Guardar();
         return new AgregarExpedienteResponse(expediente.Id);
     }
 }

@@ -7,9 +7,9 @@ using SGE.Dominio.Permisos;
 
 namespace SGE.Infraestructura.Datos;
 
-public class GestionSqlite()
+public class SgeSqlite()
 {
-    public static void Inicializar(GestionContext context)
+    public static void Inicializar(SgeContext context)
     {
         if (context.Database.EnsureCreated())
         {

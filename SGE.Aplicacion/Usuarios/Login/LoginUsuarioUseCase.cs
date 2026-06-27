@@ -39,7 +39,7 @@ public class LoginUsuarioUseCase(IUnidadDeTrabajo unidadDeTrabajo, IUsuarioRepos
         }
         // 4. Delegamos la creación del token a la infraestructura
         var token = tokenProvider.GenerarToken(usuarioBuscado);
-        unidadDeTrabajo.GuardarCambios();
+        unidadDeTrabajo.Guardar();
         return new LoginUsuarioResponse(token);
     }
 }
