@@ -57,7 +57,7 @@ Si los datos son válidos, se crea el usuario en la base de datos. Al ser un usu
 ```json
 {
   "email": "carlos@sge.com",
-  "contrasena": "carlos123"
+  "password": "carlos123"
 }
 ```
 Devuelve un token JWT. Copiarlo y pegarlo en Scalar para autenticarse.
@@ -73,7 +73,7 @@ Devuelve un token JWT. Copiarlo y pegarlo en Scalar para autenticarse.
 ```json
 {
   "email": "admin@sge.com",
-  "contrasena": "admin123"
+  "password": "admin123"
 }
 ```
 Guardar el token generado y pegarlo en la parte de Authorization.
@@ -86,7 +86,7 @@ Guardar el token generado y pegarlo en la parte de Authorization.
 {
   "nombre": "Nuevo nombre",
   "email": "nuevo@sge.com",
-  "contrasena": "nuevaContrasena123"
+  "password": "nuevaContrasena123"
 }
 ```
 
@@ -222,7 +222,7 @@ Juan cuenta con todos los permisos menos con 2 (se decidio que Juan no puede mod
 ```json
 {
   "email": "juan@sge.com",
-  "contrasena": "juan123"
+  "password": "juan123"
 }
 ```
 
@@ -244,7 +244,7 @@ Si Juan intenta usar los metodos de modificar expediente o tramite, recibira `40
 ```json
 {
   "email": "maria@sge.com",
-  "contrasena": "maria123"
+  "password": "maria123"
 }
 ```
 
