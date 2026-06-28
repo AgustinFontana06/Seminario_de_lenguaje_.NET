@@ -1,118 +1,255 @@
-# SGE - Instrucciones para probar Program.cs
+# SGE — Sistema de Gestión de Expedientes
+## TP2 — Guía de prueba de endpoints desde Scalar
 
-Este documento detalla cómo ejecutar y probar la funcionalidad desarrollada desde `SGE.Consola/Program.cs` en este espacio de trabajo.
+---
 
-## Requisitos
+## Requisitos previos
 
-- .NET SDK (compatible con la versión indicada en los proyectos, por ejemplo, .NET 10).
-- Terminal (zsh) o IDE (Visual Studio / VS Code).
-
-## Ejecución del proyecto
-
-Desde la raíz del repositorio, ejecute el siguiente comando en la terminal:
-
+1. Tener .NET 10 instalado
+2. Clonar el repositorio y pararse en la carpeta `SGE.WebApi`
+3. Ejecutar:
 ```bash
-dotnet run --project SGE.Consola/SGE.Consola.csproj
-```
-
-Alternativamente, puede situarse en la carpeta del proyecto y ejecutar la aplicación:
-
-```bash
-cd SGE.Consola
 dotnet run
 ```
+4. Abrir Scalar en el navegador: http://localhost:5049/scalar
 
-## Pruebas de Funcionalidad
+---
 
-El archivo `Program.cs` inicializa los repositorios de texto (`expedientes.txt` y `tramites.txt`), los limpia para partir de un estado inicial "vacío", y luego ejecuta de forma secuencial una batería de pruebas de los casos de uso para expedientes y trámites (caminos felices y caminos de error).
+## Credenciales de usuarios de prueba
 
-### Código de ejemplo
+| Nombre | Email | Contraseña | Característica |
+|---|---|---|---|
+| Admin del sistema | admin@sge.com | admin123 | Administrador (todos los permisos) |
+| juan | juan@sge.com | juan123 | Usuario con permisos parciales |
+| maria | maria@sge.com | maria123 | Usuario sin permisos |
 
-A continuación, un extracto de `Program.cs` que ejecuta el alta de expedientes y captura correctamente las excepciones de dominio (validación) y autorización:
 
-```csharp
-// 1-- PRUEBA: ALTA DE EXPEDIENTES (ESCENARIO INSTITUCIONAL)
-try
+---
+
+## Cómo autenticarse en Scalar
+
+1. Ejecutar `POST /api/login` con las credenciales deseadas
+2. Copiar el token JWT de la respuesta
+3. Tocar "Test request" en algun caso de uso de Scalar 
+4. En el apartado "Header" crear un campo llamado "Authorization" donde al lado tendra la palabra "Bearer" y el token jwt
+
+---
+
+## Camino de usuario nuevo
+
+### 1. Registrarse
+**`POST /api/register`** — no requiere token
+
+**Body de ejemplo:**
+```json
 {
-    var req1 = new AgregarExpedienteRequest("Informe de Solicitud de Licencia de Funcionamiento", idUsuario);
-    var resp1 = agregarExpedienteUseCase.Ejecutar(req1);
-    Console.WriteLine($"[Éxito] expediente registrado. ID: {resp1.id}\n");
-
-    var req2 = new AgregarExpedienteRequest("Acta de Inicio: Investigación Administrativa", idUsuario);
-    var resp2 = agregarExpedienteUseCase.Ejecutar(req2);
-    Console.WriteLine($"[Éxito] expediente registrado. ID: {resp2.id}\n");
+  "nombre": "Carlos",
+  "email": "carlos@sge.com",
+  "contrasena": "carlos123"
 }
-catch (AutorizacionException ex)
+```
+Si los datos son válidos, se crea el usuario en la base de datos. Al ser un usuario nuevo, no cuenta con permisos, por lo que solo podrá realizar tareas de lectura.
+
+### 2. Loguearse
+**`POST /api/login`** — no requiere token
+
+**Body:**
+```json
 {
-    Console.WriteLine($"[Error de Autorizacion]: {ex.Message}");
+  "email": "carlos@sge.com",
+  "contrasena": "carlos123"
 }
-catch (DominioException ex)
+```
+Devuelve un token JWT. Copiarlo y pegarlo en Scalar para autenticarse.
+
+---
+
+## Camino del administrador (camino feliz)
+
+### 1. Loguearse
+**`POST /api/login`**
+
+**Body:**
+```json
 {
-    Console.WriteLine($"[Error de Negocio]: {ex.Message}\n");
+  "email": "admin@sge.com",
+  "contrasena": "admin123"
 }
-catch (Exception ex)
+```
+Guardar el token generado y pegarlo en la parte de Authorization.
+
+### 2. Modificar mis datos
+**`PUT /usuarios/me`** — requiere token
+
+**Body:**
+```json
 {
-    Console.WriteLine($"[Error inesperado]: {ex.Message}");
+  "nombre": "Nuevo nombre",
+  "email": "nuevo@sge.com",
+  "contrasena": "nuevaContrasena123"
 }
 ```
 
-### Salida por consola producida
+---
 
-Al ejecutar el proyecto usando `dotnet run`, se generan salidas estructuradas validando tanto las operaciones correctas como los rechazos controlados. La salida producida es similar a la siguiente (los IDs variarán debido a que los GUIDs son generados dinámicamente cada vez):
+### Métodos de administrador
 
-```text
-1-- PRUEBA: ALTA DE EXPEDIENTES (ESCENARIO INSTITUCIONAL)
-[Éxito] expediente registrado. ID: 3f1a2b4e-6c3d-4b2a-9f6c-1a2b3c4d5e6f
+#### Listar usuarios
+**`GET /usuarios/admin/listar`** — requiere token de administrador
 
-[Éxito] expediente registrado. ID: 7a8b9c0d-1e2f-3a4b-5c6d-7e8f9a0b1c2d
+Devuelve la lista de todos los usuarios registrados en el sistema.
 
-1.1-- CAMINO ERROR, CARATULA VACIA
-[Camino de error - Validación]: La carátula no puede estar vacía
+#### Eliminar usuario
+**`DELETE /usuarios/admin/eliminar/{id}`** — requiere token de administrador
 
-2-- PRUEBA: ALTA DE TRAMITE ASOCIADO A EXPEDIENTE
-[Éxito] expediente registrado. ID: 11112222-3333-4444-5555-666677778888
+Reemplazar `{id}` con el Guid del usuario a eliminar (obtenible desde el listado o la base de datos).
 
-[Éxito] trámite registrado. ID: 9999aaaa-bbbb-cccc-dddd-eeeeffff0000
+#### Agregar permisos a un usuario
+**`PUT /usuarios/admin/agregar-permisos/{id}`** — requiere token de administrador
 
-3-- PRUEBA: BAJA DE EXPEDIENTE
-[Éxito] expediente registrado. ID: 22223333-4444-5555-6666-777788889999
-
-[Éxito] expediente eliminado. ID: 22223333-4444-5555-6666-777788889999
+**Body:**
+```json
+{
+  "permisos": ["ExpedienteAlta", "TramiteAlta"]
+}
 ```
 
-## Detalle de Funcionalidades Probadas en `Program.cs`
+#### Eliminar permisos a un usuario
+**`PUT /usuarios/admin/eliminar-permisos/{id}`** — requiere token de administrador
 
-A continuación, se detalla cada bloque de prueba implementado en el archivo y el comportamiento esperado por consola:
+**Body:**
+```json
+{
+  "permisos": ["TramiteAlta"]
+}
+```
 
-### 1. Alta de Expedientes (Caminos exitosos y de error)
+---
 
-- **Funcionalidad:** Crea nuevos expedientes.
-- **Camino de Error:** Intenta crear un expediente pasando un `string` vacío como carátula.
-- **Salida esperada:** Mensajes de éxito indicando que los expedientes se registraron con sus respectivos IDs generados. Para el caso de error, se captura una `DominioException` y se muestra un mensaje advirtiendo que la carátula no puede estar vacía.
+### Métodos para expedientes
 
-### 2. Alta de Trámite Asociado
+#### Obtener todos
+**`GET /expedientes/obtener-todos`** — no requiere token
 
-- **Funcionalidad:** Registra un expediente y, usando el ID resultante, le asocia un nuevo trámite.
-- **Salida esperada:** Mensajes de confirmación sucesivos: primero el alta del expediente y luego el alta del trámite con sus correspondientes IDs.
+Devuelve la lista completa de expedientes con su estado actual.
 
-### 3 y 4. Bajas (Eliminación de Expedientes y Trámites)
+#### Agregar expediente
+**`POST /expedientes/agregar-expediente`** — requiere token + permiso `ExpedienteAlta`
 
-- **Funcionalidad:** Recrea entidades (expediente en el caso 3; expediente y trámite en el caso 4) para proceder inmediatamente a su eliminación a través del caso de uso correspondiente.
-- **Salida esperada:** Se notificarán las creaciones y, a continuación, un mensaje de éxito afirmando que la entidad vinculada a dicho ID ha sido eliminada correctamente del repositorio.
+**Body:**
+```json
+{
+  "caratulaText": "Expediente de prueba"
+}
+```
+Devuelve el `id` del expediente creado. Guardarlo para los pasos siguientes. El estado inicial es `RecienIniciado`.
 
-### 5. Modificaciones en Expedientes (Carátula y Estado)
+#### Eliminar expediente
+**`DELETE /expedientes/eliminar-expediente/{id}`** — requiere token + permiso `ExpedienteBaja`
 
-- **Funcionalidad:** Altera atributos de un expediente existente. Primero, su carátula, y más adelante, su estado mediante el `CambiarEstadoUseCase`.
-- **Caminos de Error:** Se inyecta temporalmente un servicio (`RechazaAutorizacionService`) que deniega cualquier operación para simular el fallo en la validación de permisos.
-- **Salida esperada:** Se mostrarán los mensajes de actualización de la carátula y el estado. En los bloques de error correspondientes, se atraparán excepciones del tipo `AutorizacionException`, notificando en pantalla de forma controlada que los accesos fueron denegados.
+Al eliminar el expediente, todos sus trámites asociados también son eliminados (baja en cascada).
 
-### 6. Modificación de Trámites
+#### Modificar carátula
+**`PUT /expedientes/modificar-caratula/{id}`** — requiere token + permiso `ExpedienteModificacion`
 
-- **Funcionalidad:** Actualiza el texto descriptivo del contenido de un trámite previamente creado.
-- **Caminos de Error:** Evalúa dos vertientes. La primera es el rechazo por falta de permisos (Autorización). La segunda intenta actualizar el trámite enviando texto vacío (Dominio).
-- **Salida esperada:** La versión válida mostrará el trámite actualizado. Los caminos alternativos arrojarán explícitamente y por separado mensajes capturados de error por "Autorización" y por "Validación", demostrando la robustez de las validaciones.
+**Body:**
+```json
+{
+  "texto": "Carátula corregida"
+}
+```
 
-### 7 y 8. Consultas y Listados
+#### Cambiar estado manualmente
+**`PUT /expedientes/cambiar-estado/{id}`** — requiere token + permiso `ExpedienteModificacion`
 
-- **Funcionalidad:** Consumen los métodos de solo lectura. `ObtenerTodosUseCase` itera imprimiendo el estado íntegro de la lista de expedientes. `ObtenerPorExpedienteIdUseCase` filtra exclusivamente los trámites de un expediente dado.
-- **Salida esperada:** Imprimirá en consola la cantidad total de entidades halladas seguido por una lista detalla (con sub-viñetas) que incluye atributos fundamentales como ID, carátula/etiqueta y estado/contenido tanto de expedientes como de trámites listados de los archivos.
+**Body:**
+```json
+{
+  "estado": "EnNotificacion"
+}
+```
+Valores posibles: `RecienIniciado`, `ParaResolver`, `ConResolucion`, `EnNotificacion`, `Finalizado`.
+
+---
+
+### Métodos para trámites
+
+#### Obtener por Id
+**`GET /tramites/obtener-por/{id}`** — no requiere token
+
+Devuelve los datos del trámite con el id indicado.
+
+#### Obtener por expediente Id
+**`GET /tramites/obtener-por-expediente/{expedienteId}`** — no requiere token
+
+Devuelve todos los trámites asociados al expediente indicado, junto con los datos del expediente.
+
+#### Agregar trámite
+**`POST /tramites/agregar-tramite/{expedienteId}`** — requiere token + permiso `TramiteAlta`
+
+Reemplazar `{expedienteId}` con el Guid del expediente al que se quiere asociar el trámite.
+
+**Body:**
+```json
+{
+  "contenidoText": "Contenido del trámite"
+}
+```
+
+#### Eliminar trámite
+**`DELETE /tramites/eliminar-tramite/{id}`** — requiere token + permiso `TramiteBaja`
+
+
+#### Modificar trámite
+**`PUT /tramites/modificar-tramite/{id}`** — requiere token + permiso `TramiteModificacion`
+
+**Body:**
+```json
+{
+  "texto": "Contenido modificado"
+}
+```
+
+---
+
+## Camino de juan (camino feliz — usuario con permisos)
+
+Juan cuenta con todos los permisos menos con 2 (se decidio que Juan no puede modificar expedientes ni tramites para probar el uso correcto de la validacion):
+
+### 1. Loguearse
+**`POST /api/login`**
+
+```json
+{
+  "email": "juan@sge.com",
+  "contrasena": "juan123"
+}
+```
+
+### 2. Modificar mis datos
+**`PUT /usuarios/me`** — igual que el administrador.
+
+### Métodos de administrador
+Si juan intenta usar cualquier endpoint de `/usuarios/admin/`, recibirá `403 Forbidden` porque no es administrador.
+
+### Métodos de Expedientes y Tramites
+Si Juan intenta usar los metodos de modificar expediente o tramite, recibira `403 Forbidden` porque no cuenta con los permisos
+---
+
+## Camino de maria (camino de errores — usuario sin permisos)
+
+### 1. Loguearse
+**`POST /api/login`**
+
+```json
+{
+  "email": "maria@sge.com",
+  "contrasena": "maria123"
+}
+```
+
+### Métodos de administrador
+Si maria intenta usar cualquier endpoint de `/usuarios/admin/`, recibirá `403 Forbidden`.
+
+### Métodos para expedientes y trámites
+Maria solo puede usar los endpoints de lectura (`GET`). Si intenta cualquier operación mutativa (agregar, modificar, eliminar), recibirá `403 Forbidden` por falta de permisos.
