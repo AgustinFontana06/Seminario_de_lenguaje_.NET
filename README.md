@@ -216,7 +216,7 @@ Al eliminar el trámite, el estado del expediente se recalcula automáticamente 
 
 ## Camino de juan (camino feliz — usuario con permisos)
 
-Juan cuenta con los permisos: `ExpedienteAlta`, `ExpedienteBaja` (implica `TramiteBaja`) y `TramiteAlta`.
+Juan cuenta con todos los permisos:
 
 ### 1. Loguearse
 **`POST /api/login`**
@@ -233,11 +233,6 @@ Juan cuenta con los permisos: `ExpedienteAlta`, `ExpedienteBaja` (implica `Trami
 
 ### Métodos de administrador
 Si juan intenta usar cualquier endpoint de `/usuarios/admin/`, recibirá `403 Forbidden` porque no es administrador.
-
-### Métodos para expedientes y trámites
-Juan puede: obtener todos los expedientes, agregar expedientes, eliminar expedientes, agregar trámites y eliminar trámites.
-
-Juan **no puede**: modificar carátula, cambiar estado ni modificar trámites (no tiene `ExpedienteModificacion` ni `TramiteModificacion`). Si lo intenta, recibirá `403 Forbidden`.
 
 ---
 
@@ -258,18 +253,3 @@ Si maria intenta usar cualquier endpoint de `/usuarios/admin/`, recibirá `403 F
 
 ### Métodos para expedientes y trámites
 Maria solo puede usar los endpoints de lectura (`GET`). Si intenta cualquier operación mutativa (agregar, modificar, eliminar), recibirá `403 Forbidden` por falta de permisos.
-
----
-
-## Códigos de respuesta HTTP
-
-| Código | Significado |
-|---|---|
-| 200 | Operación exitosa |
-| 201 | Recurso creado correctamente |
-| 400 | Error de validación del dominio (ej: carátula vacía) |
-| 401 | No hay token o el token es inválido |
-| 403 | Token válido pero sin permisos suficientes |
-| 404 | Recurso no encontrado |
-| 409 | Conflicto (ej: email ya registrado) |
-| 500 | Error interno del servidor |
