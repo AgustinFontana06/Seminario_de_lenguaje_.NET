@@ -20,7 +20,7 @@ dotnet run
 | Nombre | Email | Contraseña | Característica |
 |---|---|---|---|
 | Admin del sistema | admin@sge.com | admin123 | Administrador (todos los permisos) |
-| juan | juan@sge.com | juan123 | Usuario con todos los permisos |
+| juan | juan@sge.com | juan123 | Usuario con permisos parciales |
 | maria | maria@sge.com | maria123 | Usuario sin permisos |
 
 
@@ -195,12 +195,10 @@ Reemplazar `{expedienteId}` con el Guid del expediente al que se quiere asociar 
   "contenidoText": "Contenido del trámite"
 }
 ```
-Al agregar el trámite, el estado del expediente se actualiza automáticamente según la etiqueta del último trámite.
 
 #### Eliminar trámite
 **`DELETE /tramites/eliminar-tramite/{id}`** — requiere token + permiso `TramiteBaja`
 
-Al eliminar el trámite, el estado del expediente se recalcula automáticamente según el trámite que quede como último.
 
 #### Modificar trámite
 **`PUT /tramites/modificar-tramite/{id}`** — requiere token + permiso `TramiteModificacion`
@@ -216,7 +214,7 @@ Al eliminar el trámite, el estado del expediente se recalcula automáticamente 
 
 ## Camino de juan (camino feliz — usuario con permisos)
 
-Juan cuenta con todos los permisos:
+Juan cuenta con todos los permisos menos con 2 (se decidio que Juan no puede modificar expedientes ni tramites para probar el uso correcto de la validacion):
 
 ### 1. Loguearse
 **`POST /api/login`**
@@ -234,6 +232,8 @@ Juan cuenta con todos los permisos:
 ### Métodos de administrador
 Si juan intenta usar cualquier endpoint de `/usuarios/admin/`, recibirá `403 Forbidden` porque no es administrador.
 
+### Métodos de Expedientes y Tramites
+Si Juan intenta usar los metodos de modificar expediente o tramite, recibira `403 Forbidden` porque no cuenta con los permisos
 ---
 
 ## Camino de maria (camino de errores — usuario sin permisos)
